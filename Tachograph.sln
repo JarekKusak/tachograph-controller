@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.7.34018.315
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tachograph", "Tachograph\Tachograph.csproj", "{E8461C95-0B4D-4FEF-BF8F-A55C78F53432}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E8461C95-0B4D-4FEF-BF8F-A55C78F53432}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E8461C95-0B4D-4FEF-BF8F-A55C78F53432}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E8461C95-0B4D-4FEF-BF8F-A55C78F53432}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E8461C95-0B4D-4FEF-BF8F-A55C78F53432}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {2101EE5E-F4FD-4EAD-B857-834116E4C0AF}
+	EndGlobalSection
+EndGlobal
