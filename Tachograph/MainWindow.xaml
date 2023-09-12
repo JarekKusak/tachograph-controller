@@ -5,10 +5,39 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Tachograph"
         mc:Ignorable="d"
-        Title="Tachograph" WindowStartupLocation="CenterScreen" Height="450" Width="800">
+        Title="Nastavovací a čtecí program Tafografu" WindowStartupLocation="CenterScreen" MinHeight="450" MinWidth="750" Height="600" Width="900">
     <Grid>
-        <ProgressBar Name="progressBar" Width="200" Height="20" Visibility="Hidden"/>
-        <Button Content="Button" HorizontalAlignment="Left" Margin="517,121,0,0" VerticalAlignment="Top" Click="Button_Click"/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        
+        <DockPanel Grid.Row="0">
+            <Menu DockPanel.Dock="Top">
+                <MenuItem Header="_Soubor">
+                    <MenuItem Header="_Otevřít"/>
+                    <MenuItem Header="_Uložit"/>
+                    <MenuItem Header="_Uložit jako"/>
+                    <MenuItem Header="_Zavřít"/>
+                </MenuItem>
+                <MenuItem Header="_Nastavení">
+                    <MenuItem Header="_Otevřít"/>
+                </MenuItem>
+                <MenuItem Header="_Nástroje">
+                    <MenuItem Header="_Heslo"/>
+                </MenuItem>
+                <MenuItem Header="_O aplikaci">
+                    <MenuItem Header="_Otevřít"/>
+                </MenuItem>
+            </Menu>
+        </DockPanel>
+        <StackPanel Grid.Row="1" Orientation="Horizontal" VerticalAlignment="Center">
+            <Button Content="Button" Click="Button_Click"/>
+            <ProgressBar Name="progressBar" Width="200" Height="20" Visibility="Hidden"/>
+        </StackPanel>
 
     </Grid>
 </Window>
