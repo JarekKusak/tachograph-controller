@@ -21,7 +21,7 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         
-        <DockPanel Grid.Row="0">
+        <DockPanel Grid.Row="0" Grid.ColumnSpan="3">
             <Menu DockPanel.Dock="Top">
                 <MenuItem Header="_Soubor">
                     <MenuItem Header="_Otevřít"/>
@@ -40,7 +40,7 @@
                 </MenuItem>
             </Menu>
         </DockPanel>
-        <StackPanel Grid.Row="1" Orientation="Horizontal" VerticalAlignment="Center">
+        <StackPanel Grid.Row="1" Orientation="Horizontal" VerticalAlignment="Center" Grid.ColumnSpan="3">
             <Button Content="Button" Click="Button_Click"/>
             <ProgressBar Name="progressBar" Width="200" Height="20" Visibility="Hidden"/>
         </StackPanel>
