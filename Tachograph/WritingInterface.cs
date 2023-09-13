@@ -16,6 +16,8 @@ namespace Tachograph
         int destinationPort;
         int writingPrefix;
 
+        
+
         public WritingInterface(string destinationIP, int sourcePort, int destinationPort) 
         {
             this.destinationIP = destinationIP;
@@ -23,14 +25,13 @@ namespace Tachograph
             this.destinationPort = destinationPort;
 
             writingPrefix = 0x15100000;
-        }   
+        }
 
-        // 
-        
         /// <summary>
         /// Metoda navazuje spojení s tafografem a řídí veškerou zapisovací komunikaci (ZATÍM ABSTRAKTNĚ)
         /// </summary>
-        async Task WriteData()
+        /// <param name="taphographRecord"> Vyplněné data tafografu na poslání </param>
+        async Task WriteData(TaphographRecord taphographRecord)
         {
             try
             {
