@@ -5,6 +5,7 @@ using System.Net.Sockets;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace Tachograph
 {
@@ -20,42 +21,33 @@ namespace Tachograph
             this.destinationIP = destinationIP;
             this.sourcePort = sourcePort;
             this.destinationPort = destinationPort;
-        }   
-        
-        static async Task WriteData()
-        {
-            string tachographIp = "192.168.30.15";
-            int tachographPort = 5049;
 
+            writingPrefix = 0x15100000;
+        }   
+
+        // 
+        
+        /// <summary>
+        /// Metoda navazuje spojení s tafografem a řídí veškerou zapisovací komunikaci (ZATÍM ABSTRAKTNĚ)
+        /// </summary>
+        async Task WriteData()
+        {
             try
             {
-                using (UdpClient client = new UdpClient())
+                using (UdpClient client = new UdpClient(sourcePort))
                 {
-                    IPAddress tachographAddress = IPAddress.Parse(tachographIp);
-                    IPEndPoint tachographEndPoint = new IPEndPoint(tachographAddress, tachographPort);
-
-                    // Abstraktní prefixy pro čtení a zápis
-                    int readPrefix = 0x15000000;
-                    int writePrefix = 0x15100000;
+                    IPAddress tachographAddress = IPAddress.Parse(destinationIP);
+                    IPEndPoint tachographEndPoint = new IPEndPoint(tachographAddress,destinationPort);
 
                     // Simulace zápisu dat
                     int dataToWrite = 42; // Vaše data, která chcete zapsat
-                    byte[] writeData = BitConverter.GetBytes(writePrefix | dataToWrite);
+                    byte[] writeData = BitConverter.GetBytes(writingPrefix | dataToWrite);
 
                     if (BitConverter.IsLittleEndian)
                         Array.Reverse(writeData);
 
                     Console.WriteLine($"Odesílání zápisu dat: {dataToWrite}");
                     await client.SendAsync(writeData, writeData.Length, tachographEndPoint);
-
-                    // Simulace čtení dat
-                    byte[] readData = BitConverter.GetBytes(readPrefix);
-
-                    if (BitConverter.IsLittleEndian)
-                        Array.Reverse(readData);
-
-                    Console.WriteLine("Odesílání požadavku na čtení dat.");
-                    await client.SendAsync(readData, readData.Length, tachographEndPoint);
 
                     // Přijmutí odpovědi na čtení dat (simulace)
                     var receiveResult = await client.ReceiveAsync();
@@ -71,7 +63,7 @@ namespace Tachograph
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Error: " + ex.Message);
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
     }
