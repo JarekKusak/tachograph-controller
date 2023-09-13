@@ -12,7 +12,7 @@
             <RowDefinition Height="40"/>
             <RowDefinition Height="40"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="20"/>
+            <RowDefinition Height="40"/>
         </Grid.RowDefinitions>
 
         <Grid.ColumnDefinitions>
@@ -43,15 +43,14 @@
         <StackPanel Grid.Row="1" Grid.Column="0"  VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Horizontal" Margin="5">
             <StackPanel.Resources>
                 <Style TargetType="{x:Type Button}">
-                    <Setter Property="Margin" Value="10,0,0,0"/>
                     <Setter Property="Width" Value="166"/>
                     <Setter Property="Height" Value="30"/>
                 </Style>
             </StackPanel.Resources>
             <Button Content="Nastavit datum a čas"/>
-            <Button Content="Nastavit parametry vozu"/>
-            <Button Content="Nastavit parametry tachografu"/>
-            <Button Content="Nastavit počítadla"/>
+            <Button Content="Nastavit parametry vozu" Margin="10,0,0,0"/>
+            <Button Content="Nastavit parametry tachografu" Margin="10,0,0,0"/>
+            <Button Content="Nastavit počítadla" Margin="10,0,0,0"/>
         </StackPanel>
         
         <StackPanel Grid.Row="1" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Horizontal" Margin="5">
@@ -62,14 +61,16 @@
         <StackPanel Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Horizontal" Margin="5">
             <StackPanel.Resources>
                 <Style TargetType="{x:Type Button}">
-                    <Setter Property="Margin" Value="10,0,0,0"/>
                     <Setter Property="Width" Value="100"/>
                     <Setter Property="Height" Value="30"/>
                 </Style>
             </StackPanel.Resources>
             <Button Content="Nastav"/>
-            <Button Content="Signály"/>
-            <Button Content="Poznámka"/>
+            <Button Content="Signály" Margin="10,0,0,0"/>
+            <Button Content="Poznámka" Margin="10,0,0,0"/>
         </StackPanel>
+        <Grid Name="pagesGrid" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2">
+
+        </Grid>
     </Grid>
 </Window>
