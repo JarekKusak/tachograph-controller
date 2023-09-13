@@ -38,6 +38,7 @@ namespace Tachograph
             readingPrefix = 0x15000000;
             packetIndex = 1;
             retries = 0;
+
             outputFileName = "output.txt";
 
             this.destinationIP = destinationIP;
@@ -139,10 +140,10 @@ namespace Tachograph
                         else
                         {
                             MessageBox.Show("Chyba v komunikaci - překročen počet pokusů o zaslání packetu.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                            break;
+                            return;
                         }
                     }
-                    MessageBox.Show($"Packety byly přečteny a zapsány do {filePath}.", "Alert", MessageBoxButton.OK, MessageBoxImage.Information);
+                    MessageBox.Show($"Packety byly přečteny a zapsány do {filePath}.", "Upozornění", MessageBoxButton.OK, MessageBoxImage.Information);
                 }
             }
             catch (Exception ex)
