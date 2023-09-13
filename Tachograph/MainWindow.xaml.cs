@@ -21,15 +21,16 @@ namespace Tachograph
     public partial class MainWindow : Window
     {
         ReadingInterface readingInterface;
+        WritingInterface writingInterface;
         public MainWindow()
         {
             InitializeComponent();
-
-            readingInterface = new ReadingInterface("192.168.30.15", 5049, 5049);
         }
 
         private async void Button_Click(object sender, RoutedEventArgs e)
         {
+            readingInterface = new ReadingInterface("192.168.30.15", 5049, 5049);
+
             readButton.IsEnabled = false;
             progressBar.Visibility = Visibility.Visible; // Zobrazí ProgressBar
             await readingInterface.ReadData(progressBar); // Spustíme čtení dat s ProgressBar
