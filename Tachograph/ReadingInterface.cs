@@ -21,6 +21,8 @@ namespace Tachograph
         const int dataLength = 517;
         const int timeout = 200; // timeout na 200 milisekund
         const int maxPacketIndex = 16384;
+        const int maxRetries = 3;
+        int retries;
         int baseValue;
         int packetIndex;
         int sourcePort;
@@ -28,13 +30,15 @@ namespace Tachograph
         string destinationIP;
         string filePath;
         string projectDirectory;
-        string outputFileName = "output.txt";
+        string outputFileName;
         StreamWriter writer;
         
         public ReadingInterface(string destinationIP, int sourcePort, int destinationPort)
         {
             baseValue = 0x15000000;
             packetIndex = 1;
+            retries = 0;
+            outputFileName = "output.txt";
 
             this.destinationIP = destinationIP;
             this.sourcePort = sourcePort;
@@ -76,63 +80,74 @@ namespace Tachograph
                     }
                     else
                     {
-                        Console.WriteLine("ARP dotaz selhal.");
+                        MessageBox.Show("Chyba v komunikaci - ARP dotaz selhal.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                         return; // Pokud ARP selže, ukončíme program
                     }
 
                     while (packetIndex <= maxPacketIndex)
                     {
-                        byte[] data = BitConverter.GetBytes(baseValue);
-
-                        if (BitConverter.IsLittleEndian)
-                            Array.Reverse(data);
-
-                        var sendTask = client.SendAsync(data, data.Length, tachographEndPoint);
-                        Console.WriteLine($"Žádost na packet č.{packetIndex}");
-                        // Počkejte na odeslání
-                        await sendTask;
-
-                        byte[] receiveData = null;
-
-                        using (var cts = new CancellationTokenSource())
+                        if (retries < maxRetries)
                         {
-                            var cancellationToken = cts.Token;
-                            var receiveTask = client.ReceiveAsync(cancellationToken).AsTask(); // Předáme CancellationToken do metody ReceiveAsync a převedeme na Task
+                            byte[] data = BitConverter.GetBytes(baseValue);
 
-                            if (await Task.WhenAny(receiveTask, Task.Delay(timeout, cancellationToken)) == receiveTask)
+                            if (BitConverter.IsLittleEndian)
+                                Array.Reverse(data);
+
+                            var sendTask = client.SendAsync(data, data.Length, tachographEndPoint);
+                            Console.WriteLine($"Žádost na packet č.{packetIndex}");
+                            // Počkejte na odeslání
+                            await sendTask;
+
+                            byte[] receiveData = null;
+
+                            using (var cts = new CancellationTokenSource())
                             {
-                                // Odpověď byla úspěšně přijata
-                                receiveData = receiveTask.Result.Buffer;
-                                cts.Cancel(); // Zrušíme CancellationToken pro bezpečné ukončení timeoutTask
+                                var cancellationToken = cts.Token;
+                                var receiveTask = client.ReceiveAsync(cancellationToken).AsTask(); // Předáme CancellationToken do metody ReceiveAsync a převedeme na Task
+
+                                if (await Task.WhenAny(receiveTask, Task.Delay(timeout, cancellationToken)) == receiveTask)
+                                {
+                                    // Odpověď byla úspěšně přijata
+                                    receiveData = receiveTask.Result.Buffer;
+                                    retries = 0;
+                                    cts.Cancel(); // Zrušíme CancellationToken pro bezpečné ukončení timeoutTask
+                                }
+                                else // timeout
+                                {
+                                    Console.WriteLine($"Timeout pro požadavek č.{packetIndex}");
+                                    retries++;
+                                    cts.Cancel(); // Zrušíme CancellationToken pro případné použití v dalším kódu
+                                    continue;
+                                }
                             }
-                            else
+
+                            if (receiveData != null && receiveData.Length == dataLength)
                             {
-                                Console.WriteLine($"Timeout pro požadavek č.{packetIndex}");
-                                cts.Cancel(); // Zrušíme CancellationToken pro případné použití v dalším kódu
-                                continue;
+                                Console.WriteLine($"Obdrženo č.{packetIndex}");
+                                PacketOutput(receiveData, packetIndex, writer);
+                                packetIndex++;
+                                baseValue++; // navýšení hodnoty pro další požadavek
+
+                                // Aktualizace ProgressBar na UI vlákně
+                                await Application.Current.Dispatcher.BeginInvoke(new Action(() =>
+                                {
+                                    progressBar.Value = (double)packetIndex / maxPacketIndex * 100;
+                                }));
                             }
+                            else Console.WriteLine("UDP packet fail, zkusíme to znovu...");
                         }
-
-                        if (receiveData != null && receiveData.Length == dataLength)
+                        else
                         {
-                            Console.WriteLine($"Obdrženo č.{packetIndex}");
-                            PacketOutput(receiveData, packetIndex, writer);
-                            packetIndex++;
-                            baseValue++; // navýšení hodnoty pro další požadavek
-
-                            // Aktualizace ProgressBar na UI vlákně
-                            await Application.Current.Dispatcher.BeginInvoke(new Action(() =>
-                            {
-                                progressBar.Value = (double)packetIndex / maxPacketIndex * 100;
-                            }));
+                            MessageBox.Show("Chyba v komunikaci - překročen počet pokusů o zaslání packetu.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                            break;
                         }
-                        else Console.WriteLine("UDP packet fail, zkusíme to znovu...");
                     }
+                    MessageBox.Show($"Packety byly přečteny a zapsány do {filePath}.", "Alert", MessageBoxButton.OK, MessageBoxImage.Information);
                 }
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Error: " + ex.Message);
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
             finally
             {
