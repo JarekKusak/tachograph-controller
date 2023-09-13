@@ -9,7 +9,7 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="20"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="40"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
@@ -40,10 +40,10 @@
                 </MenuItem>
             </Menu>
         </DockPanel>
-        <StackPanel Grid.Row="1" Orientation="Horizontal" VerticalAlignment="Center" Grid.ColumnSpan="3">
-            <Button Content="Button" Click="Button_Click"/>
-            <ProgressBar Name="progressBar" Width="200" Height="20" Visibility="Hidden"/>
+        <StackPanel Grid.Row="1" Grid.Column="2" VerticalAlignment="Center" Orientation="Horizontal" Margin="5" >
+            <Button Name="readButton" Content="Číst data a uložit" Click="Button_Click"/>
+            <ProgressBar Name="progressBar" Width="150" Height="20"/>
+            <!-- Další prvky zde -->
         </StackPanel>
-
     </Grid>
 </Window>
