@@ -23,7 +23,7 @@ namespace Tachograph
         const int maxPacketIndex = 16384;
         const int maxRetries = 3;
         int retries;
-        int baseValue;
+        int readingPrefix;
         int packetIndex;
         int sourcePort;
         int destinationPort;
@@ -35,7 +35,7 @@ namespace Tachograph
         
         public ReadingInterface(string destinationIP, int sourcePort, int destinationPort)
         {
-            baseValue = 0x15000000;
+            readingPrefix = 0x15000000;
             packetIndex = 1;
             retries = 0;
             outputFileName = "output.txt";
@@ -88,7 +88,7 @@ namespace Tachograph
                     {
                         if (retries < maxRetries)
                         {
-                            byte[] data = BitConverter.GetBytes(baseValue);
+                            byte[] data = BitConverter.GetBytes(readingPrefix);
 
                             if (BitConverter.IsLittleEndian)
                                 Array.Reverse(data);
@@ -126,7 +126,7 @@ namespace Tachograph
                                 Console.WriteLine($"Obdrženo č.{packetIndex}");
                                 PacketOutput(receiveData, packetIndex, writer);
                                 packetIndex++;
-                                baseValue++; // navýšení hodnoty pro další požadavek
+                                readingPrefix++; // navýšení hodnoty pro další požadavek
 
                                 // Aktualizace ProgressBar na UI vlákně
                                 await Application.Current.Dispatcher.BeginInvoke(new Action(() =>
