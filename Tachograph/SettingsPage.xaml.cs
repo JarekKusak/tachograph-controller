@@ -24,6 +24,7 @@ namespace Tachograph
         const int rowCount = 3;
         const int buttonHeight = 18;
         const int buttonWidth = 18;
+        const int labelAndButtonContainerWidth = 25;
         
         public SettingsPage()
         {
@@ -52,17 +53,19 @@ namespace Tachograph
                 StackPanel buttonPanel = new StackPanel();
                 buttonPanel.Orientation = Orientation.Horizontal;
                 buttonPanel.HorizontalAlignment = HorizontalAlignment.Center;
-
-                for (int i = buttonsInRow * (j - 1); i <= buttonsInRow * j; i++)
+                
+                for (int i = buttonsInRow * (j - 1) + 1; i <= buttonsInRow * j; i++)
                 {
                     StackPanel buttonContainer = new StackPanel();
+                    buttonContainer.Width = labelAndButtonContainerWidth;
                     Label label = new Label();
+                    label.HorizontalAlignment = HorizontalAlignment.Center;
                     label.Content = i.ToString();
 
                     Button button = new Button();
                     button.Height = buttonHeight;
                     button.Width = buttonWidth;
-
+                    
                     buttonContainer.Children.Add(label);
                     buttonContainer.Children.Add(button);
 
