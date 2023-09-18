@@ -31,11 +31,11 @@ namespace Tachograph
         {
             readingInterface = new ReadingInterface("192.168.30.15", 5049, 5049);
 
-            readButton.IsEnabled = false;
+            readAndSaveButton.IsEnabled = false;
             progressBar.Visibility = Visibility.Visible; // Zobrazí ProgressBar
             await readingInterface.ReadData(progressBar); // Spustíme čtení dat s ProgressBar
             progressBar.Visibility = Visibility.Hidden; // Skryje ProgressBar po dokončení
-            readButton.IsEnabled = true;
+            readAndSaveButton.IsEnabled = true;
         }
     }
 }
