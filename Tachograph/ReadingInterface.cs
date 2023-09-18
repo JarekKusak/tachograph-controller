@@ -165,7 +165,7 @@ namespace Tachograph
             int i = 0;
             int rowWidth = 16;
 
-            writer.WriteLine($"\nPacket č.{packetIndex}:");
+            //writer.WriteLine($"\nPacket č.{packetIndex}:");
 
             foreach (byte b in data)
             {
@@ -178,7 +178,7 @@ namespace Tachograph
                 i++;
             }
 
-            writer.WriteLine();
+            // writer.WriteLine();
         }
 
         /// <summary>
