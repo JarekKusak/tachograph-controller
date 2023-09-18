@@ -25,9 +25,15 @@ namespace Tachograph
         public MainWindow()
         {
             InitializeComponent();
+            Loaded += settingsBtn_Click;
         }
 
-        private async void Button_Click(object sender, RoutedEventArgs e)
+        protected void MainPage_Loaded(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        protected async void readAndSaveButton_Click(object sender, RoutedEventArgs e)
         {
             readingInterface = new ReadingInterface("192.168.30.15", 5049, 5049);
 
@@ -36,6 +42,16 @@ namespace Tachograph
             await readingInterface.ReadData(progressBar); // Spustíme čtení dat s ProgressBar
             progressBar.Visibility = Visibility.Hidden; // Skryje ProgressBar po dokončení
             readAndSaveButton.IsEnabled = true;
+        }
+
+        protected void settingsBtn_Click(object sender, RoutedEventArgs e)
+        {
+            pagesFrame.Content = new SettingsPage();
+        }
+
+        private void signalsBtn_Click(object sender, RoutedEventArgs e)
+        {
+            pagesFrame.Content = new SignalsPage();
         }
     }
 }
