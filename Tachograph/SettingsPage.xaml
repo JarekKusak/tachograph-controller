@@ -13,7 +13,7 @@
             <ColumnDefinition/>
             <ColumnDefinition Width="2*"/>
         </Grid.ColumnDefinitions>
-        <StackPanel Width="155" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="0" >
+        <StackPanel Width="155" HorizontalAlignment="Center" VerticalAlignment="Top" Grid.Column="0">
             <StackPanel>
                 <Label Content="Parametry tacho"/>
                 <Border CornerRadius="6" BorderBrush="Gray" Background="LightGray" BorderThickness="2" Padding="8">
@@ -63,16 +63,16 @@
             <StackPanel>
                 <Label Content="Módy"/>
                 <Border CornerRadius="6" BorderBrush="Gray" Background="LightGray" BorderThickness="2" Padding="8">
-                    <StackPanel Orientation="Horizontal">
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                         <RadioButton Content="0"/>
-                        <RadioButton Content="1" Margin="10,0,0,0"/>
-                        <RadioButton Content="2" Margin="10,0,0,0"/>
-                        <RadioButton Content="3" Margin="10,0,0,0"/>
+                        <RadioButton Content="1" Margin="8,0,0,0"/>
+                        <RadioButton Content="2" Margin="8,0,0,0"/>
+                        <RadioButton Content="3" Margin="8,0,0,0"/>
                     </StackPanel>
                 </Border>
             </StackPanel>
         </StackPanel>
-        <StackPanel Width="155" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center">
+        <StackPanel Width="155" Grid.Column="1" VerticalAlignment="Top" HorizontalAlignment="Center">
             <StackPanel>
                 <Label Content="Parametry vozu"/>
                 <Border CornerRadius="6" BorderBrush="Gray" Background="LightGray" BorderThickness="2" Padding="8">
@@ -97,8 +97,48 @@
                             <Label Content="K faktor"/>
                             <TextBox/>
                         </StackPanel>
+
+                    </StackPanel>
+                    
+                </Border>
+            </StackPanel>
+            <StackPanel>
+                <Label Content="Typ záznamu rychlosti"/>
+                <Border CornerRadius="6" BorderBrush="Gray" Background="LightGray" BorderThickness="2" Padding="8">
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                        <RadioButton Content="PR"/>
+                        <RadioButton Content="Min." Margin="8,0,0,0"/>
+                        <RadioButton Content="Max." Margin="8,0,0,0"/>
                     </StackPanel>
                 </Border>
+            </StackPanel>
+            <StackPanel>
+                <Label Content="Typ tachografu"/>
+                <Border CornerRadius="6" BorderBrush="Gray" Background="LightGray" BorderThickness="2" Padding="8">
+                    <StackPanel  HorizontalAlignment="Center">
+                        <RadioButton Content="TT32"/>
+                        <RadioButton Content="TT32-24" />
+                        <RadioButton Content="TT32-48"/>
+                        <RadioButton Content="TT12/22"/>
+                        <RadioButton Content="TT68"/>
+                    </StackPanel>
+                </Border>
+            </StackPanel>
+            <StackPanel>
+                <Label Content="Krok záznamu"/>
+                <ComboBox>
+                    <ComboBoxItem IsSelected="True" Content="1 m"/>
+                    <ComboBoxItem Content="2 m"/>
+                    <ComboBoxItem Content="3 m"/>
+                    <ComboBoxItem Content="4 m"/>
+                    <ComboBoxItem Content="5 m"/>
+                    <ComboBoxItem Content="6 m"/>
+                    <ComboBoxItem Content="7 m"/>
+                    <ComboBoxItem Content="8 m"/>
+                    <ComboBoxItem Content="9 m"/>
+                    <ComboBoxItem Content="10 m"/>
+                    <ComboBoxItem Content="0,25 m"/>
+                </ComboBox>
             </StackPanel>
         </StackPanel>
     </Grid>
