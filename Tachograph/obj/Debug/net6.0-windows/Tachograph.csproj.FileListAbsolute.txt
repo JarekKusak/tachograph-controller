@@ -18,3 +18,7 @@ C:\Users\david.manasek\Documents\projekty\csharp\Tachograph\Tachograph\obj\Debug
 C:\Users\david.manasek\Documents\projekty\csharp\Tachograph\Tachograph\obj\Debug\net6.0-windows\Tachograph.pdb
 C:\Users\david.manasek\Documents\projekty\csharp\Tachograph\Tachograph\obj\Debug\net6.0-windows\Tachograph.genruntimeconfig.cache
 C:\Users\david.manasek\Documents\projekty\csharp\Tachograph\Tachograph\obj\Debug\net6.0-windows\ref\Tachograph.dll
+C:\Users\david.manasek\Documents\projekty\csharp\Tachograph\Tachograph\obj\Debug\net6.0-windows\settingsPage.g.cs
+C:\Users\david.manasek\Documents\projekty\csharp\Tachograph\Tachograph\obj\Debug\net6.0-windows\settingsPage.baml
+C:\Users\david.manasek\Documents\projekty\csharp\Tachograph\Tachograph\obj\Debug\net6.0-windows\SignalsPage.g.cs
+C:\Users\david.manasek\Documents\projekty\csharp\Tachograph\Tachograph\obj\Debug\net6.0-windows\SignalsPage.baml
