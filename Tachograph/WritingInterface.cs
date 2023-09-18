@@ -16,8 +16,6 @@ namespace Tachograph
         int destinationPort;
         int writingPrefix;
 
-        
-
         public WritingInterface(string destinationIP, int sourcePort, int destinationPort) 
         {
             this.destinationIP = destinationIP;
