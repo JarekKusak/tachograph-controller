@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Tachograph"
         mc:Ignorable="d"
-        Title="Nastavovací a čtecí program Tafografu" WindowStartupLocation="CenterScreen" MinHeight="700" MinWidth="970" Height="700" Width="970" >
+        Title="Nastavovací a čtecí program Tafografu" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Height="700" Width="970" >
     <Window.Icon>
         <BitmapImage UriSource="C:\Users\david.manasek\Documents\projekty\csharp\Tachograph\Tachograph\tapho-icon.ico"/>
     </Window.Icon>
