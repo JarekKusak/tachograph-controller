@@ -28,11 +28,6 @@ namespace Tachograph
             Loaded += settingsBtn_Click;
         }
 
-        protected void MainPage_Loaded(object sender, RoutedEventArgs e)
-        {
-
-        }
-
         protected async void readAndSaveButton_Click(object sender, RoutedEventArgs e)
         {
             readingInterface = new ReadingInterface("192.168.30.15", 5049, 5049);
