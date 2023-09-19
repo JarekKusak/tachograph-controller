@@ -33,7 +33,7 @@ namespace Tachograph
             foreach (string p in stringTachoParameters)
                 if (string.IsNullOrEmpty(p)) // nebyl zadán
                     throw new ArgumentException("Některý z řetězcových parametrů nebyl zadán.");
-            MessageBox.Show("bomba");
+            MessageBox.Show("vše OK ;-)");
             //TaphographRecord record = new TaphographRecord();
         }
 
