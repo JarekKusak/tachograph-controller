@@ -25,14 +25,23 @@ namespace Tachograph
             writingPrefix = 0x15100000;
         }
 
+        public void AddRecord(string jmeno, DateTime? datumNarozeni)
+        {
+            if (jmeno.Length < 3)
+                throw new ArgumentException("Jméno je příliš krátké");
+            if (datumNarozeni == null)
+                throw new ArgumentException("Nebylo zadané datum narození");
+            if (datumNarozeni.Value.Date > DateTime.Today)
+                throw new ArgumentException("Datum narození nesmí být v budoucnosti");
+            // TaphographRecord record = new TaphographRecord();
+        }
+
         /// <summary>
         /// Metoda navazuje spojení s tafografem a řídí veškerou zapisovací komunikaci (ZATÍM ABSTRAKTNĚ)
         /// </summary>
         /// <param name="taphographRecord"> Vyplněné data tafografu na poslání </param>
         async Task WriteData(TaphographRecord taphographRecord)
         {
-            // TaphographRecord record = new TaphographRecord();
-            
             try
             {
                 using (UdpClient client = new UdpClient(sourcePort))
