@@ -36,14 +36,28 @@ namespace Tachograph
         {
             InitializeComponent();
 
-            StackPanel stackPanel = new StackPanel();
-            stackPanel.HorizontalAlignment = HorizontalAlignment.Stretch;
-            stackPanel.VerticalAlignment = VerticalAlignment.Top;
-            stackPanel.Margin = new Thickness(stackPanelMargin);
+            StackPanel mainPanel = new StackPanel();
+            
+            
+
+            mainPanel.Children.Add(CreateStackPanel("Aktivní signály v záznamu"));
+            mainPanel.Children.Add(CreateStackPanel("Signály pro test brzdy"));
+            mainPanel.Children.Add(CreateStackPanel("Invverzní signály"));
+
+            Grid.SetColumn(mainPanel, column);
+            settingGrid.Children.Add(mainPanel); // Přidejte StackPanel s hlavním Borderem do Gridu
+        }
+
+        StackPanel CreateStackPanel(string description)
+        {
+            StackPanel signalPanel = new StackPanel();
+            signalPanel.HorizontalAlignment = HorizontalAlignment.Center;
+            signalPanel.VerticalAlignment = VerticalAlignment.Center;
+            signalPanel.Margin = new Thickness(stackPanelMargin);
 
             Label titleLabel = new Label();
-            titleLabel.Content = "Aktivní signály v záznamu";
-            stackPanel.Children.Add(titleLabel);
+            titleLabel.Content = description;
+            signalPanel.Children.Add(titleLabel);
 
             StackPanel aroundPanel = new StackPanel();
 
@@ -59,7 +73,7 @@ namespace Tachograph
                 StackPanel buttonPanel = new StackPanel();
                 buttonPanel.Orientation = Orientation.Horizontal;
                 buttonPanel.HorizontalAlignment = HorizontalAlignment.Center;
-                
+
                 for (int i = buttonsInRow * (j - 1) + 1; i <= buttonsInRow * j; i++)
                 {
                     StackPanel buttonContainer = new StackPanel();
@@ -71,7 +85,7 @@ namespace Tachograph
                     Button button = new Button();
                     button.Height = buttonHeight;
                     button.Width = buttonWidth;
-                    
+
                     buttonContainer.Children.Add(label);
                     buttonContainer.Children.Add(button);
 
@@ -80,11 +94,8 @@ namespace Tachograph
                 aroundPanel.Children.Add(buttonPanel);
             }
 
-            stackPanel.Children.Add(mainBorder);
-            Grid.SetColumn(stackPanel, column);
-            settingGrid.Children.Add(stackPanel); // Přidejte StackPanel s hlavním Borderem do Gridu
+            signalPanel.Children.Add(mainBorder);
+            return signalPanel;
         }
-
-
     }
 }
