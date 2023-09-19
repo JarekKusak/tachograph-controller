@@ -82,7 +82,7 @@ namespace Tachograph
         /// <summary>
         /// Metoda na asynchronní zasílání a přijímání packetů za pomocí UDP protokolu (s veškerou režií)
         /// </summary
-        async public Task ReadData(ProgressBar progressBar)
+        async public Task ReadAndSaveData(ProgressBar progressBar)
         {
             writer = new StreamWriter(filePath);
 
@@ -178,7 +178,7 @@ namespace Tachograph
 
             foreach (byte b in data)
             {
-                if (i % rowWidth == 0)
+                if (i % rowWidth == 0) // vypisuje vždy po konkrétním počtu bytů (standardně po 16, jako hexdump)
                 {
                     writer.Write("\n");
                     i = 0;
