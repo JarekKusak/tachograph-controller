@@ -46,7 +46,10 @@ namespace Tachograph
             settingGrid.Children.Add(mainPanel); // Přidejte StackPanel s hlavním Borderem do Gridu
         }
 
-        
+        /// <summary>
+        /// Vrací číselné parametry tachografu
+        /// </summary>
+        /// <returns> Pole číselných parametrů </returns>
         public int?[] PickUpIntegerParameters()
         {
             try
@@ -79,6 +82,10 @@ namespace Tachograph
             }        
         }
 
+        /// <summary>
+        /// Vrací textové parametry tachografu
+        /// </summary>
+        /// <returns> Pole textových parametrů tachografu </returns>
         public string[] PickUpStringParameters()
         {
             string carType = carTypeTxtBox.Text;
