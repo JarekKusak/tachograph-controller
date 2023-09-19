@@ -43,7 +43,7 @@
             </Menu>
         </DockPanel>
 
-        <StackPanel Grid.Row="1" Grid.Column="0"  VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Horizontal" Margin="5">
+        <StackPanel Grid.Row="1" Grid.Column="0"  VerticalAlignment="Center" HorizontalAlignment="Left" Orientation="Horizontal" Margin="5">
             <StackPanel.Resources>
                 <Style TargetType="{x:Type Button}">
                     <Setter Property="Width" Value="166"/>
@@ -65,7 +65,7 @@
         </StackPanel>
         <Line Stretch="Fill" Stroke="Gray" X2="1" Grid.Row="2" Grid.ColumnSpan="2" VerticalAlignment="Bottom"/>
 
-        <StackPanel Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Horizontal" Margin="5">
+        <StackPanel Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left" Orientation="Horizontal" Margin="5">
             <StackPanel.Resources>
                 <Style TargetType="{x:Type Button}">
                     <Setter Property="Width" Value="100"/>
