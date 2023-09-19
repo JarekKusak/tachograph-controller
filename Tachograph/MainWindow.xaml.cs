@@ -32,9 +32,9 @@ namespace Tachograph
         {
             readingInterface = new ReadingInterface("192.168.30.15", 5049, 5049);
 
-            readAndSaveButton.IsEnabled = false;
+            readAndSaveButton.IsEnabled = false; // znemožní opakované klikání na tlačítko
             progressBar.Visibility = Visibility.Visible; // Zobrazí ProgressBar
-            await readingInterface.ReadData(progressBar); // Spustíme čtení dat s ProgressBar
+            await readingInterface.ReadAndSaveData(progressBar); // Spustíme čtení dat s ProgressBar
             progressBar.Visibility = Visibility.Hidden; // Skryje ProgressBar po dokončení
             readAndSaveButton.IsEnabled = true;
         }
