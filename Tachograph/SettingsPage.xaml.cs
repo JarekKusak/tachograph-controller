@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -25,6 +26,11 @@ namespace Tachograph
         const int buttonHeight = 18;
         const int buttonWidth = 18;
         const int labelAndButtonContainerWidth = 25;
+        const int stackPanelMargin = 10;
+        const int cornerRadius = 6;
+        const int borderThickness = 2;
+        const int borderPadding = 5;
+        const int column = 2; 
         
         public SettingsPage()
         {
@@ -33,7 +39,7 @@ namespace Tachograph
             StackPanel stackPanel = new StackPanel();
             stackPanel.HorizontalAlignment = HorizontalAlignment.Stretch;
             stackPanel.VerticalAlignment = VerticalAlignment.Top;
-            stackPanel.Margin = new Thickness(10);
+            stackPanel.Margin = new Thickness(stackPanelMargin);
 
             Label titleLabel = new Label();
             titleLabel.Content = "Aktivní signály v záznamu";
@@ -42,11 +48,11 @@ namespace Tachograph
             StackPanel aroundPanel = new StackPanel();
 
             Border mainBorder = new Border(); // Vytvořte nový Border pro každý cyklus
-            mainBorder.CornerRadius = new CornerRadius(6);
+            mainBorder.CornerRadius = new CornerRadius(cornerRadius);
             mainBorder.BorderBrush = Brushes.Gray;
             mainBorder.Background = Brushes.LightGray;
-            mainBorder.BorderThickness = new Thickness(2);
-            mainBorder.Padding = new Thickness(5);
+            mainBorder.BorderThickness = new Thickness(borderThickness);
+            mainBorder.Padding = new Thickness(borderPadding);
             mainBorder.Child = aroundPanel; // Přidejte každý buttonPanel do hlavního Borderu
             for (int j = 1; j <= rowCount; j++)
             {
@@ -75,8 +81,10 @@ namespace Tachograph
             }
 
             stackPanel.Children.Add(mainBorder);
-            Grid.SetColumn(stackPanel, 2);
+            Grid.SetColumn(stackPanel, column);
             settingGrid.Children.Add(stackPanel); // Přidejte StackPanel s hlavním Borderem do Gridu
         }
+
+
     }
 }
