@@ -20,11 +20,11 @@
                     <StackPanel>
                         <StackPanel>
                             <Label Content="Průměr kola [mm]"/>
-                            <TextBox Text="700"/>
+                            <TextBox Name="wheelDiameterTxtBox" Text="700"/>
                         </StackPanel>
                         <StackPanel>
                             <Label Content="Číslo vozu"/>
-                            <TextBox Text="1"/>
+                            <TextBox Text="1" Name="carNumberTxtBox"/>
                         </StackPanel>
                     </StackPanel>
                 </Border>
@@ -35,27 +35,27 @@
                     <StackPanel>
                         <StackPanel>
                             <Label Content="Ujeto celkem [km]"/>
-                            <TextBox Text="0"/>
+                            <TextBox Text="0" Name="totalKilometersDrivenTxtBox"/>
                         </StackPanel>
                         <StackPanel>
                             <Label Content="Počítadlo 1"/>
-                            <TextBox Text="0"/>
+                            <TextBox Text="0" Name="counter1TxtBox"/>
                         </StackPanel>
                         <StackPanel>
                             <Label Content="Počítadlo 2"/>
-                            <TextBox Text="0"/>
+                            <TextBox Text="0" Name="counter2TxtBox"/>
                         </StackPanel>
                         <StackPanel>
                             <Label Content="Počítadlo 3"/>
-                            <TextBox Text="0"/>
+                            <TextBox Text="0" Name="counter3TxtBox"/>
                         </StackPanel>
                         <StackPanel>
                             <Label Content="Počítadlo 4"/>
-                            <TextBox Text="0"/>
+                            <TextBox Text="0" Name="counter4TxtBox"/>
                         </StackPanel>
                         <StackPanel>
                             <Label Content="Počítadlo 5"/>
-                            <TextBox Text="0"/>
+                            <TextBox Text="0" Name="counter5TxtBox"/>
                         </StackPanel>
                     </StackPanel>
                 </Border>
@@ -79,23 +79,23 @@
                     <StackPanel>
                         <StackPanel>
                             <Label Content="Typ vozu"/>
-                            <TextBox Text="Default"/>
+                            <TextBox Text="Default" Name="carTypeTxtBox"/>
                         </StackPanel>
                         <StackPanel>
                             <Label Content="Převodový poměr"/>
-                            <TextBox Text="52"/>
+                            <TextBox Text="52" Name="gearRatioTxtBox"/>
                         </StackPanel>
                         <StackPanel>
                             <Label Content="Max. průměr kola [mm]"/>
-                            <TextBox Text="700"/>
+                            <TextBox Text="700" Name="maxWheelDiameterTxtBox"/>
                         </StackPanel>
                         <StackPanel>
                             <Label Content="Max. rychlost [km/h]"/>
-                            <TextBox Text="60"/>
+                            <TextBox Text="60" Name="maxSpeedTxtBox"/>
                         </StackPanel>
                         <StackPanel>
                             <Label Content="K faktor"/>
-                            <TextBox Text="10000"/>
+                            <TextBox Text="10000" Name="kFactorTxtBox"/>
                         </StackPanel>
                     </StackPanel>
                 </Border>
