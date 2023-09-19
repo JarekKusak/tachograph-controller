@@ -46,6 +46,49 @@ namespace Tachograph
             settingGrid.Children.Add(mainPanel); // Přidejte StackPanel s hlavním Borderem do Gridu
         }
 
+        
+        public int?[] PickUpIntegerParameters()
+        {
+            try
+            {
+                int wheelDiameter = int.Parse(wheelDiameterTxtBox.Text);
+                int carNumber = int.Parse(carNumberTxtBox.Text);
+                int gearRatio = int.Parse(gearRatioTxtBox.Text);
+                int maxWheelDiameter = int.Parse(maxWheelDiameterTxtBox.Text);
+                int maxSpeed = int.Parse(maxSpeedTxtBox.Text); // km/h
+                int kFactor = int.Parse(kFactorTxtBox.Text);
+                // Blok počítadla:
+                int totalKilometersDriven = int.Parse(totalKilometersDrivenTxtBox.Text);
+                int counter1 = int.Parse(counter1TxtBox.Text);
+                int counter2 = int.Parse(counter2TxtBox.Text);
+                int counter3 = int.Parse(counter3TxtBox.Text);
+                int counter4 = int.Parse(counter4TxtBox.Text);
+                int counter5 = int.Parse(counter5TxtBox.Text);
+                int mode = 0; // radio
+                int recordStep = 1; // musí se oddělat metry
+
+                int?[] parameters = { wheelDiameter, carNumber, gearRatio, maxWheelDiameter, maxSpeed, kFactor,
+                    totalKilometersDriven, counter1, counter2, counter3, counter4, counter5,
+                    mode, recordStep };
+                return parameters;
+            }
+            catch
+            {
+                // ---------zpráva o selhání---------
+                return null;
+            }        
+        }
+
+        public string[] PickUpStringParameters()
+        {
+            string carType = carTypeTxtBox.Text;
+            string speedRecordType = "PR."; // radio
+            string tachographType = "TT62"; // radio
+
+            string[] parameters = { carType, speedRecordType, tachographType };
+            return parameters;
+        }
+
         /// <summary>
         /// Vytvoří požadovaný stack panel na signály, vždy s konkrétním popisem (labelem)
         /// </summary>
