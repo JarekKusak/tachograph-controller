@@ -51,8 +51,8 @@
                 </Style>
             </StackPanel.Resources>
             <Button Content="Nastavit datum a čas" Name="setTimeAndDateBtn"/>
-            <Button Content="Nastavit parametry vozu" Margin="10,0,0,0" Name="setCarParametersBtn"/>
-            <Button Content="Nastavit parametry tachografu" Margin="10,0,0,0" Name="setTaphoParametersBtn"/>
+            <Button Content="Nastavit parametry vozu" Margin="10,0,0,0" Name="setCarParametersBtn" Click="setCarParametersBtn_Click"/>
+            <Button Content="Nastavit parametry tachografu" Margin="10,0,0,0" Name="setTaphoParametersBtn" Click="setTaphoParametersBtn_Click"/>
             <Button Content="Nastavit počítadla" Margin="10,0,0,0" Name="setCountersBtn"/>
         </StackPanel>
 
