@@ -22,6 +22,13 @@ namespace Tachograph
     {
         ReadingInterface readingInterface;
         WritingInterface writingInterface;
+        SettingsPage settingsPage;
+        SignalsPage signalsPage;
+
+        const string tachoIP = "192.168.30.15";
+        const int sourcePort = 5049;
+        const int destinationPort = sourcePort;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -30,7 +37,7 @@ namespace Tachograph
 
         protected async void readAndSaveButton_Click(object sender, RoutedEventArgs e)
         {
-            readingInterface = new ReadingInterface("192.168.30.15", 5049, 5049);
+            readingInterface = new ReadingInterface(tachoIP, sourcePort, destinationPort);
 
             readAndSaveButton.IsEnabled = false; // znemožní opakované klikání na tlačítko
             progressBar.Visibility = Visibility.Visible; // Zobrazí ProgressBar
@@ -41,7 +48,8 @@ namespace Tachograph
 
         protected void settingsBtn_Click(object sender, RoutedEventArgs e)
         {
-            pagesFrame.Content = new SettingsPage();
+            settingsPage = new SettingsPage();
+            pagesFrame.Content = settingsPage;
         }
 
         private void signalsBtn_Click(object sender, RoutedEventArgs e)
@@ -54,7 +62,20 @@ namespace Tachograph
         /// </summary>
         private void setTaphoParametersBtn_Click(object sender, RoutedEventArgs e)
         {
+            writingInterface = new WritingInterface(tachoIP, sourcePort, destinationPort);
 
+            try
+            {
+                int?[] intParameters = settingsPage.PickUpIntegerParameters();
+                if (intParameters != null)
+                    writingInterface.AddRecord(intParameters, settingsPage.PickUpStringParameters());
+                else MessageBox.Show("Jeden z parametrů není v číselném tvaru."); // chce to vymyslet trochu lepší způsob :D
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Chyba", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+            }
+            
         }
 
         /// <summary>
