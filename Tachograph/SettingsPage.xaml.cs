@@ -37,20 +37,23 @@ namespace Tachograph
             InitializeComponent();
 
             StackPanel mainPanel = new StackPanel();
-            
-            
 
-            mainPanel.Children.Add(CreateStackPanel("Aktivní signály v záznamu"));
-            mainPanel.Children.Add(CreateStackPanel("Signály pro test brzdy"));
-            mainPanel.Children.Add(CreateStackPanel("Invverzní signály"));
+            mainPanel.Children.Add(CreateSignalStackPanel("Aktivní signály v záznamu"));
+            mainPanel.Children.Add(CreateSignalStackPanel("Signály pro test brzdy"));
+            mainPanel.Children.Add(CreateSignalStackPanel("Invverzní signály"));
 
             Grid.SetColumn(mainPanel, column);
             settingGrid.Children.Add(mainPanel); // Přidejte StackPanel s hlavním Borderem do Gridu
         }
 
-        StackPanel CreateStackPanel(string description)
+        /// <summary>
+        /// Vytvoří požadovaný stack panel na signály, vždy s konkrétním popisem (labelem)
+        /// </summary>
+        /// <param name="description"> Typ signálů </param>
+        /// <returns> Vrátí vytvořený stack panel </returns>
+        StackPanel CreateSignalStackPanel(string description)
         {
-            StackPanel signalPanel = new StackPanel();
+            StackPanel signalPanel = new StackPanel(); // panel s labelem a tlačítky
             signalPanel.HorizontalAlignment = HorizontalAlignment.Center;
             signalPanel.VerticalAlignment = VerticalAlignment.Center;
             signalPanel.Margin = new Thickness(stackPanelMargin);
@@ -59,7 +62,7 @@ namespace Tachograph
             titleLabel.Content = description;
             signalPanel.Children.Add(titleLabel);
 
-            StackPanel aroundPanel = new StackPanel();
+            StackPanel aroundPanel = new StackPanel(); // obalovací panel na tlačítka (následně ohraničen Borderem)
 
             Border mainBorder = new Border(); // Vytvořte nový Border pro každý cyklus
             mainBorder.CornerRadius = new CornerRadius(cornerRadius);
@@ -70,13 +73,13 @@ namespace Tachograph
             mainBorder.Child = aroundPanel; // Přidejte každý buttonPanel do hlavního Borderu
             for (int j = 1; j <= rowCount; j++)
             {
-                StackPanel buttonPanel = new StackPanel();
+                StackPanel buttonPanel = new StackPanel(); // panel na řadu tlačítek
                 buttonPanel.Orientation = Orientation.Horizontal;
                 buttonPanel.HorizontalAlignment = HorizontalAlignment.Center;
 
                 for (int i = buttonsInRow * (j - 1) + 1; i <= buttonsInRow * j; i++)
                 {
-                    StackPanel buttonContainer = new StackPanel();
+                    StackPanel buttonContainer = new StackPanel(); // panel na tlačítko s jeho ID
                     buttonContainer.Width = labelAndButtonContainerWidth;
                     Label label = new Label();
                     label.HorizontalAlignment = HorizontalAlignment.Center;
