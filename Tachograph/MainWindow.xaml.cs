@@ -48,5 +48,21 @@ namespace Tachograph
         {
             pagesFrame.Content = new SignalsPage();
         }
+
+        /// <summary>
+        /// Metoda na zápis dat do tafografu (při správném vyplnění parametrů)
+        /// </summary>
+        private void setTaphoParametersBtn_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        /// <summary>
+        /// Úplně nevím, jak tuhle metodu využít?
+        /// </summary>
+        private void setCarParametersBtn_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
