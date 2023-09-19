@@ -31,6 +31,8 @@ namespace Tachograph
         /// <param name="taphographRecord"> Vyplněné data tafografu na poslání </param>
         async Task WriteData(TaphographRecord taphographRecord)
         {
+            // TaphographRecord record = new TaphographRecord();
+            
             try
             {
                 using (UdpClient client = new UdpClient(sourcePort))

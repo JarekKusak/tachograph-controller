@@ -40,7 +40,7 @@ namespace Tachograph
 
             mainPanel.Children.Add(CreateSignalStackPanel("Aktivní signály v záznamu"));
             mainPanel.Children.Add(CreateSignalStackPanel("Signály pro test brzdy"));
-            mainPanel.Children.Add(CreateSignalStackPanel("Invverzní signály"));
+            mainPanel.Children.Add(CreateSignalStackPanel("Inverzní signály"));
 
             Grid.SetColumn(mainPanel, column);
             settingGrid.Children.Add(mainPanel); // Přidejte StackPanel s hlavním Borderem do Gridu
@@ -83,7 +83,7 @@ namespace Tachograph
                     buttonContainer.Width = labelAndButtonContainerWidth;
                     Label label = new Label();
                     label.HorizontalAlignment = HorizontalAlignment.Center;
-                    label.Content = i.ToString();
+                    label.Content = i.ToString(); // ID tlačítka
 
                     Button button = new Button();
                     button.Height = buttonHeight;

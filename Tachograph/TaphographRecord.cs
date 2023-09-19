@@ -35,9 +35,9 @@ namespace Tachograph
         int recordStep;
 
         string taphographType;
-        public TaphographRecord() 
+        public TaphographRecord(int wheelDiameter, int carNumber, int carType, int gearRatio, int maxWheelDiameter, int maxSpeed) 
         { 
-        
+            
         }         
     }
 }
