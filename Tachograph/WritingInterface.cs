@@ -25,15 +25,16 @@ namespace Tachograph
             writingPrefix = 0x15100000;
         }
 
-        public void AddRecord(string jmeno, DateTime? datumNarozeni)
+        public void AddRecord(int?[] intTachoParameters, string[] stringTachoParameters)
         {
-            if (jmeno.Length < 3)
-                throw new ArgumentException("Jméno je příliš krátké");
-            if (datumNarozeni == null)
-                throw new ArgumentException("Nebylo zadané datum narození");
-            if (datumNarozeni.Value.Date > DateTime.Today)
-                throw new ArgumentException("Datum narození nesmí být v budoucnosti");
-            // TaphographRecord record = new TaphographRecord();
+            foreach (int p in intTachoParameters)
+                if (p < 0)
+                    throw new ArgumentException($"Záporná hodnota není povolena pro parametr {p}.");
+            foreach (string p in stringTachoParameters)
+                if (string.IsNullOrEmpty(p)) // nebyl zadán
+                    throw new ArgumentException("Některý z řetězcových parametrů nebyl zadán.");
+            MessageBox.Show("bomba");
+            //TaphographRecord record = new TaphographRecord();
         }
 
         /// <summary>
