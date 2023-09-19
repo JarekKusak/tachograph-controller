@@ -68,7 +68,7 @@ namespace Tachograph
                 int counter4 = int.Parse(counter4TxtBox.Text);
                 int counter5 = int.Parse(counter5TxtBox.Text);
                 int mode = 0; // radio
-                int recordStep = 1; // combo box (musí se oddělat metry)
+                int recordStep = int.Parse(recordStepComboBox.SelectedItem.ToString().Split()[1]); // položky v comboboxu mají podobu "X m" a my chceme uložit pouze číselné X (nultá položka je typ elementu...)
 
                 int?[] parameters = { wheelDiameter, carNumber, gearRatio, maxWheelDiameter, maxSpeed, kFactor,
                     totalKilometersDriven, counter1, counter2, counter3, counter4, counter5,
