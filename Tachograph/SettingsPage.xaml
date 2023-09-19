@@ -124,7 +124,7 @@
             </StackPanel>
             <StackPanel>
                 <Label Content="Krok záznamu"/>
-                <ComboBox>
+                <ComboBox Name="recordStepComboBox">
                     <ComboBoxItem IsSelected="True" Content="1 m"/>
                     <ComboBoxItem Content="2 m"/>
                     <ComboBoxItem Content="3 m"/>
