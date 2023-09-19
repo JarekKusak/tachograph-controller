@@ -20,11 +20,11 @@
                     <StackPanel>
                         <StackPanel>
                             <Label Content="Průměr kola [mm]"/>
-                            <TextBox/>
+                            <TextBox Text="700"/>
                         </StackPanel>
                         <StackPanel>
                             <Label Content="Číslo vozu"/>
-                            <TextBox/>
+                            <TextBox Text="1"/>
                         </StackPanel>
                     </StackPanel>
                 </Border>
@@ -35,27 +35,27 @@
                     <StackPanel>
                         <StackPanel>
                             <Label Content="Ujeto celkem [km]"/>
-                            <TextBox/>
+                            <TextBox Text="0"/>
                         </StackPanel>
                         <StackPanel>
                             <Label Content="Počítadlo 1"/>
-                            <TextBox/>
+                            <TextBox Text="0"/>
                         </StackPanel>
                         <StackPanel>
                             <Label Content="Počítadlo 2"/>
-                            <TextBox/>
+                            <TextBox Text="0"/>
                         </StackPanel>
                         <StackPanel>
                             <Label Content="Počítadlo 3"/>
-                            <TextBox/>
+                            <TextBox Text="0"/>
                         </StackPanel>
                         <StackPanel>
                             <Label Content="Počítadlo 4"/>
-                            <TextBox/>
+                            <TextBox Text="0"/>
                         </StackPanel>
                         <StackPanel>
                             <Label Content="Počítadlo 5"/>
-                            <TextBox/>
+                            <TextBox Text="0"/>
                         </StackPanel>
                     </StackPanel>
                 </Border>
@@ -64,7 +64,7 @@
                 <Label Content="Módy"/>
                 <Border CornerRadius="6" BorderBrush="Gray" Background="LightGray" BorderThickness="2" Padding="8">
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                        <RadioButton Content="0"/>
+                        <RadioButton Content="0" IsChecked="True"/>
                         <RadioButton Content="1" Margin="8,0,0,0"/>
                         <RadioButton Content="2" Margin="8,0,0,0"/>
                         <RadioButton Content="3" Margin="8,0,0,0"/>
@@ -79,23 +79,23 @@
                     <StackPanel>
                         <StackPanel>
                             <Label Content="Typ vozu"/>
-                            <TextBox/>
+                            <TextBox Text="Default"/>
                         </StackPanel>
                         <StackPanel>
                             <Label Content="Převodový poměr"/>
-                            <TextBox/>
+                            <TextBox Text="52"/>
                         </StackPanel>
                         <StackPanel>
                             <Label Content="Max. průměr kola [mm]"/>
-                            <TextBox/>
+                            <TextBox Text="700"/>
                         </StackPanel>
                         <StackPanel>
                             <Label Content="Max. rychlost [km/h]"/>
-                            <TextBox/>
+                            <TextBox Text="60"/>
                         </StackPanel>
                         <StackPanel>
                             <Label Content="K faktor"/>
-                            <TextBox/>
+                            <TextBox Text="10000"/>
                         </StackPanel>
                     </StackPanel>
                 </Border>
@@ -104,7 +104,7 @@
                 <Label Content="Typ záznamu rychlosti"/>
                 <Border CornerRadius="6" BorderBrush="Gray" Background="LightGray" BorderThickness="2" Padding="8">
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                        <RadioButton Content="PR."/>
+                        <RadioButton Content="PR." IsChecked="True"/>
                         <RadioButton Content="Min." Margin="8,0,0,0"/>
                         <RadioButton Content="Max." Margin="8,0,0,0"/>
                     </StackPanel>
@@ -115,10 +115,10 @@
                 <Border CornerRadius="6" BorderBrush="Gray" Background="LightGray" BorderThickness="2" Padding="8">
                     <StackPanel  HorizontalAlignment="Center">
                         <RadioButton Content="TT32"/>
-                        <RadioButton Content="TT32-24" />
+                        <RadioButton Content="TT32-24"/>
                         <RadioButton Content="TT32-48"/>
                         <RadioButton Content="TT12/22"/>
-                        <RadioButton Content="TT68"/>
+                        <RadioButton Content="TT62" IsChecked="True"/>
                     </StackPanel>
                 </Border>
             </StackPanel>
