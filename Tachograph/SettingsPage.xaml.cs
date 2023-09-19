@@ -65,7 +65,7 @@ namespace Tachograph
                 int counter4 = int.Parse(counter4TxtBox.Text);
                 int counter5 = int.Parse(counter5TxtBox.Text);
                 int mode = 0; // radio
-                int recordStep = 1; // musí se oddělat metry
+                int recordStep = 1; // combo box (musí se oddělat metry)
 
                 int?[] parameters = { wheelDiameter, carNumber, gearRatio, maxWheelDiameter, maxSpeed, kFactor,
                     totalKilometersDriven, counter1, counter2, counter3, counter4, counter5,
