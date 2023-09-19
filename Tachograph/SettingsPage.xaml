@@ -13,7 +13,7 @@
             <ColumnDefinition/>
             <ColumnDefinition Width="2*"/>
         </Grid.ColumnDefinitions>
-        <StackPanel Width="155" HorizontalAlignment="Center" VerticalAlignment="Top" Grid.Column="0">
+        <StackPanel Width="155" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="0">
             <StackPanel>
                 <Label Content="Parametry tacho"/>
                 <Border CornerRadius="6" BorderBrush="Gray" Background="LightGray" BorderThickness="2" Padding="8">
@@ -72,7 +72,7 @@
                 </Border>
             </StackPanel>
         </StackPanel>
-        <StackPanel Width="155" Grid.Column="1" VerticalAlignment="Top" HorizontalAlignment="Center">
+        <StackPanel Width="155" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center">
             <StackPanel>
                 <Label Content="Parametry vozu"/>
                 <Border CornerRadius="6" BorderBrush="Gray" Background="LightGray" BorderThickness="2" Padding="8">
@@ -97,9 +97,7 @@
                             <Label Content="K faktor"/>
                             <TextBox/>
                         </StackPanel>
-
                     </StackPanel>
-                    
                 </Border>
             </StackPanel>
             <StackPanel>
