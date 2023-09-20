@@ -67,9 +67,10 @@ namespace Tachograph
             try
             {
                 int?[] intParameters = settingsPage.NumericalParameters();
+                bool[] signalParameters = settingsPage.SignalParameters();
                 if (intParameters != null)
-                    writingInterface.AddRecord(intParameters, settingsPage.TextParameters());
-                else MessageBox.Show("Jeden z parametrů není v číselném tvaru."); // chce to vymyslet trochu lepší způsob :D
+                    writingInterface.AddRecord(intParameters, settingsPage.TextParameters(), signalParameters);
+                else MessageBox.Show("Jeden z parametrů není v číselném tvaru."); // chce to vymyslet lepší způsob, jak upozornit na konkrétní problémový parametr
             }
             catch (Exception ex)
             {
