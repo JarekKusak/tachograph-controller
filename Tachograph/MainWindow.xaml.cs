@@ -35,7 +35,10 @@ namespace Tachograph
             Loaded += settingsBtn_Click;
         }
 
-        protected async void readAndSaveButton_Click(object sender, RoutedEventArgs e)
+        /// <summary>
+        /// Událost po stisknutí tlačíka na čtení a uložení
+        /// </summary>
+        private async void readAndSaveButton_Click(object sender, RoutedEventArgs e)
         {
             readingInterface = new ReadingInterface(tachoIP, sourcePort, destinationPort);
 
@@ -46,12 +49,18 @@ namespace Tachograph
             readAndSaveButton.IsEnabled = true;
         }
 
-        protected void settingsBtn_Click(object sender, RoutedEventArgs e)
+        /// <summary>
+        /// Generuje stránku s nastavením parametrů tachografu
+        /// </summary>
+        private void settingsBtn_Click(object sender, RoutedEventArgs e)
         {
             settingsPage = new SettingsPage();
             pagesFrame.Content = settingsPage;
         }
 
+        /// <summary>
+        /// Stránka na signály (ještě úplně nevím k čemu)
+        /// </summary>
         private void signalsBtn_Click(object sender, RoutedEventArgs e)
         {
             pagesFrame.Content = new SignalsPage();
@@ -67,10 +76,12 @@ namespace Tachograph
             try
             {
                 int?[] intParameters = settingsPage.NumericalParameters();
+                string[] textParameters = settingsPage.TextParameters();
                 bool[] signalParameters = settingsPage.SignalParameters();
+
                 if (intParameters != null)
-                    writingInterface.AddRecord(intParameters, settingsPage.TextParameters(), signalParameters);
-                else MessageBox.Show("Jeden z parametrů není v číselném tvaru."); // chce to vymyslet lepší způsob, jak upozornit na konkrétní problémový parametr
+                    writingInterface.AddRecord(intParameters, textParameters, signalParameters);
+                else MessageBox.Show("Jeden z parametrů není správně vyplněn."); // chce to vymyslet lepší způsob, jak upozornit na konkrétní problémový parametr
             }
             catch (Exception ex)
             {
