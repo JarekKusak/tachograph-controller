@@ -75,7 +75,6 @@ namespace Tachograph
             {
                 MessageBox.Show(ex.Message, "Chyba", MessageBoxButton.OK, MessageBoxImage.Exclamation);
             }
-            
         }
 
         /// <summary>
