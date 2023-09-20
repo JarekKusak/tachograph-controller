@@ -32,8 +32,9 @@ namespace Tachograph
         const int borderPadding = 5;
         const int column = 2;
 
-        string speedRecordTypeContent;
-        string tachographTypeContent;
+        string speedRecordTypeRadioBtnContent;
+        string tachographTypeRadioBtnContent;
+        int modeRadioBtnContent;
 
 
         public SettingsPage()
@@ -49,8 +50,9 @@ namespace Tachograph
             Grid.SetColumn(mainPanel, column);
             settingGrid.Children.Add(mainPanel); // Přidejte StackPanel s hlavním Borderem do Gridu
 
-            speedRecordTypeContent = "PR.";
-            tachographTypeContent = "TT62";
+            speedRecordTypeRadioBtnContent = "PR.";
+            tachographTypeRadioBtnContent = "TT62";
+            modeRadioBtnContent = 0;
         } 
 
         /// <summary>
@@ -74,7 +76,8 @@ namespace Tachograph
                 int counter3 = int.Parse(counter3TxtBox.Text);
                 int counter4 = int.Parse(counter4TxtBox.Text);
                 int counter5 = int.Parse(counter5TxtBox.Text);
-                int mode = 0; // radio
+                int mode = modeRadioBtnContent; // radio
+
                 // může být i float!!!
                 int recordStep = int.Parse(recordStepComboBox.SelectedItem.ToString().Split()[1]); // položky v comboboxu mají podobu "X m" a my chceme uložit pouze číselné X (nultá položka je typ elementu...)
 
@@ -97,11 +100,21 @@ namespace Tachograph
         public string[] TextParameters()
         {
             string carType = carTypeTxtBox.Text;
-            string speedRecordType = speedRecordTypeContent;
-            string tachographType = tachographTypeContent; 
+            string speedRecordType = speedRecordTypeRadioBtnContent;
+            string tachographType = tachographTypeRadioBtnContent; 
 
             string[] parameters = { carType, speedRecordType, tachographType };
             return parameters;
+        }
+
+        /// <summary>
+        /// Zaznamenává zakliklý radio button pro tachographType
+        /// </summary>
+        void modeRadioButton_Click(object sender, RoutedEventArgs e)
+        {
+            RadioButton clickedRadioButton = (RadioButton)sender;
+            if (clickedRadioButton.IsChecked == true)
+                modeRadioBtnContent = int.Parse(clickedRadioButton.Content.ToString());
         }
 
         /// <summary>
@@ -111,7 +124,7 @@ namespace Tachograph
         {
             RadioButton clickedRadioButton = (RadioButton)sender;
             if (clickedRadioButton.IsChecked == true)
-                tachographTypeContent = clickedRadioButton.Content.ToString();
+                tachographTypeRadioBtnContent = clickedRadioButton.Content.ToString();
         }
 
         /// <summary>
@@ -121,7 +134,7 @@ namespace Tachograph
         {
             RadioButton clickedRadioButton = (RadioButton)sender;
             if (clickedRadioButton.IsChecked == true)
-                speedRecordTypeContent = clickedRadioButton.Content.ToString();
+                speedRecordTypeRadioBtnContent = clickedRadioButton.Content.ToString();
         }
 
         /// <summary>
