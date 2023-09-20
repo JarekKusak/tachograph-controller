@@ -104,9 +104,9 @@
                 <Label Content="Typ záznamu rychlosti"/>
                 <Border CornerRadius="6" BorderBrush="Gray" Background="LightGray" BorderThickness="2" Padding="8">
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                        <RadioButton Content="PR." IsChecked="True"/>
-                        <RadioButton Content="Min." Margin="8,0,0,0"/>
-                        <RadioButton Content="Max." Margin="8,0,0,0"/>
+                        <RadioButton Content="PR." IsChecked="True" Click="speedRecordTypeRadioButton_Click"/>
+                        <RadioButton Content = "Min." Margin="8,0,0,0" Click="speedRecordTypeRadioButton_Click"/>
+                        <RadioButton Content = "Max." Margin="8,0,0,0" Click="speedRecordTypeRadioButton_Click"/>
                     </StackPanel>
                 </Border>
             </StackPanel>
