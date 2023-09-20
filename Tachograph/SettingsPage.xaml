@@ -114,11 +114,11 @@
                 <Label Content="Typ tachografu"/>
                 <Border CornerRadius="6" BorderBrush="Gray" Background="LightGray" BorderThickness="2" Padding="8">
                     <StackPanel  HorizontalAlignment="Center">
-                        <RadioButton Content="TT32"/>
-                        <RadioButton Content="TT32-24"/>
-                        <RadioButton Content="TT32-48"/>
-                        <RadioButton Content="TT12/22"/>
-                        <RadioButton Content="TT62" IsChecked="True"/>
+                        <RadioButton Content="TT32" Click="tachographTypeRadioButton_Click"/>
+                        <RadioButton Content="TT32-24" Click="tachographTypeRadioButton_Click"/>
+                        <RadioButton Content="TT32-48" Click="tachographTypeRadioButton_Click"/>
+                        <RadioButton Content="TT12/22" Click="tachographTypeRadioButton_Click"/>
+                        <RadioButton Content="TT62" IsChecked="True" Click="tachographTypeRadioButton_Click"/>
                     </StackPanel>
                 </Border>
             </StackPanel>

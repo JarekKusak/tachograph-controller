@@ -33,6 +33,7 @@ namespace Tachograph
         const int column = 2;
 
         string speedRecordTypeContent;
+        string tachographTypeContent;
 
 
         public SettingsPage()
@@ -49,6 +50,7 @@ namespace Tachograph
             settingGrid.Children.Add(mainPanel); // Přidejte StackPanel s hlavním Borderem do Gridu
 
             speedRecordTypeContent = "PR.";
+            tachographTypeContent = "TT62";
         } 
 
         /// <summary>
@@ -95,23 +97,31 @@ namespace Tachograph
         public string[] TextParameters()
         {
             string carType = carTypeTxtBox.Text;
-            string speedRecordType = speedRecordTypeContent; // radio
-            string tachographType = "TT62"; // radio
+            string speedRecordType = speedRecordTypeContent;
+            string tachographType = tachographTypeContent; 
 
             string[] parameters = { carType, speedRecordType, tachographType };
             return parameters;
         }
 
+        /// <summary>
+        /// Zaznamenává zakliklý radio button pro tachographType
+        /// </summary>
+        void tachographTypeRadioButton_Click(object sender, RoutedEventArgs e)
+        {
+            RadioButton clickedRadioButton = (RadioButton)sender;
+            if (clickedRadioButton.IsChecked == true)
+                tachographTypeContent = clickedRadioButton.Content.ToString();
+        }
+
+        /// <summary>
+        /// Zaznamenává zakliklý radio button pro speedRecordType
+        /// </summary>
         void speedRecordTypeRadioButton_Click(object sender, RoutedEventArgs e)
         {
             RadioButton clickedRadioButton = (RadioButton)sender;
-
             if (clickedRadioButton.IsChecked == true)
-            {
                 speedRecordTypeContent = clickedRadioButton.Content.ToString();
-                // content nyní obsahuje text označeného RadioButtonu
-                MessageBox.Show("Označený RadioButton: " + speedRecordTypeContent);
-            }
         }
 
         /// <summary>
