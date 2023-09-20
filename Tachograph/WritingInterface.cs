@@ -25,12 +25,12 @@ namespace Tachograph
             writingPrefix = 0x15100000;
         }
 
-        public void AddRecord(int?[] intTachoParameters, string[] stringTachoParameters)
+        public void AddRecord(int?[] numericalTachoParameters, string[] textTachoParameters)
         {
-            foreach (int p in intTachoParameters)
+            foreach (int p in numericalTachoParameters)
                 if (p < 0)
                     throw new ArgumentException($"Záporná hodnota není povolena pro parametr {p}.");
-            foreach (string p in stringTachoParameters)
+            foreach (string p in textTachoParameters)
                 if (string.IsNullOrEmpty(p)) // nebyl zadán
                     throw new ArgumentException("Některý z řetězcových parametrů nebyl zadán.");
             MessageBox.Show("vše OK ;-)");
