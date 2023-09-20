@@ -30,8 +30,11 @@ namespace Tachograph
         const int cornerRadius = 6;
         const int borderThickness = 2;
         const int borderPadding = 5;
-        const int column = 2; 
-        
+        const int column = 2;
+
+        string speedRecordTypeContent;
+
+
         public SettingsPage()
         {
             InitializeComponent();
@@ -44,13 +47,15 @@ namespace Tachograph
 
             Grid.SetColumn(mainPanel, column);
             settingGrid.Children.Add(mainPanel); // Přidejte StackPanel s hlavním Borderem do Gridu
-        }
+
+            speedRecordTypeContent = "PR.";
+        } 
 
         /// <summary>
         /// Vrací číselné parametry tachografu
         /// </summary>
         /// <returns> Pole číselných parametrů </returns>
-        public int?[] PickUpIntegerParameters()
+        public int?[] NumericalParameters()
         {
             try
             {
@@ -68,6 +73,7 @@ namespace Tachograph
                 int counter4 = int.Parse(counter4TxtBox.Text);
                 int counter5 = int.Parse(counter5TxtBox.Text);
                 int mode = 0; // radio
+                // může být i float!!!
                 int recordStep = int.Parse(recordStepComboBox.SelectedItem.ToString().Split()[1]); // položky v comboboxu mají podobu "X m" a my chceme uložit pouze číselné X (nultá položka je typ elementu...)
 
                 int?[] parameters = { wheelDiameter, carNumber, gearRatio, maxWheelDiameter, maxSpeed, kFactor,
@@ -86,14 +92,26 @@ namespace Tachograph
         /// Vrací textové parametry tachografu
         /// </summary>
         /// <returns> Pole textových parametrů tachografu </returns>
-        public string[] PickUpStringParameters()
+        public string[] TextParameters()
         {
             string carType = carTypeTxtBox.Text;
-            string speedRecordType = "PR."; // radio
+            string speedRecordType = speedRecordTypeContent; // radio
             string tachographType = "TT62"; // radio
 
             string[] parameters = { carType, speedRecordType, tachographType };
             return parameters;
+        }
+
+        void speedRecordTypeRadioButton_Click(object sender, RoutedEventArgs e)
+        {
+            RadioButton clickedRadioButton = (RadioButton)sender;
+
+            if (clickedRadioButton.IsChecked == true)
+            {
+                speedRecordTypeContent = clickedRadioButton.Content.ToString();
+                // content nyní obsahuje text označeného RadioButtonu
+                MessageBox.Show("Označený RadioButton: " + speedRecordTypeContent);
+            }
         }
 
         /// <summary>
