@@ -66,9 +66,9 @@ namespace Tachograph
 
             try
             {
-                int?[] intParameters = settingsPage.PickUpIntegerParameters();
+                int?[] intParameters = settingsPage.NumericalParameters();
                 if (intParameters != null)
-                    writingInterface.AddRecord(intParameters, settingsPage.PickUpStringParameters());
+                    writingInterface.AddRecord(intParameters, settingsPage.TextParameters());
                 else MessageBox.Show("Jeden z parametrů není v číselném tvaru."); // chce to vymyslet trochu lepší způsob :D
             }
             catch (Exception ex)
