@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
@@ -108,7 +109,7 @@ namespace Tachograph
         }
 
         /// <summary>
-        /// Zaznamenává zakliklý radio button pro tachographType
+        /// Zaznamenává zakliklý radio button pro mode
         /// </summary>
         void modeRadioButton_Click(object sender, RoutedEventArgs e)
         {
@@ -162,6 +163,9 @@ namespace Tachograph
             mainBorder.BorderThickness = new Thickness(borderThickness);
             mainBorder.Padding = new Thickness(borderPadding);
             mainBorder.Child = aroundPanel; // Přidejte každý buttonPanel do hlavního Borderu
+
+            List<ToggleButton> toggleButtons = new List<ToggleButton>(); // Pole pro ukládání tlačítek
+
             for (int j = 1; j <= rowCount; j++)
             {
                 StackPanel buttonPanel = new StackPanel(); // panel na řadu tlačítek
@@ -176,20 +180,27 @@ namespace Tachograph
                     label.HorizontalAlignment = HorizontalAlignment.Center;
                     label.Content = i.ToString(); // ID tlačítka
 
-                    Button button = new Button();
-                    button.Height = buttonHeight;
-                    button.Width = buttonWidth;
+                    ToggleButton toggleButton = new ToggleButton(); // Použijeme ToggleButton místo Button
+                    toggleButton.Height = buttonHeight;
+                    toggleButton.Width = buttonWidth;
 
                     buttonContainer.Children.Add(label);
-                    buttonContainer.Children.Add(button);
+                    buttonContainer.Children.Add(toggleButton);
 
                     buttonPanel.Children.Add(buttonContainer);
+
+                    toggleButtons.Add(toggleButton); // Přidejte tlačítko do pole
                 }
                 aroundPanel.Children.Add(buttonPanel);
             }
 
             signalPanel.Children.Add(mainBorder);
+
+            // Nyní máte všechna tlačítka uložena v poli toggleButtons
+            // Můžete sledovat jejich stavy (zakliknutý/nebo ne) a provádět akce na základě stavu
+
             return signalPanel;
         }
+
     }
 }
