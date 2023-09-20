@@ -25,7 +25,7 @@ namespace Tachograph
             writingPrefix = 0x15100000;
         }
 
-        public void AddRecord(int?[] numericalTachoParameters, string[] textTachoParameters)
+        public void AddRecord(int?[] numericalTachoParameters, string[] textTachoParameters, bool[] signalParameters)
         {
             foreach (int p in numericalTachoParameters)
                 if (p < 0)
