@@ -44,7 +44,7 @@ namespace Tachograph
             InitializeComponent();
 
             StackPanel mainPanel = new StackPanel();
-            mainPanel.VerticalAlignment = VerticalAlignment.Top;
+            mainPanel.VerticalAlignment = VerticalAlignment.Center;
 
             signalButtons = new List<ToggleButton>(); // list na ukládání signálů (mělo by jich být 144)
 
@@ -218,5 +218,27 @@ namespace Tachograph
             return signalPanel;
         }
 
+
+        // TODO
+        /// <summary>
+        /// Event na označení/odznačení všech tlačítek daného typu
+        /// </summary>
+        private void pressActiveSignalsBtn_Click(object sender, RoutedEventArgs e)
+        {
+            for (int i = 0; i < signalButtons.Count/3; i++) 
+            {
+                signalButtons[i].IsChecked = true;            
+            }
+        }
+
+        private void pressBreakSignalsBtn_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void pressInverseSignalsBtn_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
