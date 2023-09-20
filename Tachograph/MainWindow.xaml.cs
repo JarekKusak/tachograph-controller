@@ -33,6 +33,8 @@ namespace Tachograph
         {
             InitializeComponent();
             Loaded += settingsBtn_Click;
+
+            settingsPage = new SettingsPage();
         }
 
         /// <summary>
@@ -54,7 +56,6 @@ namespace Tachograph
         /// </summary>
         private void settingsBtn_Click(object sender, RoutedEventArgs e)
         {
-            settingsPage = new SettingsPage();
             pagesFrame.Content = settingsPage;
         }
 
@@ -80,8 +81,12 @@ namespace Tachograph
                 bool[] signalParameters = settingsPage.SignalParameters();
 
                 if (intParameters != null)
-                    writingInterface.AddRecord(intParameters, textParameters, signalParameters);
+                {
+                    writingInterface.AddRecord(intParameters, textParameters, signalParameters); 
+                    // settingsPage = new SettingsPage(); // potřeba aktualizovat okno
+                }  
                 else MessageBox.Show("Jeden z parametrů není správně vyplněn."); // chce to vymyslet lepší způsob, jak upozornit na konkrétní problémový parametr
+                
             }
             catch (Exception ex)
             {
