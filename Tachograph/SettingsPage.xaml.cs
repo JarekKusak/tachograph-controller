@@ -44,6 +44,8 @@ namespace Tachograph
             InitializeComponent();
 
             StackPanel mainPanel = new StackPanel();
+            mainPanel.VerticalAlignment = VerticalAlignment.Top;
+
             signalButtons = new List<ToggleButton>(); // list na ukládání signálů (mělo by jich být 144)
 
             mainPanel.Children.Add(CreateSignalStackPanel("Aktivní signály v záznamu"));
@@ -91,7 +93,6 @@ namespace Tachograph
             }
             catch
             {
-                // ---------zpráva o selhání---------
                 return null;
             }        
         }
@@ -108,6 +109,21 @@ namespace Tachograph
 
             string[] parameters = { carType, speedRecordType, tachographType };
             return parameters;
+        }
+
+        /// <summary>
+        /// Vrací všechny druhy (zakliklých) signálů
+        /// </summary>
+        /// <returns> Bool pole (ne)zakliklých signálů </returns>
+        public bool[] SignalParameters()
+        {
+            bool[] turnedSignals = new bool[signalButtons.Count];
+            
+            for (int i = 0; i < signalButtons.Count; i++)
+                if (signalButtons[i].IsChecked == true)
+                    turnedSignals[i] = true;      
+            
+            return turnedSignals;
         }
 
         /// <summary>
@@ -164,9 +180,7 @@ namespace Tachograph
             mainBorder.Background = Brushes.LightGray;
             mainBorder.BorderThickness = new Thickness(borderThickness);
             mainBorder.Padding = new Thickness(borderPadding);
-            mainBorder.Child = aroundPanel; // Přidejte každý buttonPanel do hlavního Borderu
-
-            
+            mainBorder.Child = aroundPanel; // Přidejte každý buttonPanel do hlavního Borderu    
 
             for (int j = 1; j <= rowCount; j++)
             {
