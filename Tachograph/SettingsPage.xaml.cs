@@ -36,6 +36,7 @@ namespace Tachograph
         string speedRecordTypeRadioBtnContent;
         string tachographTypeRadioBtnContent;
         int modeRadioBtnContent;
+        List<ToggleButton> signalButtons;
 
 
         public SettingsPage()
@@ -43,6 +44,7 @@ namespace Tachograph
             InitializeComponent();
 
             StackPanel mainPanel = new StackPanel();
+            signalButtons = new List<ToggleButton>(); // list na ukládání signálů (mělo by jich být 144)
 
             mainPanel.Children.Add(CreateSignalStackPanel("Aktivní signály v záznamu"));
             mainPanel.Children.Add(CreateSignalStackPanel("Signály pro test brzdy"));
@@ -164,7 +166,7 @@ namespace Tachograph
             mainBorder.Padding = new Thickness(borderPadding);
             mainBorder.Child = aroundPanel; // Přidejte každý buttonPanel do hlavního Borderu
 
-            List<ToggleButton> toggleButtons = new List<ToggleButton>(); // Pole pro ukládání tlačítek
+            
 
             for (int j = 1; j <= rowCount; j++)
             {
@@ -189,7 +191,7 @@ namespace Tachograph
 
                     buttonPanel.Children.Add(buttonContainer);
 
-                    toggleButtons.Add(toggleButton); // Přidejte tlačítko do pole
+                    signalButtons.Add(toggleButton); // Přidejte tlačítko do pole
                 }
                 aroundPanel.Children.Add(buttonPanel);
             }

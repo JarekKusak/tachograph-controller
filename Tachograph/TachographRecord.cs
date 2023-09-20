@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Tachograph
 {
-    class TaphographRecord
+    class TachographRecord
     {
         // Blok parametry tacho:
         int wheelDiameter;
@@ -36,7 +36,7 @@ namespace Tachograph
         // + signály (3x bool[48])
         // + byty navíc..
 
-        public TaphographRecord(int wheelDiameter, int carNumber, int gearRatio, int maxWheelDiameter, int maxSpeed, int kFactor, int totalKilometersDriven, 
+        public TachographRecord(int wheelDiameter, int carNumber, int gearRatio, int maxWheelDiameter, int maxSpeed, int kFactor, int totalKilometersDriven, 
             int counter1, int counter2, int counter3, int counter4, int counter5, int mode, int recordStep, string carType, string speedRecordType, string taphographType) 
         {
             this.wheelDiameter = wheelDiameter;

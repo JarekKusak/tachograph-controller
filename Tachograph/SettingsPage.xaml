@@ -64,10 +64,10 @@
                 <Label Content="Módy"/>
                 <Border CornerRadius="6" BorderBrush="Gray" Background="LightGray" BorderThickness="2" Padding="8">
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                        <RadioButton Content="0" IsChecked="True"/>
-                        <RadioButton Content="1" Margin="8,0,0,0"/>
-                        <RadioButton Content="2" Margin="8,0,0,0"/>
-                        <RadioButton Content="3" Margin="8,0,0,0"/>
+                        <RadioButton Content="0" IsChecked="True" Click="modeRadioButton_Click"/>
+                        <RadioButton Content="1" Margin="8,0,0,0" Click="modeRadioButton_Click"/>
+                        <RadioButton Content="2" Margin="8,0,0,0" Click="modeRadioButton_Click"/>
+                        <RadioButton Content="3" Margin="8,0,0,0" Click="modeRadioButton_Click"/>
                     </StackPanel>
                 </Border>
             </StackPanel>
