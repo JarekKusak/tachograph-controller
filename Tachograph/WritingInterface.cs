@@ -25,6 +25,13 @@ namespace Tachograph
             writingPrefix = 0x15100000;
         }
 
+        /// <summary>
+        /// Metoda na kontrolu validity získaných parametrů ze SettingsPage a následného založení záznamu
+        /// </summary>
+        /// <param name="numericalTachoParameters"> číselné parametry tachografu </param>
+        /// <param name="textTachoParameters"> textové parametry tachografu </param>
+        /// <param name="signalParameters"> signály tachografu </param>
+        /// <exception cref="ArgumentException"></exception>
         public void AddRecord(int?[] numericalTachoParameters, string[] textTachoParameters, bool[] signalParameters)
         {
             foreach (int p in numericalTachoParameters)
