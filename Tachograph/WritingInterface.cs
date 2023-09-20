@@ -40,8 +40,8 @@ namespace Tachograph
         /// <summary>
         /// Metoda navazuje spojení s tafografem a řídí veškerou zapisovací komunikaci (ZATÍM ABSTRAKTNĚ)
         /// </summary>
-        /// <param name="taphographRecord"> Vyplněné data tafografu na poslání </param>
-        async Task WriteData(TaphographRecord taphographRecord)
+        /// <param name="tachographRecord"> Vyplněné data tafografu na poslání </param>
+        async Task WriteData(TachographRecord tachographRecord)
         {
             try
             {
