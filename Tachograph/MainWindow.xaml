@@ -60,8 +60,8 @@
         <Line Stretch="Fill" Stroke="Gray" X2="1" Grid.Row="1" Grid.ColumnSpan="2"  VerticalAlignment="Bottom"/>
         
         <StackPanel Grid.Row="1" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Horizontal" Margin="5">
-            <Button Name="readAndSaveButton" Content="Číst data a uložit" Click="readAndSaveButton_Click" Height="30"/>
-            <ProgressBar Name="progressBar" Margin="5,0,0,0" Width="120" Height="20"/>
+            <Button Name="readAndSaveButton" Content="Číst data a uložit" Click="readAndSaveButton_Click" Height="30" Width="105"/>
+            <ProgressBar Name="progressBar" Margin="5,0,0,0" Width="120" Height="20" Visibility="Hidden"/>
         </StackPanel>
         <Line Stretch="Fill" Stroke="Gray" X2="1" Grid.Row="2" Grid.ColumnSpan="2" VerticalAlignment="Bottom"/>
 
