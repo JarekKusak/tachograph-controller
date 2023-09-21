@@ -37,7 +37,7 @@ namespace Tachograph
         string tachographTypeRadioBtnContent;
         int modeRadioBtnContent;
         bool[] markedSignals = { false, false, false };
-        string[] signals = { "aktivní signály", "brzdné signály", "inversní signály" };
+        string[] signals = { "aktivní signály", "brzdné signály", "inverzní signály" };
         List<ToggleButton> signalButtons;
         List<Button> markSignalsButtons = new List<Button>();
 
@@ -54,16 +54,16 @@ namespace Tachograph
             mainPanel.Children.Add(CreateSignalStackPanel("Signály pro test brzdy"));
             mainPanel.Children.Add(CreateSignalStackPanel("Inverzní signály"));
 
+            markSignalsButtons.Add(pressActiveSignalsBtn);
+            markSignalsButtons.Add(pressBreakSignalsBtn);
+            markSignalsButtons.Add(pressInverseSignalsBtn);
+
             Grid.SetColumn(mainPanel, column);
             settingGrid.Children.Add(mainPanel); // Přidejte StackPanel s hlavním Borderem do Gridu
 
             speedRecordTypeRadioBtnContent = "PR.";
             tachographTypeRadioBtnContent = "TT62";
             modeRadioBtnContent = 0;
-
-            markSignalsButtons.Add(pressActiveSignalsBtn);
-            markSignalsButtons.Add(pressBreakSignalsBtn);
-            markSignalsButtons.Add(pressInverseSignalsBtn);
         }
 
         /// <summary>
@@ -187,38 +187,58 @@ namespace Tachograph
             }
 
             signalPanel.Children.Add(mainBorder);
-
-            // Nyní máte všechna tlačítka uložena v poli toggleButtons
-            // Můžete sledovat jejich stavy (zakliknutý/nebo ne) a provádět akce na základě stavu
-
             return signalPanel;
         }
 
+        /// <summary>
+        /// Univerzální metoda pro obsluhu RadioButton kliknutí s generickým typem T.
+        /// </summary>
         private void RadioButton_Click<T>(object sender, RoutedEventArgs e, Action<T> action)
         {
+            // Přetypování odesílatele (sender) na RadioButton.
             RadioButton clickedRadioButton = (RadioButton)sender;
+
+            // Zkontrolujeme, zda byl RadioButton označen.
             if (clickedRadioButton.IsChecked == true)
             {
+                // Získáme obsah RadioButtonu a přetypujeme ho na generický typ T.
                 T content = (T)Convert.ChangeType(clickedRadioButton.Content, typeof(T));
+
+                // Volání akce (delegátu) s obsahem RadioButtonu jako argumentem.
                 action(content);
             }
         }
 
+        /// <summary>
+        /// Obsluha RadioButton kliknutí pro tlačítko modeRadioButton s typem int.
+        /// </summary>
         private void modeRadioButton_Click(object sender, RoutedEventArgs e)
         {
+            // Volání generické metody s typem int a delegátem, který nastavuje modeRadioBtnContent.
             RadioButton_Click<int>(sender, e, (content) => { modeRadioBtnContent = content; });
         }
 
+        /// <summary>
+        /// Obsluha RadioButton kliknutí pro tlačítko tachographTypeRadioButton s typem string.
+        /// </summary>
         private void tachographTypeRadioButton_Click(object sender, RoutedEventArgs e)
         {
+            // Volání generické metody s typem string a delegátem, který nastavuje tachographTypeRadioBtnContent.
             RadioButton_Click<string>(sender, e, (content) => { tachographTypeRadioBtnContent = content; });
         }
 
+        /// <summary>
+        /// Obsluha RadioButton kliknutí pro tlačítko speedRecordTypeRadioButton s typem string.
+        /// </summary>
         private void speedRecordTypeRadioButton_Click(object sender, RoutedEventArgs e)
         {
+            // Volání generické metody s typem string a delegátem, který nastavuje speedRecordTypeRadioBtnContent.
             RadioButton_Click<string>(sender, e, (content) => { speedRecordTypeRadioBtnContent = content; });
         }
 
+        /// <summary>
+        /// Metoda označuje/odznačuje vybrané typy signálů
+        /// </summary>
         private void pressSignalsBtn_Click(object sender, RoutedEventArgs e)
         {
             var button = (Button)sender;
@@ -226,6 +246,7 @@ namespace Tachograph
             {
                 if (button == markSignalsButtons[i])
                 {
+                    // vždy se signály odznačují po třetinách (signály jsou rozdělené do tří typů)
                     if (markedSignals[i]) // bool pole tří typů signálů
                     {
                         for (int j = (signalButtons.Count / 3) * i; j < (signalButtons.Count / 3) * (i + 1); j++)
