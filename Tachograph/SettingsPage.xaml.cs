@@ -33,6 +33,10 @@ namespace Tachograph
         const int borderPadding = 5;
         const int column = 2;
 
+        bool activeSignalsMarked;
+        bool inverseSignalsMarked;
+        bool breakSignalsMarked;
+
         string speedRecordTypeRadioBtnContent;
         string tachographTypeRadioBtnContent;
         int modeRadioBtnContent;
@@ -58,6 +62,9 @@ namespace Tachograph
             speedRecordTypeRadioBtnContent = "PR.";
             tachographTypeRadioBtnContent = "TT62";
             modeRadioBtnContent = 0;
+            activeSignalsMarked = false;
+            breakSignalsMarked = false;
+            inverseSignalsMarked = false;
         } 
 
         /// <summary>
@@ -223,22 +230,65 @@ namespace Tachograph
         /// <summary>
         /// Event na označení/odznačení všech tlačítek daného typu
         /// </summary>
+
         private void pressActiveSignalsBtn_Click(object sender, RoutedEventArgs e)
         {
-            for (int i = 0; i < signalButtons.Count/3; i++) 
+            if (activeSignalsMarked)
             {
-                signalButtons[i].IsChecked = true;            
+                // Pokud signály byly označeny, odznačíme je a změníme obsah tlačítka
+                for (int i = 0; i < signalButtons.Count / 3; i++)
+                    signalButtons[i].IsChecked = false;
+                pressActiveSignalsBtn.Content = "Označit aktivní signály";
             }
+            else
+            {
+                // Pokud signály nebyly označeny, označíme je a změníme obsah tlačítka
+                for (int i = 0; i < signalButtons.Count / 3; i++)
+                    signalButtons[i].IsChecked = true;
+                pressActiveSignalsBtn.Content = "Odznačit aktivní signály";
+            }
+            // Invertujeme stav pro příští stisknutí
+            activeSignalsMarked = !activeSignalsMarked;
         }
 
         private void pressBreakSignalsBtn_Click(object sender, RoutedEventArgs e)
         {
-
+            if (breakSignalsMarked)
+            {
+                // Pokud signály byly označeny, odznačíme je a změníme obsah tlačítka
+                for (int i = signalButtons.Count / 3; i < 2*(signalButtons.Count / 3); i++)
+                    signalButtons[i].IsChecked = false;
+                pressBreakSignalsBtn.Content = "Označit brzdné signály";
+            }
+            else
+            {
+                // Pokud signály nebyly označeny, označíme je a změníme obsah tlačítka
+                for (int i = signalButtons.Count / 3; i < 2 * (signalButtons.Count / 3); i++)
+                    signalButtons[i].IsChecked = true;   
+                pressBreakSignalsBtn.Content = "Odznačit brzdné signály";
+            }
+            // Invertujeme stav pro příští stisknutí
+            breakSignalsMarked = !breakSignalsMarked;
         }
 
         private void pressInverseSignalsBtn_Click(object sender, RoutedEventArgs e)
         {
-
+            if (inverseSignalsMarked)
+            {
+                // Pokud signály byly označeny, odznačíme je a změníme obsah tlačítka
+                for (int i = 2 * (signalButtons.Count / 3); i < signalButtons.Count; i++)
+                    signalButtons[i].IsChecked = false;
+                pressInverseSignalsBtn.Content = "Označit inversní signály";
+            }
+            else
+            {
+                // Pokud signály nebyly označeny, označíme je a změníme obsah tlačítka
+                for (int i = 2 * (signalButtons.Count / 3); i < signalButtons.Count; i++)
+                    signalButtons[i].IsChecked = true;    
+                pressInverseSignalsBtn.Content = "Odznačit inversní signály";
+            }
+            // Invertujeme stav pro příští stisknutí
+            inverseSignalsMarked = !inverseSignalsMarked;
         }
     }
 }
