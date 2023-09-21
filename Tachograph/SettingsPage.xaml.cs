@@ -31,17 +31,15 @@ namespace Tachograph
         const int cornerRadius = 6;
         const int borderThickness = 2;
         const int borderPadding = 5;
-        const int column = 2;
-
-        bool activeSignalsMarked;
-        bool inverseSignalsMarked;
-        bool breakSignalsMarked;
-
+        const int column = 2;   
+        
         string speedRecordTypeRadioBtnContent;
         string tachographTypeRadioBtnContent;
         int modeRadioBtnContent;
+        bool[] markedSignals = { false, false, false };
+        string[] signals = { "aktivní signály", "brzdné signály", "inversní signály" };
         List<ToggleButton> signalButtons;
-
+        List<Button> markSignalsButtons = new List<Button>();
 
         public SettingsPage()
         {
@@ -62,10 +60,11 @@ namespace Tachograph
             speedRecordTypeRadioBtnContent = "PR.";
             tachographTypeRadioBtnContent = "TT62";
             modeRadioBtnContent = 0;
-            activeSignalsMarked = false;
-            breakSignalsMarked = false;
-            inverseSignalsMarked = false;
-        } 
+
+            markSignalsButtons.Add(pressActiveSignalsBtn);
+            markSignalsButtons.Add(pressBreakSignalsBtn);
+            markSignalsButtons.Add(pressInverseSignalsBtn);
+        }
 
         /// <summary>
         /// Vrací číselné parametry tachografu
@@ -134,36 +133,6 @@ namespace Tachograph
         }
 
         /// <summary>
-        /// Zaznamenává zakliklý radio button pro mode
-        /// </summary>
-        void modeRadioButton_Click(object sender, RoutedEventArgs e)
-        {
-            RadioButton clickedRadioButton = (RadioButton)sender;
-            if (clickedRadioButton.IsChecked == true)
-                modeRadioBtnContent = int.Parse(clickedRadioButton.Content.ToString());
-        }
-
-        /// <summary>
-        /// Zaznamenává zakliklý radio button pro tachographType
-        /// </summary>
-        void tachographTypeRadioButton_Click(object sender, RoutedEventArgs e)
-        {
-            RadioButton clickedRadioButton = (RadioButton)sender;
-            if (clickedRadioButton.IsChecked == true)
-                tachographTypeRadioBtnContent = clickedRadioButton.Content.ToString();
-        }
-
-        /// <summary>
-        /// Zaznamenává zakliklý radio button pro speedRecordType
-        /// </summary>
-        void speedRecordTypeRadioButton_Click(object sender, RoutedEventArgs e)
-        {
-            RadioButton clickedRadioButton = (RadioButton)sender;
-            if (clickedRadioButton.IsChecked == true)
-                speedRecordTypeRadioBtnContent = clickedRadioButton.Content.ToString();
-        }
-
-        /// <summary>
         /// Vytvoří požadovaný stack panel na signály, vždy s konkrétním popisem (labelem)
         /// </summary>
         /// <param name="description"> Typ signálů </param>
@@ -225,70 +194,54 @@ namespace Tachograph
             return signalPanel;
         }
 
-
-        // TODO
-        /// <summary>
-        /// Event na označení/odznačení všech tlačítek daného typu
-        /// </summary>
-
-        private void pressActiveSignalsBtn_Click(object sender, RoutedEventArgs e)
+        private void RadioButton_Click<T>(object sender, RoutedEventArgs e, Action<T> action)
         {
-            if (activeSignalsMarked)
+            RadioButton clickedRadioButton = (RadioButton)sender;
+            if (clickedRadioButton.IsChecked == true)
             {
-                // Pokud signály byly označeny, odznačíme je a změníme obsah tlačítka
-                for (int i = 0; i < signalButtons.Count / 3; i++)
-                    signalButtons[i].IsChecked = false;
-                pressActiveSignalsBtn.Content = "Označit aktivní signály";
+                T content = (T)Convert.ChangeType(clickedRadioButton.Content, typeof(T));
+                action(content);
             }
-            else
-            {
-                // Pokud signály nebyly označeny, označíme je a změníme obsah tlačítka
-                for (int i = 0; i < signalButtons.Count / 3; i++)
-                    signalButtons[i].IsChecked = true;
-                pressActiveSignalsBtn.Content = "Odznačit aktivní signály";
-            }
-            // Invertujeme stav pro příští stisknutí
-            activeSignalsMarked = !activeSignalsMarked;
         }
 
-        private void pressBreakSignalsBtn_Click(object sender, RoutedEventArgs e)
+        private void modeRadioButton_Click(object sender, RoutedEventArgs e)
         {
-            if (breakSignalsMarked)
-            {
-                // Pokud signály byly označeny, odznačíme je a změníme obsah tlačítka
-                for (int i = signalButtons.Count / 3; i < 2*(signalButtons.Count / 3); i++)
-                    signalButtons[i].IsChecked = false;
-                pressBreakSignalsBtn.Content = "Označit brzdné signály";
-            }
-            else
-            {
-                // Pokud signály nebyly označeny, označíme je a změníme obsah tlačítka
-                for (int i = signalButtons.Count / 3; i < 2 * (signalButtons.Count / 3); i++)
-                    signalButtons[i].IsChecked = true;   
-                pressBreakSignalsBtn.Content = "Odznačit brzdné signály";
-            }
-            // Invertujeme stav pro příští stisknutí
-            breakSignalsMarked = !breakSignalsMarked;
+            RadioButton_Click<int>(sender, e, (content) => { modeRadioBtnContent = content; });
         }
 
-        private void pressInverseSignalsBtn_Click(object sender, RoutedEventArgs e)
+        private void tachographTypeRadioButton_Click(object sender, RoutedEventArgs e)
         {
-            if (inverseSignalsMarked)
-            {
-                // Pokud signály byly označeny, odznačíme je a změníme obsah tlačítka
-                for (int i = 2 * (signalButtons.Count / 3); i < signalButtons.Count; i++)
-                    signalButtons[i].IsChecked = false;
-                pressInverseSignalsBtn.Content = "Označit inversní signály";
-            }
-            else
-            {
-                // Pokud signály nebyly označeny, označíme je a změníme obsah tlačítka
-                for (int i = 2 * (signalButtons.Count / 3); i < signalButtons.Count; i++)
-                    signalButtons[i].IsChecked = true;    
-                pressInverseSignalsBtn.Content = "Odznačit inversní signály";
-            }
-            // Invertujeme stav pro příští stisknutí
-            inverseSignalsMarked = !inverseSignalsMarked;
+            RadioButton_Click<string>(sender, e, (content) => { tachographTypeRadioBtnContent = content; });
         }
+
+        private void speedRecordTypeRadioButton_Click(object sender, RoutedEventArgs e)
+        {
+            RadioButton_Click<string>(sender, e, (content) => { speedRecordTypeRadioBtnContent = content; });
+        }
+
+        private void pressSignalsBtn_Click(object sender, RoutedEventArgs e)
+        {
+            var button = (Button)sender;
+            for (int i = 0; i < markSignalsButtons.Count; i++) // buttons = pole tří tlačítek
+            {
+                if (button == markSignalsButtons[i])
+                {
+                    if (markedSignals[i]) // bool pole tří typů signálů
+                    {
+                        for (int j = (signalButtons.Count / 3) * i; j < (signalButtons.Count / 3) * (i + 1); j++)
+                            signalButtons[j].IsChecked = false;
+                        markSignalsButtons[i].Content = $"Označit {signals[i]}";
+                    }
+                    else
+                    {
+                        for (int j = (signalButtons.Count/3) * i; j < (signalButtons.Count / 3) * (i + 1); j++)
+                            signalButtons[j].IsChecked = true;
+                        markSignalsButtons[i].Content = $"Odznačit {signals[i]}";
+                    }
+                    markedSignals[i] = !markedSignals[i];
+                    break;
+                }
+            }
+        } 
     }
 }
