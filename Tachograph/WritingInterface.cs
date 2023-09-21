@@ -31,7 +31,6 @@ namespace Tachograph
         /// <param name="numericalTachoParameters"> číselné parametry tachografu </param>
         /// <param name="textTachoParameters"> textové parametry tachografu </param>
         /// <param name="signalParameters"> signály tachografu </param>
-        /// <exception cref="ArgumentException"></exception>
         public void AddRecord(int?[] numericalTachoParameters, string[] textTachoParameters, bool[] signalParameters)
         {
             foreach (int p in numericalTachoParameters)
