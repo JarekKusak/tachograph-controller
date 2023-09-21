@@ -18,9 +18,9 @@
             <RowDefinition Height="50"/>
         </Grid.RowDefinitions>
         <StackPanel Grid.Column="2" Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,0,10">
-            <Button Width="140" Content="Označit aktivní signály" Name="pressActiveSignalsBtn" Click="pressActiveSignalsBtn_Click"/>
-            <Button Width="140" Content="Označit brzdné signály" Margin="5,0,0,0" Name="pressBreakSignalsBtn" Click="pressBreakSignalsBtn_Click"/>
-            <Button Width="140" Content="Označit inverzní signály" Margin="5,0,0,0" Name="pressInverseSignalsBtn" Click="pressInverseSignalsBtn_Click"/>
+            <Button Width="140" Content="Označit aktivní signály" Name="pressActiveSignalsBtn" Click="pressSignalsBtn_Click"/>
+            <Button Width="140" Content="Označit brzdné signály" Margin="5,0,0,0" Name="pressBreakSignalsBtn" Click="pressSignalsBtn_Click"/>
+            <Button Width="140" Content="Označit inverzní signály" Margin="5,0,0,0" Name="pressInverseSignalsBtn" Click="pressSignalsBtn_Click"/>
         </StackPanel>
         
         <StackPanel Width="155" HorizontalAlignment="Center" VerticalAlignment="Top" Grid.Column="0" Margin="0,30,0,0">
