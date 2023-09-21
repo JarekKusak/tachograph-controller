@@ -32,12 +32,12 @@ namespace Tachograph
         const int borderThickness = 2;
         const int borderPadding = 5;
         const int column = 2;   
+        string[] signals = { "aktivní signály", "brzdné signály", "inverzní signály" };
         
         string speedRecordTypeRadioBtnContent;
         string tachographTypeRadioBtnContent;
         int modeRadioBtnContent;
         bool[] markedSignals = { false, false, false };
-        string[] signals = { "aktivní signály", "brzdné signály", "inverzní signály" };
 
         List<ToggleButton> signalButtons;
         List<Button> markingSignalsButtons = new List<Button>();
@@ -123,11 +123,9 @@ namespace Tachograph
         public bool[] ReturnSignalParameters()
         {
             bool[] turnedSignals = new bool[signalButtons.Count];
-            
             for (int i = 0; i < signalButtons.Count; i++)
                 if (signalButtons[i].IsChecked == true)
                     turnedSignals[i] = true;      
-            
             return turnedSignals;
         }
 
