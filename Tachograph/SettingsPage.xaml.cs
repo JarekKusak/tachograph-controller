@@ -64,7 +64,7 @@ namespace Tachograph
         /// Vrací číselné parametry tachografu
         /// </summary>
         /// <returns> Pole číselných parametrů </returns>
-        public int?[] NumericalParameters()
+        public int?[] ReturnNumericalParameters()
         {
             try
             {
@@ -101,7 +101,7 @@ namespace Tachograph
         /// Vrací textové parametry tachografu
         /// </summary>
         /// <returns> Pole textových parametrů tachografu </returns>
-        public string[] TextParameters()
+        public string[] ReturnTextParameters()
         {
             string carType = carTypeTxtBox.Text;
             string speedRecordType = speedRecordTypeRadioBtnContent;
@@ -115,7 +115,7 @@ namespace Tachograph
         /// Vrací všechny druhy (zakliklých) signálů
         /// </summary>
         /// <returns> Bool pole (ne)zakliklých signálů </returns>
-        public bool[] SignalParameters()
+        public bool[] ReturnSignalParameters()
         {
             bool[] turnedSignals = new bool[signalButtons.Count];
             
