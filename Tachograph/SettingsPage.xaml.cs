@@ -38,8 +38,9 @@ namespace Tachograph
         int modeRadioBtnContent;
         bool[] markedSignals = { false, false, false };
         string[] signals = { "aktivní signály", "brzdné signály", "inverzní signály" };
+
         List<ToggleButton> signalButtons;
-        List<Button> markSignalsButtons = new List<Button>();
+        List<Button> markingSignalsButtons = new List<Button>();
 
         public SettingsPage()
         {
@@ -54,9 +55,9 @@ namespace Tachograph
             mainPanel.Children.Add(CreateSignalStackPanel("Signály pro test brzdy"));
             mainPanel.Children.Add(CreateSignalStackPanel("Inverzní signály"));
 
-            markSignalsButtons.Add(pressActiveSignalsBtn);
-            markSignalsButtons.Add(pressBreakSignalsBtn);
-            markSignalsButtons.Add(pressInverseSignalsBtn);
+            markingSignalsButtons.Add(pressActiveSignalsBtn);
+            markingSignalsButtons.Add(pressBreakSignalsBtn);
+            markingSignalsButtons.Add(pressInverseSignalsBtn);
 
             Grid.SetColumn(mainPanel, column);
             settingGrid.Children.Add(mainPanel); // Přidejte StackPanel s hlavním Borderem do Gridu
@@ -95,12 +96,10 @@ namespace Tachograph
                 int?[] parameters = { wheelDiameter, carNumber, gearRatio, maxWheelDiameter, maxSpeed, kFactor,
                     totalKilometersDriven, counter1, counter2, counter3, counter4, counter5,
                     mode, recordStep };
+
                 return parameters;
             }
-            catch
-            {
-                return null;
-            }        
+            catch { return null; }        
         }
 
         /// <summary>
@@ -242,22 +241,22 @@ namespace Tachograph
         private void pressSignalsBtn_Click(object sender, RoutedEventArgs e)
         {
             var button = (Button)sender;
-            for (int i = 0; i < markSignalsButtons.Count; i++) // buttons = pole tří tlačítek
+            for (int i = 0; i < markingSignalsButtons.Count; i++) // buttons = pole tří tlačítek
             {
-                if (button == markSignalsButtons[i])
+                if (button == markingSignalsButtons[i])
                 {
                     // vždy se signály odznačují po třetinách (signály jsou rozdělené do tří typů)
                     if (markedSignals[i]) // bool pole tří typů signálů
                     {
                         for (int j = (signalButtons.Count / 3) * i; j < (signalButtons.Count / 3) * (i + 1); j++)
                             signalButtons[j].IsChecked = false;
-                        markSignalsButtons[i].Content = $"Označit {signals[i]}";
+                        markingSignalsButtons[i].Content = $"Označit {signals[i]}";
                     }
                     else
                     {
                         for (int j = (signalButtons.Count/3) * i; j < (signalButtons.Count / 3) * (i + 1); j++)
                             signalButtons[j].IsChecked = true;
-                        markSignalsButtons[i].Content = $"Odznačit {signals[i]}";
+                        markingSignalsButtons[i].Content = $"Odznačit {signals[i]}";
                     }
                     markedSignals[i] = !markedSignals[i];
                     break;
