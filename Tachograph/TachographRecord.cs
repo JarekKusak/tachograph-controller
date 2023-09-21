@@ -28,7 +28,7 @@ namespace Tachograph
             Blok počítadla:
 
             totalKilometersDriven jako 4 bajty (int)
-            counter1, counter2, counter3, counter4, a counter5 každý jako 1 byte (int)
+            counter1, counter2, counter3, counter4 a counter5 každý jako 1 byte (int)
             
             Další parametry:
 
