@@ -35,6 +35,7 @@ namespace Tachograph
             Loaded += settingsBtn_Click;
 
             settingsPage = new SettingsPage();
+            signalsPage = new SignalsPage();
         }
 
         /// <summary>
@@ -64,7 +65,7 @@ namespace Tachograph
         /// </summary>
         private void signalsBtn_Click(object sender, RoutedEventArgs e)
         {
-            pagesFrame.Content = new SignalsPage();
+            pagesFrame.Content = signalsPage;
         }
 
         /// <summary>
