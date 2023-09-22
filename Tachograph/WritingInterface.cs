@@ -47,23 +47,26 @@ namespace Tachograph
         /// Metoda navazuje spojení s tafografem a řídí veškerou zapisovací komunikaci (ZATÍM ABSTRAKTNĚ)
         /// </summary>
         /// <param name="tachographRecord"> Vyplněné data tafografu na poslání </param>
-        async Task WriteData(TachographRecord tachographRecord)
+        public async Task WriteData(TachographRecord tachographRecord)
         {
             try
             {
                 using (UdpClient client = new UdpClient(sourcePort))
                 {
                     IPAddress tachographAddress = IPAddress.Parse(destinationIP);
-                    IPEndPoint tachographEndPoint = new IPEndPoint(tachographAddress,destinationPort);
+                    IPEndPoint tachographEndPoint = new IPEndPoint(tachographAddress, destinationPort);
 
-                    // Simulace zápisu dat
-                    int dataToWrite = 42; // Vaše data, která chcete zapsat
-                    byte[] writeData = BitConverter.GetBytes(writingPrefix | dataToWrite);
+                    // Převedení vyplněných dat tafografu na bajty
+                    byte[] recordData = tachographRecord.ToBytes();
+
+                    // Spojení prefixu s daty a zápis do pole bajtů
+                    byte[] writeData = BitConverter.GetBytes(writingPrefix);
+                    writeData = writeData.Concat(recordData).ToArray();
 
                     if (BitConverter.IsLittleEndian)
                         Array.Reverse(writeData);
 
-                    Console.WriteLine($"Odesílání zápisu dat: {dataToWrite}");
+                    Console.WriteLine($"Odesílání zápisu dat: {BitConverter.ToString(writeData)}");
                     await client.SendAsync(writeData, writeData.Length, tachographEndPoint);
 
                     // Přijmutí odpovědi na čtení dat (simulace)

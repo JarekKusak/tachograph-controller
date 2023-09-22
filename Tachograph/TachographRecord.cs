@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -94,6 +95,52 @@ namespace Tachograph
             this.speedRecordType = speedRecordType;
             this.recordStep = recordStep;
             this.taphographType = taphographType;
-        }         
+        }
+        public byte[] ToBytes()
+        {
+            using (MemoryStream stream = new MemoryStream())
+            using (BinaryWriter writer = new BinaryWriter(stream))
+            {
+                // Blok parametry tacho:
+                writer.Write(wheelDiameter);
+                writer.Write((byte)carNumber);
+
+                // Blok parametry vozu:
+                byte[] carTypeBytes = Encoding.UTF8.GetBytes(carType);
+                writer.Write(carTypeBytes.Length);
+                writer.Write(carTypeBytes);
+                writer.Write(gearRatio);
+                writer.Write(maxWheelDiameter);
+                writer.Write(maxSpeed);
+                writer.Write(kFactor);
+
+                // Blok počítadla:
+                writer.Write(totalKilometersDriven);
+                writer.Write((byte)counter1);
+                writer.Write((byte)counter2);
+                writer.Write((byte)counter3);
+                writer.Write((byte)counter4);
+                writer.Write((byte)counter5);
+
+                // Další parametry:
+                writer.Write((byte)mode);
+
+                byte[] speedRecordTypeBytes = Encoding.UTF8.GetBytes(speedRecordType);
+                writer.Write(speedRecordTypeBytes.Length);
+                writer.Write(speedRecordTypeBytes);
+
+                writer.Write(recordStep);
+
+                byte[] taphographTypeBytes = Encoding.UTF8.GetBytes(taphographType);
+                writer.Write(taphographTypeBytes.Length);
+                writer.Write(taphographTypeBytes);
+
+                // Signály (zde můžete implementovat logiku pro zápis signálů)
+
+                // Další byty (zde můžete implementovat logiku pro zápis dalších bytů)
+
+                return stream.ToArray();
+            }
+        }
     }
 }
