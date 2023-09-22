@@ -77,7 +77,7 @@ namespace Tachograph
 
             try
             {
-                int?[] intParameters = settingsPage.ReturnNumericalParameters();
+                int[] intParameters = settingsPage.ReturnNumericalParameters();
                 string[] textParameters = settingsPage.ReturnTextParameters();
                 bool[] signalParameters = settingsPage.ReturnSignalParameters();
 
