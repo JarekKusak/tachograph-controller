@@ -98,7 +98,10 @@ namespace Tachograph
         }
         public byte[] ToBytes()
         {
+            // třída, která vytváří stream dat v paměti RAM
+            // umožňuje efektivně zapisovat a číst data, aniž by bylo nutné je ukládat do souboru nebo jiného trvalého úložiště.
             using (MemoryStream stream = new MemoryStream())
+            // třída, která zjednodušuje zápis primitivních datových typů (jako int, byte, float, atd.) do streamu
             using (BinaryWriter writer = new BinaryWriter(stream))
             {
                 // Blok parametry tacho:
@@ -139,6 +142,8 @@ namespace Tachograph
 
                 // Další byty (zde můžete implementovat logiku pro zápis dalších bytů)
 
+                // Metoda ToArray() na instanci MemoryStream slouží k získání obsahu tohoto bufferu jako pole bajtů (byte[]).
+                // To znamená, že pokud jste zapsali nějaká data do MemoryStream, můžete tato data získat pomocí metody ToArray() ve formě pole bajtů.
                 return stream.ToArray();
             }
         }
