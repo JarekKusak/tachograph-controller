@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace Tachograph
 {
@@ -72,29 +73,30 @@ namespace Tachograph
 
         string taphographType; // ? bytů
 
-        // + signály (3x bool[48])
+        bool[] signalParameters;
         // + byty navíc..
 
-        public TachographRecord(int wheelDiameter, int carNumber, int gearRatio, int maxWheelDiameter, int maxSpeed, int kFactor, int totalKilometersDriven, 
-            int counter1, int counter2, int counter3, int counter4, int counter5, int mode, int recordStep, string carType, string speedRecordType, string taphographType) 
+        public TachographRecord(int?[] numericalTachoParameters, string[] textTachoParameters, bool[] signalParameters) 
         {
-            this.wheelDiameter = wheelDiameter;
-            this.carNumber = carNumber;
-            this.carType = carType;
-            this.gearRatio = gearRatio;
-            this.maxWheelDiameter = maxWheelDiameter;
-            this.maxSpeed = maxSpeed;
-            this.kFactor = kFactor;
-            this.totalKilometersDriven = totalKilometersDriven;
-            this.counter1 = counter1;
-            this.counter2 = counter2;
-            this.counter3 = counter3;
-            this.counter4 = counter4;
-            this.counter5 = counter5;
-            this.mode = mode;
-            this.speedRecordType = speedRecordType;
-            this.recordStep = recordStep;
-            this.taphographType = taphographType;
+            wheelDiameter = (int)numericalTachoParameters[0];
+            carNumber = (int)numericalTachoParameters[1];
+            gearRatio = (int)numericalTachoParameters[2];
+            maxWheelDiameter = (int)numericalTachoParameters[3];
+            maxSpeed = (int)numericalTachoParameters[4];
+            kFactor = (int)numericalTachoParameters[5];
+            totalKilometersDriven = (int)numericalTachoParameters[6];
+            counter1 = (int)numericalTachoParameters[7];
+            counter2 = (int)numericalTachoParameters[8];
+            counter3 = (int)numericalTachoParameters[9];
+            counter4 = (int)numericalTachoParameters[10];
+            counter5 = (int)numericalTachoParameters[11];
+            mode = (int)numericalTachoParameters[12];
+            recordStep = (int)numericalTachoParameters[13];
+
+            carType = textTachoParameters[0];
+            speedRecordType = textTachoParameters[1];
+            taphographType = textTachoParameters[2];
+            this.signalParameters = signalParameters;
         }
         public byte[] ToBytes()
         {
@@ -138,10 +140,11 @@ namespace Tachograph
                 writer.Write(taphographTypeBytes.Length);
                 writer.Write(taphographTypeBytes);
 
-                // Signály (zde můžete implementovat logiku pro zápis signálů)
+                foreach (bool b in signalParameters)
+                    writer.Write(b);
 
                 // Další byty (zde můžete implementovat logiku pro zápis dalších bytů)
-
+                
                 // Metoda ToArray() na instanci MemoryStream slouží k získání obsahu tohoto bufferu jako pole bajtů (byte[]).
                 // To znamená, že pokud jste zapsali nějaká data do MemoryStream, můžete tato data získat pomocí metody ToArray() ve formě pole bajtů.
                 return stream.ToArray();
