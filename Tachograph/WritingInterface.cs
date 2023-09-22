@@ -41,8 +41,11 @@ namespace Tachograph
             foreach (string p in textTachoParameters)
                 if (string.IsNullOrEmpty(p)) // nebyl zadán
                     throw new ArgumentException("Některý z řetězcových parametrů nebyl zadán.");
-            MessageBox.Show("vše OK ;-)");
-            //TaphographRecord record = new TaphographRecord();
+
+            TachographRecord record = new TachographRecord(numericalTachoParameters, textTachoParameters, signalParameters);
+            WriteData(record);
+
+            MessageBox.Show("Parametry tachografu byly úspěšně zapsány.");
         }
 
         /// <summary>
@@ -60,7 +63,6 @@ namespace Tachograph
 
                     // Převedení vyplněných dat tachografu na bajty
                     byte[] recordData = tachographRecord.ToBytes();
-
                     // Výpočet CRC-32 pro data
                     uint crc32 = CalculateCRC32(recordData);
 
@@ -68,6 +70,7 @@ namespace Tachograph
                     byte[] writeData = BitConverter.GetBytes(writingPrefix);
                     writeData = writeData.Concat(BitConverter.GetBytes(crc32)).ToArray();
                     writeData = writeData.Concat(recordData).ToArray();
+                    MessageBox.Show($"Délka bitového streamu: {((byte)writeData.Length)} bytů");
 
                     if (BitConverter.IsLittleEndian)
                         Array.Reverse(writeData);
@@ -94,9 +97,9 @@ namespace Tachograph
         }
 
         /// <summary>
-        /// 
+        /// Výpočet kontrolního součtu CRC32
         /// </summary>
-        /// <param name="data"></param>
+        /// <param name="data"> data na zahashování </param>
         /// <returns></returns>
         uint CalculateCRC32(byte[] data)
         {
@@ -107,9 +110,10 @@ namespace Tachograph
             {
                 // V každém kroku cyklu se provede operace XOR mezi aktuální hodnotou crc a bytem b z pole data. Toto zajišťuje kombinaci aktuálního stavu CRC s novými daty.
                 crc ^= b; // XOR operace s bytem 
+                // Po provedení XOR operace s bytem b následuje vnitřní cyklus, který provádí operace na každém jednom bitu v osmi bitech byteu. V tomto cyklu se používá bitová maska a logické operace.
                 for (int i = 0; i < 8; i++)
                 {
-                    if ((crc & 1) == 1) // Pro každý bit v byteu b se kontroluje, zda je nejnižší bit (LSB) nastaven (roven 1). To se provádí testem if ((crc & 1) == 1).
+                    if ((crc & 1) == 1) // Pro každý bit v byteu b se kontroluje, zda je nejnižší bit (LSB) nastaven (roven 1).
                         // Pokud je nejnižší bit 1, pak se provádí posun hodnoty crc o jedno místo doprava (bitový posun vpravo).
                         // Poté se provede XOR této hodnoty s konstantou 0xEDB88320.
                         // Tato konstanta je standardní hodnota pro CRC-32 a slouží k tomu, aby byl výpočet efektivní a robustní.
