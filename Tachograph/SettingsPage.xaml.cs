@@ -32,7 +32,6 @@ namespace Tachograph
         const int borderThickness = 2;
         const int borderPadding = 5;
         const int column = 2;
-        const int numericalParametersCount = 14; // máme dohromady 13 číselných parametrů na nastavování tachografu
         string[] signals = { "aktivní signály", "brzdné signály", "inverzní signály" };
         
         string speedRecordTypeRadioBtnContent;
@@ -71,7 +70,7 @@ namespace Tachograph
         /// <summary>
         /// Blok Parametry tachografu
         /// </summary>
-        /// <returns> Vrací parametry daného typu </returns>
+        /// <returns> Vrací parametry typu Parametry tachografu </returns>
         int[] ReturnTachoParameters()
         {
             int wheelDiameter = int.Parse(wheelDiameterTxtBox.Text);
@@ -83,10 +82,10 @@ namespace Tachograph
         /// <summary>
         /// Blok Počítadla
         /// </summary>
-        /// <returns> Vrací parametry daného typu </returns>
+        /// <returns> Vrací parametry typu Počítadla </returns>
         int[] ReturnCounters()
         {
-            int totalKilometersDriven = int.Parse(totalKilometersDrivenTxtBox.Text);
+            int totalKilometersDriven = int.Parse(totalKilometersDrivenTxtBox.Text);         
             int counter1 = int.Parse(counter1TxtBox.Text);
             int counter2 = int.Parse(counter2TxtBox.Text);
             int counter3 = int.Parse(counter3TxtBox.Text);
@@ -98,7 +97,7 @@ namespace Tachograph
         /// <summary>
         /// Blok Parametry vozu
         /// </summary>
-        /// <returns> Vrací parametry daného typu </returns>
+        /// <returns> Vrací parametry typu Parametry vozu </returns>
         int[] ReturnCarParameters()
         {
             int gearRatio = int.Parse(gearRatioTxtBox.Text);
@@ -218,48 +217,48 @@ namespace Tachograph
         }
 
         /// <summary>
-        /// Univerzální metoda pro obsluhu RadioButton kliknutí s generickým typem T.
+        /// Univerzální metoda pro obsluhu RadioButton kliknutí s generickým typem T
         /// </summary>
         private void RadioButton_Click<T>(object sender, RoutedEventArgs e, Action<T> action)
         {
-            // Přetypování odesílatele (sender) na RadioButton.
+            // Přetypování odesílatele (sender) na RadioButton
             RadioButton clickedRadioButton = (RadioButton)sender;
 
-            // Zkontrolujeme, zda byl RadioButton označen.
+            // Zkontrolujeme, zda byl RadioButton označen
             if (clickedRadioButton.IsChecked == true)
             {
-                // Získáme obsah RadioButtonu a přetypujeme ho na generický typ T.
+                // Získáme obsah RadioButtonu a přetypujeme ho na generický typ T
                 T content = (T)Convert.ChangeType(clickedRadioButton.Content, typeof(T));
 
-                // Volání akce (delegátu) s obsahem RadioButtonu jako argumentem.
+                // Volání akce (delegátu) s obsahem RadioButtonu jako argumentem
                 action(content);
             }
         }
 
         /// <summary>
-        /// Obsluha RadioButton kliknutí pro tlačítko modeRadioButton s typem int.
+        /// Obsluha RadioButton kliknutí pro tlačítko modeRadioButton s typem int
         /// </summary>
         private void modeRadioButton_Click(object sender, RoutedEventArgs e)
         {
-            // Volání generické metody s typem int a delegátem, který nastavuje modeRadioBtnContent.
+            // Volání generické metody s typem int a delegátem, který nastavuje modeRadioBtnContent
             RadioButton_Click<int>(sender, e, (content) => { modeRadioBtnContent = content; });
         }
 
         /// <summary>
-        /// Obsluha RadioButton kliknutí pro tlačítko tachographTypeRadioButton s typem string.
+        /// Obsluha RadioButton kliknutí pro tlačítko tachographTypeRadioButton s typem string
         /// </summary>
         private void tachographTypeRadioButton_Click(object sender, RoutedEventArgs e)
         {
-            // Volání generické metody s typem string a delegátem, který nastavuje tachographTypeRadioBtnContent.
+            // Volání generické metody s typem string a delegátem, který nastavuje tachographTypeRadioBtnContent
             RadioButton_Click<string>(sender, e, (content) => { tachographTypeRadioBtnContent = content; });
         }
 
         /// <summary>
-        /// Obsluha RadioButton kliknutí pro tlačítko speedRecordTypeRadioButton s typem string.
+        /// Obsluha RadioButton kliknutí pro tlačítko speedRecordTypeRadioButton s typem string
         /// </summary>
         private void speedRecordTypeRadioButton_Click(object sender, RoutedEventArgs e)
         {
-            // Volání generické metody s typem string a delegátem, který nastavuje speedRecordTypeRadioBtnContent.
+            // Volání generické metody s typem string a delegátem, který nastavuje speedRecordTypeRadioBtnContent
             RadioButton_Click<string>(sender, e, (content) => { speedRecordTypeRadioBtnContent = content; });
         }
 
