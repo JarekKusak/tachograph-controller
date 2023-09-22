@@ -197,7 +197,7 @@ namespace Tachograph {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/Tachograph;V1.0.0.0;component/settingspage.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/Tachograph;component/settingspage.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\SettingsPage.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);
