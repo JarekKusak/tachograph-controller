@@ -76,22 +76,22 @@ namespace Tachograph
         bool[] signalParameters;
         // + byty navíc..
 
-        public TachographRecord(int?[] numericalTachoParameters, string[] textTachoParameters, bool[] signalParameters) 
+        public TachographRecord(int[] numericalTachoParameters, string[] textTachoParameters, bool[] signalParameters) 
         {
-            wheelDiameter = (int)numericalTachoParameters[0];
-            carNumber = (int)numericalTachoParameters[1];
-            gearRatio = (int)numericalTachoParameters[2];
-            maxWheelDiameter = (int)numericalTachoParameters[3];
-            maxSpeed = (int)numericalTachoParameters[4];
-            kFactor = (int)numericalTachoParameters[5];
-            totalKilometersDriven = (int)numericalTachoParameters[6];
-            counter1 = (int)numericalTachoParameters[7];
-            counter2 = (int)numericalTachoParameters[8];
-            counter3 = (int)numericalTachoParameters[9];
-            counter4 = (int)numericalTachoParameters[10];
-            counter5 = (int)numericalTachoParameters[11];
-            mode = (int)numericalTachoParameters[12];
-            recordStep = (int)numericalTachoParameters[13];
+            wheelDiameter = numericalTachoParameters[0];
+            carNumber = numericalTachoParameters[1];
+            gearRatio = numericalTachoParameters[2];
+            maxWheelDiameter = numericalTachoParameters[3];
+            maxSpeed = numericalTachoParameters[4];
+            kFactor = numericalTachoParameters[5];
+            totalKilometersDriven = numericalTachoParameters[6];
+            counter1 = numericalTachoParameters[7];
+            counter2 = numericalTachoParameters[8];
+            counter3 = numericalTachoParameters[9];
+            counter4 = numericalTachoParameters[10];
+            counter5 = numericalTachoParameters[11];
+            mode = numericalTachoParameters[12];
+            recordStep = numericalTachoParameters[13];
 
             carType = textTachoParameters[0];
             speedRecordType = textTachoParameters[1];
