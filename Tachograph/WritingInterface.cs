@@ -42,7 +42,7 @@ namespace Tachograph
                 if (string.IsNullOrEmpty(p)) // nebyl zadán
                     throw new ArgumentException("Některý z řetězcových parametrů nebyl zadán.");
 
-            TachographRecord record = new TachographRecord(numericalTachoParameters, textTachoParameters, signalParameters);
+            TachographRecord record = new (numericalTachoParameters, textTachoParameters, signalParameters);
             WriteData(record);
 
             MessageBox.Show("Parametry tachografu byly úspěšně zapsány.");
@@ -70,12 +70,10 @@ namespace Tachograph
                     byte[] writeData = BitConverter.GetBytes(writingPrefix);
                     writeData = writeData.Concat(BitConverter.GetBytes(crc32)).ToArray();
                     writeData = writeData.Concat(recordData).ToArray();
-                    MessageBox.Show($"Délka bitového streamu: {((byte)writeData.Length)} bytů");
 
                     if (BitConverter.IsLittleEndian)
                         Array.Reverse(writeData);
 
-                    Console.WriteLine($"Odesílání zápisu dat: {BitConverter.ToString(writeData)}");
                     await client.SendAsync(writeData, writeData.Length, tachographEndPoint);
 
                     // Přijmutí odpovědi na čtení dat (simulace)
@@ -86,8 +84,6 @@ namespace Tachograph
                         Array.Reverse(receivedBytes);
 
                     int responseData = BitConverter.ToInt32(receivedBytes, 0);
-
-                    Console.WriteLine($"Přijata odpověď na čtení dat: {responseData}");
                 }
             }
             catch (Exception ex)
@@ -100,7 +96,7 @@ namespace Tachograph
         /// Výpočet kontrolního součtu CRC32
         /// </summary>
         /// <param name="data"> data na zahashování </param>
-        /// <returns></returns>
+        /// <returns> Vrací výsledek výpočtu kontrolního součtu CRC32 (Cyclic Redundancy Check) pro vstupní pole bajtů </returns>
         uint CalculateCRC32(byte[] data)
         {
             // Nejprve je inicializována proměnná crc na hodnotu 0xFFFFFFFF.Toto je počáteční hodnota pro výpočet CRC-32.CRC - 32 je kontrolní součet, který se postupně upravuje během výpočtu.
