@@ -56,11 +56,15 @@ namespace Tachograph
                     IPAddress tachographAddress = IPAddress.Parse(destinationIP);
                     IPEndPoint tachographEndPoint = new IPEndPoint(tachographAddress, destinationPort);
 
-                    // Převedení vyplněných dat tafografu na bajty
+                    // Převedení vyplněných dat tachografu na bajty
                     byte[] recordData = tachographRecord.ToBytes();
 
-                    // Spojení prefixu s daty a zápis do pole bajtů
+                    // Výpočet CRC-32 pro data
+                    uint crc32 = CalculateCRC32(recordData);
+
+                    // Spojení prefixu, CRC-32 a dat do jednoho pole bajtů
                     byte[] writeData = BitConverter.GetBytes(writingPrefix);
+                    writeData = writeData.Concat(BitConverter.GetBytes(crc32)).ToArray();
                     writeData = writeData.Concat(recordData).ToArray();
 
                     if (BitConverter.IsLittleEndian)
@@ -85,6 +89,30 @@ namespace Tachograph
             {
                 MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns></returns>
+        uint CalculateCRC32(byte[] data)
+        {
+            uint crc = 0xFFFFFFFF; // Počáteční hodnota CRC
+
+            foreach (byte b in data)
+            {
+                crc ^= b; // XOR operace s bytem
+                for (int i = 0; i < 8; i++)
+                {
+                    if ((crc & 1) == 1)
+                        crc = (crc >> 1) ^ 0xEDB88320; // XOR a posun vpravo s konstantou
+                    else
+                        crc >>= 1; // Pouze posun vpravo
+                }
+            }
+
+            return ~crc; // Invertování výsledného CRC
         }
     }
 }
