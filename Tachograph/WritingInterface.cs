@@ -6,6 +6,8 @@ using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls.Primitives;
+using System.Windows.Input;
 
 namespace Tachograph
 {
@@ -98,20 +100,26 @@ namespace Tachograph
         /// <returns></returns>
         uint CalculateCRC32(byte[] data)
         {
+            // Nejprve je inicializována proměnná crc na hodnotu 0xFFFFFFFF.Toto je počáteční hodnota pro výpočet CRC-32.CRC - 32 je kontrolní součet, který se postupně upravuje během výpočtu.
             uint crc = 0xFFFFFFFF; // Počáteční hodnota CRC
 
             foreach (byte b in data)
             {
-                crc ^= b; // XOR operace s bytem
+                // V každém kroku cyklu se provede operace XOR mezi aktuální hodnotou crc a bytem b z pole data. Toto zajišťuje kombinaci aktuálního stavu CRC s novými daty.
+                crc ^= b; // XOR operace s bytem 
                 for (int i = 0; i < 8; i++)
                 {
-                    if ((crc & 1) == 1)
+                    if ((crc & 1) == 1) // Pro každý bit v byteu b se kontroluje, zda je nejnižší bit (LSB) nastaven (roven 1). To se provádí testem if ((crc & 1) == 1).
+                        // Pokud je nejnižší bit 1, pak se provádí posun hodnoty crc o jedno místo doprava (bitový posun vpravo).
+                        // Poté se provede XOR této hodnoty s konstantou 0xEDB88320.
+                        // Tato konstanta je standardní hodnota pro CRC-32 a slouží k tomu, aby byl výpočet efektivní a robustní.
                         crc = (crc >> 1) ^ 0xEDB88320; // XOR a posun vpravo s konstantou
                     else
+                        //Pokud je nejnižší bit 0, pouze se provádí bitový posun hodnoty crc o jedno místo doprava.
                         crc >>= 1; // Pouze posun vpravo
                 }
             }
-
+            // Po zpracování všech bitů v byteu b se pokračuje s dalším bytem v poli data. Po dokončení všech bytů se výsledná hodnota crc invertuje pomocí operace ~crc.
             return ~crc; // Invertování výsledného CRC
         }
     }
