@@ -27,7 +27,7 @@ namespace Tachograph
         /// Metoda navazuje spojení s tafografem a řídí veškerou zapisovací komunikaci (ZATÍM ABSTRAKTNĚ)
         /// </summary>
         /// <param name="tachographRecord"> Vyplněné data tafografu na poslání </param>
-        public async Task WriteData(TachographRecord tachographRecord)
+        public async Task<int> WriteData(TachographRecord tachographRecord)
         {
             try
             {
@@ -58,11 +58,14 @@ namespace Tachograph
                         Array.Reverse(receivedBytes);
 
                     int responseData = BitConverter.ToInt32(receivedBytes, 0);
+
+                    return 0;
                 }
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return 1;
             }
         }
 

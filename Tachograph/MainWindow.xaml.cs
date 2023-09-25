@@ -59,30 +59,34 @@ namespace Tachograph
         /// <summary>
         /// Metoda na zápis dat do tafografu (při správném vyplnění parametrů)
         /// </summary>
-        private void setTaphoParametersBtn_Click(object sender, RoutedEventArgs e)
+        private async void setTachoParametersBtn_Click(object sender, RoutedEventArgs e)
         {
-            writingInterface = new WritingInterface(tachoIP, sourcePort, destinationPort);
-
             try
             {
+                writingInterface = new WritingInterface(tachoIP, sourcePort, destinationPort);
+
                 TachographParameters tachographParameters = settingsPage.ReturnTachoParameters();
                 CarParameters carParameters = settingsPage.ReturnCarParameters();
                 CounterParameters counterParameters = settingsPage.ReturnCounterParameters();
                 OtherParameters otherParameters = settingsPage.ReturnOtherParameters();
                 bool[] signalParameters = settingsPage.ReturnSignalParameters();
 
-                TachographRecord record = new (tachographParameters, carParameters, counterParameters, otherParameters, signalParameters);
-                writingInterface.WriteData(record);
+                TachographRecord record = new TachographRecord(tachographParameters, carParameters, counterParameters, otherParameters, signalParameters);
 
-                MessageBox.Show("Parametry tachografu byly úspěšně zapsány.");
-                settingsPage = new SettingsPage(); // potřeba aktualizovat okno
-                pagesFrame.Content = settingsPage;
-                //else MessageBox.Show("Jeden z parametrů není správně vyplněn."); // chce to vymyslet lepší způsob, jak upozornit na konkrétní problémový parametr
-                
+                int result = await writingInterface.WriteData(record);
+
+                if (result == 0)
+                {
+                    MessageBox.Show("Parametry tachografu byly úspěšně zapsány.");
+                    settingsPage = new SettingsPage(); // potřeba aktualizovat okno
+                    pagesFrame.Content = settingsPage;
+                }
+                else return;
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Chyba", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                return; // Ukončení metody v případě výjimky
             }
         }
 
