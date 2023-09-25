@@ -63,7 +63,7 @@ namespace Tachograph
 
                     // Převedení vyplněných dat tachografu na bajty
                     byte[] recordData = tachographRecord.ToBytes(writingPrefix);
-                    
+                    // TODO: vymyslet odpověď tachografu po zpětném spočítání CRC
                     // Výpočet CRC-32 pro data
                     uint crc32 = CalculateCRC32(recordData);
 
