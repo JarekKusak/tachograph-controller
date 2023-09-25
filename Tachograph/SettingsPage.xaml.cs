@@ -60,22 +60,37 @@ namespace Tachograph
         }
 
         /// <summary>
+        /// Vrací ostatní parametry z radio buttonů, comboboxů atd.
+        /// </summary>
+        /// <returns> Vrací parametry typu Ostatní parametry </returns>
+        public OtherParameters ReturnOtherParameters()
+        {
+            int mode = modeRadioBtnContent; // radio
+            // PROBLÉM: recordStep může být 0.25 !!
+            float recordStep = float.Parse(recordStepComboBox.SelectedItem.ToString().Split()[1]); // chceme odseknout jednotky metrů a ponechat pouze číslo
+            string speedRecordType = speedRecordTypeRadioBtnContent;
+            string tachographType = tachographTypeRadioBtnContent;
+            OtherParameters otherParameters = new (mode, recordStep, speedRecordType, tachographType);
+            return otherParameters;
+        }
+
+        /// <summary>
         /// Blok Parametry tachografu
         /// </summary>
         /// <returns> Vrací parametry typu Parametry tachografu </returns>
-        int[] ReturnTachoParameters()
+        public TachographParameters ReturnTachoParameters()
         {
             int wheelDiameter = int.Parse(wheelDiameterTxtBox.Text);
             int carNumber = int.Parse(carNumberTxtBox.Text);
-            int[] parameters = { wheelDiameter, carNumber };
-            return parameters;
+            TachographParameters tachoParameters = new  (wheelDiameter, carNumber);
+            return tachoParameters;
         }
 
         /// <summary>
         /// Blok Počítadla
         /// </summary>
         /// <returns> Vrací parametry typu Počítadla </returns>
-        int[] ReturnCounters()
+        public CounterParameters ReturnCounterParameters()
         {
             int totalKilometersDriven = int.Parse(totalKilometersDrivenTxtBox.Text);         
             int counter1 = int.Parse(counter1TxtBox.Text);
@@ -83,58 +98,21 @@ namespace Tachograph
             int counter3 = int.Parse(counter3TxtBox.Text);
             int counter4 = int.Parse(counter4TxtBox.Text);
             int counter5 = int.Parse(counter5TxtBox.Text);
-            int[] parameters = { totalKilometersDriven, counter1, counter2, counter3, counter4, counter5 };
-            return parameters;
+            CounterParameters counterParameters = new (totalKilometersDriven, counter1, counter2, counter3, counter4, counter5);
+            return counterParameters;
         }
         /// <summary>
         /// Blok Parametry vozu
         /// </summary>
         /// <returns> Vrací parametry typu Parametry vozu </returns>
-        int[] ReturnCarParameters()
+        public CarParameters ReturnCarParameters()
         {
+            string carType = carTypeTxtBox.Text;
             int gearRatio = int.Parse(gearRatioTxtBox.Text);
             int maxWheelDiameter = int.Parse(maxWheelDiameterTxtBox.Text);
             int maxSpeed = int.Parse(maxSpeedTxtBox.Text); // km/h
             int kFactor = int.Parse(kFactorTxtBox.Text);
-            int[] parameters = { gearRatio, maxWheelDiameter, maxSpeed, kFactor };
-            return parameters;
-        }
-        
-        /// <summary>
-        /// Vrací číselné parametry tachografu
-        /// </summary>
-        /// <returns> Pole číselných parametrů </returns>
-        public int[] ReturnNumericalParameters()
-        {
-            try
-            {
-                int[] tachoParameters = ReturnTachoParameters();
-                int[] counters = ReturnCounters();
-                int[] carParameters = ReturnCarParameters();
-
-                int mode = modeRadioBtnContent; // radio
-                // PROBLÉM: recordStep může být 0.25 !!
-                int recordStep = int.Parse(recordStepComboBox.SelectedItem.ToString().Split()[1]); // chceme odseknout jednotky metrů a ponechat pouze číslo
-                // položky v comboboxu mají podobu "X m" a my chceme uložit pouze číselné X (nultá položka je typ elementu...)
-                int[] parameters = tachoParameters.Concat(counters).Concat(carParameters).Concat(new[] { mode, recordStep }).ToArray(); 
-
-                return parameters;
-            }
-            catch { return null; }  
-        }
-
-        /// <summary>
-        /// Vrací textové parametry tachografu
-        /// </summary>
-        /// <returns> Pole textových parametrů tachografu </returns>
-        public string[] ReturnTextParameters()
-        {
-            string carType = carTypeTxtBox.Text;
-            string speedRecordType = speedRecordTypeRadioBtnContent;
-            string tachographType = tachographTypeRadioBtnContent; 
-
-            string[] parameters = { carType, speedRecordType, tachographType };
-            return parameters;
+            return new CarParameters(carType, gearRatio, maxWheelDiameter, maxSpeed, kFactor);
         }
 
         /// <summary>
