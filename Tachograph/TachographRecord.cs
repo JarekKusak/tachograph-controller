@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
 
 namespace Tachograph
 {
@@ -41,7 +38,7 @@ namespace Tachograph
             
             Signály:
 
-            Můžeme reprezentovat signály jako pole boolů, kde každý bool je jeden bit. Pokud máme 3x bool[48], pak potřebujeme 144 bitů.
+            Můžeme reprezentovat signály jako pole boolů, kde každý bool je jeden byte. Pokud máme 3x bool[48], pak potřebujeme 144 bytů.
             Další byty:
 
             Zde byste měli zahrnout další byty, které potřebujete pro vaši aplikaci.
