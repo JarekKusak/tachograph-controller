@@ -112,6 +112,7 @@ namespace Tachograph
             // třída, která zjednodušuje zápis primitivních datových typů (jako int, byte, float, atd.) do streamu
             using (BinaryWriter writer = new BinaryWriter(stream))
             {
+                // na signalParameters je voláno Reverse, aby signály byly v pořadí Aktivní, Brzdné a Inverzní
                 foreach (bool b in signalParameters.Reverse())
                     writer.Write(b);
 
