@@ -84,7 +84,8 @@ namespace Tachograph
                 if (intParameters != null)
                 {
                     writingInterface.AddRecord(intParameters, textParameters, signalParameters); 
-                    // settingsPage = new SettingsPage(); // potřeba aktualizovat okno
+                    settingsPage = new SettingsPage(); // potřeba aktualizovat okno
+                    pagesFrame.Content = settingsPage;
                 }  
                 else MessageBox.Show("Jeden z parametrů není správně vyplněn."); // chce to vymyslet lepší způsob, jak upozornit na konkrétní problémový parametr
                 
