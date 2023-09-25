@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace Tachograph
 {
-    internal class Counters
+    public class SignalParameters
     {
+
     }
 }
