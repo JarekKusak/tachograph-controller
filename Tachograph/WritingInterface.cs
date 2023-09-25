@@ -24,27 +24,6 @@ namespace Tachograph
         }
 
         /// <summary>
-        /// Metoda na kontrolu validity získaných parametrů ze SettingsPage a následného založení záznamu
-        /// </summary>
-        /// <param name="numericalTachoParameters"> číselné parametry tachografu </param>
-        /// <param name="textTachoParameters"> textové parametry tachografu </param>
-        /// <param name="signalParameters"> signály tachografu </param>
-        public void AddRecord(int[] numericalTachoParameters, string[] textTachoParameters, bool[] signalParameters)
-        {
-            foreach (int p in numericalTachoParameters)
-                if (p < 0)
-                    throw new ArgumentException($"Záporná hodnota není povolena pro parametr {p}.");
-            foreach (string p in textTachoParameters)
-                if (string.IsNullOrEmpty(p)) // nebyl zadán
-                    throw new ArgumentException("Některý z řetězcových parametrů nebyl zadán.");
-
-            TachographRecord record = new (numericalTachoParameters, textTachoParameters, signalParameters);
-            WriteData(record);
-
-            MessageBox.Show("Parametry tachografu byly úspěšně zapsány.");
-        }
-
-        /// <summary>
         /// Metoda navazuje spojení s tafografem a řídí veškerou zapisovací komunikaci (ZATÍM ABSTRAKTNĚ)
         /// </summary>
         /// <param name="tachographRecord"> Vyplněné data tafografu na poslání </param>
