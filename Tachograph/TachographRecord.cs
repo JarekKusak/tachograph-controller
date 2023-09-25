@@ -73,6 +73,12 @@ namespace Tachograph
         bool[] signalParameters;
         // + byty navíc..
 
+        /*
+        Chtěl jsem dát svobodu ve výběru pořadí parametrů do packetu na zápis, ovšem za cenu praktičnosti (kód se hůře spravuje). Hlavní problém je neznalost toho,
+        co a v jakém pořadí vlastně v číselných, textových a signálových parametrech je (tohle pořadí se uvádí ve třídě SettingsPage.xaml.cs). Alternativa k tomuto přístupu 
+        bylo udat každý parametr zvlášť, pak by ale počet parametrů konstruktoru rapidně narostl... a to se mi zdálo ještě méně přehlednější.
+        - Jedna z možností byla sjednotit všechna pole a následně je v tomhle pořadí procházet cyklem a zapisovat do streamu
+        */
         public TachographRecord(int[] numericalTachoParameters, string[] textTachoParameters, bool[] signalParameters) 
         {
             wheelDiameter = numericalTachoParameters[0];
