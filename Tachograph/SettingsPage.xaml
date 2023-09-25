@@ -74,7 +74,7 @@
                 <Label Content="Módy"/>
                 <Border CornerRadius="6" BorderBrush="Gray" Background="LightGray" BorderThickness="2" Padding="8">
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                        <RadioButton Content="0" IsChecked="True" Click="modeRadioButton_Click"/>
+                        <RadioButton Content="0" IsChecked="True" Click="modeRadioButton_Click" Name="modeRadioButtonBaseValue"/>
                         <RadioButton Content="1" Margin="8,0,0,0" Click="modeRadioButton_Click"/>
                         <RadioButton Content="2" Margin="8,0,0,0" Click="modeRadioButton_Click"/>
                         <RadioButton Content="3" Margin="8,0,0,0" Click="modeRadioButton_Click"/>
@@ -114,7 +114,7 @@
                 <Label Content="Typ záznamu rychlosti"/>
                 <Border CornerRadius="6" BorderBrush="Gray" Background="LightGray" BorderThickness="2" Padding="8">
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                        <RadioButton Content="PR." IsChecked="True" Click="speedRecordTypeRadioButton_Click"/>
+                        <RadioButton Content="PR." IsChecked="True" Click="speedRecordTypeRadioButton_Click" Name="speedRecordTypeRadioButtonBaseValue"/>
                         <RadioButton Content = "Min." Margin="8,0,0,0" Click="speedRecordTypeRadioButton_Click"/>
                         <RadioButton Content = "Max." Margin="8,0,0,0" Click="speedRecordTypeRadioButton_Click"/>
                     </StackPanel>
@@ -128,7 +128,7 @@
                         <RadioButton Content="TT32-24" Click="tachographTypeRadioButton_Click"/>
                         <RadioButton Content="TT32-48" Click="tachographTypeRadioButton_Click"/>
                         <RadioButton Content="TT12/22" Click="tachographTypeRadioButton_Click"/>
-                        <RadioButton Content="TT62" IsChecked="True" Click="tachographTypeRadioButton_Click"/>
+                        <RadioButton Content="TT62" IsChecked="True" Click="tachographTypeRadioButton_Click" Name="tachographTypeRadioButtonBaseValue"/>
                     </StackPanel>
                 </Border>
             </StackPanel>

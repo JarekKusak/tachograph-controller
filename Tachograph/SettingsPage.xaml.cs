@@ -40,7 +40,7 @@ namespace Tachograph
         bool[] markedSignals = { false, false, false };
 
         List<ToggleButton> signalButtons;
-        List<Button> markingSignalsButtons = new List<Button>();
+        List<Button> markingSignalsButtons;
 
         public SettingsPage()
         {
@@ -50,6 +50,7 @@ namespace Tachograph
             mainPanel.VerticalAlignment = VerticalAlignment.Center;
 
             signalButtons = new List<ToggleButton>(); // list na ukládání signálů (mělo by jich být 144)
+            markingSignalsButtons = new List<Button>(); // tlačítka na označení celého bloku signálů daného typu
 
             mainPanel.Children.Add(CreateSignalStackPanel("Aktivní signály v záznamu"));
             mainPanel.Children.Add(CreateSignalStackPanel("Signály pro test brzdy"));
@@ -62,9 +63,9 @@ namespace Tachograph
             Grid.SetColumn(mainPanel, column);
             settingGrid.Children.Add(mainPanel); // Přidejte StackPanel s hlavním Borderem do Gridu
 
-            speedRecordTypeRadioBtnContent = "PR.";
-            tachographTypeRadioBtnContent = "TT62";
-            modeRadioBtnContent = 0;
+            speedRecordTypeRadioBtnContent = speedRecordTypeRadioButtonBaseValue.Content.ToString();
+            tachographTypeRadioBtnContent = tachographTypeRadioButtonBaseValue.Content.ToString();
+            modeRadioBtnContent = int.Parse(modeRadioButtonBaseValue.Content.ToString());
         }
 
         /// <summary>
