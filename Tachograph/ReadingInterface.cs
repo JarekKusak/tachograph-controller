@@ -84,10 +84,9 @@ namespace Tachograph
         /// </summary
         async public Task ReadAndSaveData(ProgressBar progressBar)
         {
-            writer = new StreamWriter(filePath);
-
             try
             {
+                writer = new StreamWriter(filePath);
                 using (UdpClient client = new UdpClient(sourcePort)) // inicializace UDP klienta na řízení komunikace
                 {
                     IPAddress tachographAddress = IPAddress.Parse(destinationIP);
