@@ -1,12 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Tachograph
 {
-    internal class CarParameters
+    public class CarParameters
     {
         public string CarType { get; private set; }
         public int GearRatio { get; private set; }

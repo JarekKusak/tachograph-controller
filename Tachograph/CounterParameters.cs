@@ -1,12 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Tachograph
 {
-    internal class CounterParameters
+    public class CounterParameters
     {
         public int TotalKilometersDriven { get; private set; }
         public int Counter1 { get; private set; }
