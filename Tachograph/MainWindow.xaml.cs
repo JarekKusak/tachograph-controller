@@ -65,17 +65,19 @@ namespace Tachograph
 
             try
             {
-                int[] intParameters = settingsPage.ReturnNumericalParameters();
-                string[] textParameters = settingsPage.ReturnTextParameters();
+                TachographParameters tachographParameters = settingsPage.ReturnTachoParameters();
+                CarParameters carParameters = settingsPage.ReturnCarParameters();
+                CounterParameters counterParameters = settingsPage.ReturnCounterParameters();
+                OtherParameters otherParameters = settingsPage.ReturnOtherParameters();
                 bool[] signalParameters = settingsPage.ReturnSignalParameters();
 
-                if (intParameters != null)
-                {
-                    writingInterface.AddRecord(intParameters, textParameters, signalParameters); 
-                    settingsPage = new SettingsPage(); // potřeba aktualizovat okno
-                    pagesFrame.Content = settingsPage;
-                }  
-                else MessageBox.Show("Jeden z parametrů není správně vyplněn."); // chce to vymyslet lepší způsob, jak upozornit na konkrétní problémový parametr
+                TachographRecord record = new (tachographParameters, carParameters, counterParameters, otherParameters, signalParameters);
+                writingInterface.WriteData(record);
+
+                MessageBox.Show("Parametry tachografu byly úspěšně zapsány.");
+                settingsPage = new SettingsPage(); // potřeba aktualizovat okno
+                pagesFrame.Content = settingsPage;
+                //else MessageBox.Show("Jeden z parametrů není správně vyplněn."); // chce to vymyslet lepší způsob, jak upozornit na konkrétní problémový parametr
                 
             }
             catch (Exception ex)
