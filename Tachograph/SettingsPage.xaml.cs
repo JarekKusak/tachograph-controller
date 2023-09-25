@@ -70,8 +70,7 @@ namespace Tachograph
             float recordStep = float.Parse(recordStepComboBox.SelectedItem.ToString().Split()[1]); // chceme odseknout jednotky metrů a ponechat pouze číslo
             string speedRecordType = speedRecordTypeRadioBtnContent;
             string tachographType = tachographTypeRadioBtnContent;
-            OtherParameters otherParameters = new (mode, recordStep, speedRecordType, tachographType);
-            return otherParameters;
+            return new(mode, recordStep, speedRecordType, tachographType);
         }
 
         /// <summary>
@@ -82,8 +81,7 @@ namespace Tachograph
         {
             int wheelDiameter = int.Parse(wheelDiameterTxtBox.Text);
             int carNumber = int.Parse(carNumberTxtBox.Text);
-            TachographParameters tachoParameters = new  (wheelDiameter, carNumber);
-            return tachoParameters;
+            return new(wheelDiameter, carNumber);
         }
 
         /// <summary>
@@ -98,8 +96,7 @@ namespace Tachograph
             int counter3 = int.Parse(counter3TxtBox.Text);
             int counter4 = int.Parse(counter4TxtBox.Text);
             int counter5 = int.Parse(counter5TxtBox.Text);
-            CounterParameters counterParameters = new (totalKilometersDriven, counter1, counter2, counter3, counter4, counter5);
-            return counterParameters;
+            return new (totalKilometersDriven, counter1, counter2, counter3, counter4, counter5);
         }
         /// <summary>
         /// Blok Parametry vozu
@@ -112,7 +109,7 @@ namespace Tachograph
             int maxWheelDiameter = int.Parse(maxWheelDiameterTxtBox.Text);
             int maxSpeed = int.Parse(maxSpeedTxtBox.Text); // km/h
             int kFactor = int.Parse(kFactorTxtBox.Text);
-            return new CarParameters(carType, gearRatio, maxWheelDiameter, maxSpeed, kFactor);
+            return new (carType, gearRatio, maxWheelDiameter, maxSpeed, kFactor);
         }
 
         /// <summary>

@@ -205,10 +205,7 @@ namespace Tachograph
                 if (result == 0) return macAddress; 
                 else return null;
             }
-            catch
-            {
-                return null;
-            }
+            catch { return null; }
         }    
     }
 }
