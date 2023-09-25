@@ -69,7 +69,7 @@ namespace Tachograph
                 CarParameters carParameters = settingsPage.ReturnCarParameters();
                 CounterParameters counterParameters = settingsPage.ReturnCounterParameters();
                 OtherParameters otherParameters = settingsPage.ReturnOtherParameters();
-                bool[] signalParameters = settingsPage.ReturnSignalParameters();
+                SignalParameters signalParameters = settingsPage.ReturnSignalParameters();
 
                 TachographRecord record = new TachographRecord(tachographParameters, carParameters, counterParameters, otherParameters, signalParameters);
 

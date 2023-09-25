@@ -113,16 +113,18 @@ namespace Tachograph
         }
 
         /// <summary>
-        /// Vrací všechny druhy (zakliklých) signálů
+        /// Blok signálů
         /// </summary>
-        /// <returns> Bool pole (ne)zakliklých signálů </returns>
-        public bool[] ReturnSignalParameters()
+        /// <returns> Vrací parametry typu Aktivní, Brzdové a Inversní signály </returns>
+        public SignalParameters ReturnSignalParameters()
         {
             bool[] turnedSignals = new bool[signalButtons.Count];
             for (int i = 0; i < signalButtons.Count; i++)
                 if (signalButtons[i].IsChecked == true)
-                    turnedSignals[i] = true;      
-            return turnedSignals;
+                    turnedSignals[i] = true;
+            SignalParameters signalParameters = new SignalParameters(turnedSignals);
+            signalParameters.SetSignalParameters();
+            return signalParameters;
         }
 
         /// <summary>
