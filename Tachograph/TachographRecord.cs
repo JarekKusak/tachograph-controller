@@ -143,7 +143,7 @@ namespace Tachograph
                 writer.Write(gearRatio);
                 byte[] carTypeBytes = Encoding.UTF8.GetBytes(carType);
                 writer.Write(carTypeBytes);
-                writer.Write(carTypeBytes.Length);
+                writer.Write(carTypeBytes.Length); 
 
                 // Blok parametry tacho:
                 writer.Write((byte)carNumber);
