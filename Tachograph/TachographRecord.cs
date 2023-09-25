@@ -66,39 +66,36 @@ namespace Tachograph
 
         string speedRecordType; // ? bytů
 
-        int recordStep; // ? bytů (asi by byl vhodnější float)
+        float recordStep; // ? bytů (asi by byl vhodnější float)
 
         string taphographType; // ? bytů
 
         bool[] signalParameters;
         // + byty navíc..
 
-        /*
-        Chtěl jsem dát svobodu ve výběru pořadí parametrů do packetu na zápis, ovšem za cenu praktičnosti (kód se hůře spravuje). Hlavní problém je neznalost toho,
-        co a v jakém pořadí vlastně v číselných, textových a signálových parametrech je (tohle pořadí se uvádí ve třídě SettingsPage.xaml.cs). Alternativa k tomuto přístupu 
-        bylo udat každý parametr zvlášť, pak by ale počet parametrů konstruktoru rapidně narostl... a to se mi zdálo ještě méně přehlednější.
-        - Jedna z možností byla sjednotit všechna pole a následně je v tomhle pořadí procházet cyklem a zapisovat do streamu
-        */
-        public TachographRecord(int[] numericalTachoParameters, string[] textTachoParameters, bool[] signalParameters) 
+        public TachographRecord(TachographParameters tachographParameters, CarParameters carParameters, CounterParameters counterParameters, OtherParameters otherParameters, bool[] signalParameters) 
         {
-            wheelDiameter = numericalTachoParameters[0];
-            carNumber = numericalTachoParameters[1];
-            gearRatio = numericalTachoParameters[2];
-            maxWheelDiameter = numericalTachoParameters[3];
-            maxSpeed = numericalTachoParameters[4];
-            kFactor = numericalTachoParameters[5];
-            totalKilometersDriven = numericalTachoParameters[6];
-            counter1 = numericalTachoParameters[7];
-            counter2 = numericalTachoParameters[8];
-            counter3 = numericalTachoParameters[9];
-            counter4 = numericalTachoParameters[10];
-            counter5 = numericalTachoParameters[11];
-            mode = numericalTachoParameters[12];
-            recordStep = numericalTachoParameters[13];
+            wheelDiameter = tachographParameters.WheelDiameter;
+            carNumber = tachographParameters.CarNumber;
 
-            carType = textTachoParameters[0];
-            speedRecordType = textTachoParameters[1];
-            taphographType = textTachoParameters[2];
+            carType = carParameters.CarType;
+            gearRatio = carParameters.GearRatio;
+            maxWheelDiameter = carParameters.MaxSpeed;
+            maxSpeed = carParameters.MaxSpeed;
+            kFactor = carParameters.KFactor;
+            
+            totalKilometersDriven = counterParameters.TotalKilometersDriven;
+            counter1 = counterParameters.Counter1;
+            counter2 = counterParameters.Counter2;
+            counter3 = counterParameters.Counter3;
+            counter4 = counterParameters.Counter4;
+            counter5 = counterParameters.Counter5;
+            
+            mode = otherParameters.Mode;
+            recordStep = otherParameters.RecordStep;
+
+            speedRecordType = otherParameters.SpeedRecordType;
+            taphographType = otherParameters.TachographType;
             this.signalParameters = signalParameters;
         }
 
