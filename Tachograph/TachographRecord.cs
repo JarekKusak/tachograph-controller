@@ -98,6 +98,12 @@ namespace Tachograph
             taphographType = textTachoParameters[2];
             this.signalParameters = signalParameters;
         }
+
+        /// <summary>
+        /// Metoda zapisuje byty do streamu (v opačném pořadí) a následně vrací pole bytů na zápis
+        /// </summary>
+        /// <param name="writingPrefix"> Prefix pro žádost na zápis do tachografu </param>
+        /// <returns> Pole bytů na zápis </returns>
         public byte[] ToBytes(int writingPrefix)
         {
             // třída, která vytváří stream dat v paměti RAM
@@ -106,7 +112,7 @@ namespace Tachograph
             // třída, která zjednodušuje zápis primitivních datových typů (jako int, byte, float, atd.) do streamu
             using (BinaryWriter writer = new BinaryWriter(stream))
             {
-                foreach (bool b in signalParameters)
+                foreach (bool b in signalParameters.Reverse())
                     writer.Write(b);
 
                 byte[] taphographTypeBytes = Encoding.UTF8.GetBytes(taphographType);
