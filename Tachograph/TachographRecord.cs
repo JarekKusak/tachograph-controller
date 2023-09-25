@@ -70,10 +70,13 @@ namespace Tachograph
 
         string taphographType; // ? bytů
 
-        bool[] signalParameters;
+        bool[] activeSignals;
+        bool[] breakSignals;
+        bool[] inverseSignals;
+
         // + byty navíc..
 
-        public TachographRecord(TachographParameters tachographParameters, CarParameters carParameters, CounterParameters counterParameters, OtherParameters otherParameters, bool[] signalParameters) 
+        public TachographRecord(TachographParameters tachographParameters, CarParameters carParameters, CounterParameters counterParameters, OtherParameters otherParameters, SignalParameters signalParameters) 
         {
             wheelDiameter = tachographParameters.WheelDiameter;
             carNumber = tachographParameters.CarNumber;
@@ -96,7 +99,10 @@ namespace Tachograph
 
             speedRecordType = otherParameters.SpeedRecordType;
             taphographType = otherParameters.TachographType;
-            this.signalParameters = signalParameters;
+
+            activeSignals = signalParameters.ActiveSignals;
+            breakSignals = signalParameters.BreakSignals;
+            inverseSignals = signalParameters.InverseSignals;
         }
 
         /// <summary>
@@ -112,8 +118,12 @@ namespace Tachograph
             // třída, která zjednodušuje zápis primitivních datových typů (jako int, byte, float, atd.) do streamu
             using (BinaryWriter writer = new BinaryWriter(stream))
             {
-                // na signalParameters je voláno Reverse, aby signály byly v pořadí Aktivní, Brzdné a Inverzní
-                foreach (bool b in signalParameters.Reverse())
+                // Signály
+                foreach (bool b in inverseSignals)
+                    writer.Write(b);
+                foreach (bool b in breakSignals)
+                    writer.Write(b);
+                foreach (bool b in activeSignals)
                     writer.Write(b);
 
                 byte[] taphographTypeBytes = Encoding.UTF8.GetBytes(taphographType);
