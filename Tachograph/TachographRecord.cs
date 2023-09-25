@@ -98,7 +98,7 @@ namespace Tachograph
             taphographType = textTachoParameters[2];
             this.signalParameters = signalParameters;
         }
-        public byte[] ToBytes()
+        public byte[] ToBytes(int writingPrefix)
         {
             // třída, která vytváří stream dat v paměti RAM
             // umožňuje efektivně zapisovat a číst data, aniž by bylo nutné je ukládat do souboru nebo jiného trvalého úložiště.
@@ -106,42 +106,43 @@ namespace Tachograph
             // třída, která zjednodušuje zápis primitivních datových typů (jako int, byte, float, atd.) do streamu
             using (BinaryWriter writer = new BinaryWriter(stream))
             {
-                // Blok parametry tacho:
-                writer.Write(wheelDiameter);
-                writer.Write((byte)carNumber);
-
-                // Blok parametry vozu:
-                byte[] carTypeBytes = Encoding.UTF8.GetBytes(carType);
-                writer.Write(carTypeBytes.Length);
-                writer.Write(carTypeBytes);
-                writer.Write(gearRatio);
-                writer.Write(maxWheelDiameter);
-                writer.Write(maxSpeed);
-                writer.Write(kFactor);
-
-                // Blok počítadla:
-                writer.Write(totalKilometersDriven);
-                writer.Write((byte)counter1);
-                writer.Write((byte)counter2);
-                writer.Write((byte)counter3);
-                writer.Write((byte)counter4);
-                writer.Write((byte)counter5);
-
-                // Další parametry:
-                writer.Write((byte)mode);
-
-                byte[] speedRecordTypeBytes = Encoding.UTF8.GetBytes(speedRecordType);
-                writer.Write(speedRecordTypeBytes.Length);
-                writer.Write(speedRecordTypeBytes);
-
-                writer.Write(recordStep);
-
-                byte[] taphographTypeBytes = Encoding.UTF8.GetBytes(taphographType);
-                writer.Write(taphographTypeBytes.Length);
-                writer.Write(taphographTypeBytes);
-
                 foreach (bool b in signalParameters)
                     writer.Write(b);
+
+                byte[] taphographTypeBytes = Encoding.UTF8.GetBytes(taphographType);
+
+                writer.Write(taphographTypeBytes);
+                writer.Write(taphographTypeBytes.Length);
+                writer.Write(recordStep);
+
+                // Další parametry:
+                byte[] speedRecordTypeBytes = Encoding.UTF8.GetBytes(speedRecordType);
+                writer.Write(speedRecordTypeBytes);
+                writer.Write(speedRecordTypeBytes.Length);
+                writer.Write((byte)mode);
+
+                // Blok počítadla:
+                writer.Write((byte)counter5);
+                writer.Write((byte)counter4);
+                writer.Write((byte)counter3);
+                writer.Write((byte)counter2);
+                writer.Write((byte)counter1);
+                writer.Write(totalKilometersDriven);
+
+                // Blok parametry vozu:
+                writer.Write(kFactor);
+                writer.Write(maxSpeed);
+                writer.Write(maxWheelDiameter);
+                writer.Write(gearRatio);
+                byte[] carTypeBytes = Encoding.UTF8.GetBytes(carType);
+                writer.Write(carTypeBytes);
+                writer.Write(carTypeBytes.Length);
+
+                // Blok parametry tacho:
+                writer.Write((byte)carNumber);
+                writer.Write(wheelDiameter);
+
+                writer.Write(writingPrefix);
 
                 // Další byty (zde můžete implementovat logiku pro zápis dalších bytů)
                 

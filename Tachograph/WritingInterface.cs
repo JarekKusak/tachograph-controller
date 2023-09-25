@@ -62,18 +62,17 @@ namespace Tachograph
                     IPEndPoint tachographEndPoint = new IPEndPoint(tachographAddress, destinationPort);
 
                     // Převedení vyplněných dat tachografu na bajty
-                    byte[] recordData = tachographRecord.ToBytes();
+                    byte[] recordData = tachographRecord.ToBytes(writingPrefix);
+                    
                     // Výpočet CRC-32 pro data
                     uint crc32 = CalculateCRC32(recordData);
 
                     // Spojení prefixu, CRC-32 a dat do jednoho pole bajtů
-                    byte[] writeData = BitConverter.GetBytes(writingPrefix);
-                    writeData = writeData.Concat(BitConverter.GetBytes(crc32)).ToArray();
+                    byte[] writeData  = BitConverter.GetBytes(crc32).ToArray();
                     writeData = writeData.Concat(recordData).ToArray();
-
+                    
                     if (BitConverter.IsLittleEndian)
                         Array.Reverse(writeData);
-
                     await client.SendAsync(writeData, writeData.Length, tachographEndPoint);
 
                     // Přijmutí odpovědi na čtení dat (simulace)
