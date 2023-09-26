@@ -67,7 +67,7 @@ namespace Tachograph
         }
 
         /// <summary>
-        /// Metoda na zápis dat do tafografu (při správném vyplnění parametrů)
+        /// Metoda na zápis dat do tachografu (při správném vyplnění parametrů)
         /// </summary>
         private async void setTachoParametersBtn_Click(object sender, RoutedEventArgs e)
         {
@@ -81,6 +81,7 @@ namespace Tachograph
                 OtherParameters otherParameters = settingsPage.ReturnOtherParameters();
                 SignalParameters signalParameters = settingsPage.ReturnSignalParameters();
 
+                //TachographRecord record = new TachographRecord(tachographParameters);
                 TachographRecord record = new TachographRecord(tachographParameters, carParameters, counterParameters, otherParameters, signalParameters);
 
                 int result = await writingInterface.WriteData(record); // návratový kód asynchronní metody
