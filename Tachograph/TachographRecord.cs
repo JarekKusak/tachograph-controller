@@ -48,7 +48,7 @@ namespace Tachograph
         int wheelDiameter; // 4 byty
         int carNumber; // 1 byte
         // Blok parametry vozu:
-        string carType; // ? bytů
+        string carType; // // dvě proměnné: délka stringu (4 byty) + samotný string (? bytů)
         int gearRatio; // 4 byty
         int maxWheelDiameter; // 4 byty
         int maxSpeed; // km/h // 4 byty
@@ -63,11 +63,11 @@ namespace Tachograph
 
         int mode; // 1 byte
 
-        string speedRecordType; // ? bytů
+        string speedRecordType; // dvě proměnné: délka stringu (4 byty) + samotný string (? bytů)
 
-        float recordStep; // ? bytů (asi by byl vhodnější float)
+        float recordStep; // 4 byty
 
-        string taphographType; // ? bytů
+        string taphographType; // dvě proměnné: délka stringu (4 byty) + samotný string (? bytů)
 
         bool[] activeSignals;
         bool[] breakSignals;

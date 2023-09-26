@@ -65,11 +65,10 @@ namespace Tachograph
         public OtherParameters ReturnOtherParameters()
         {
             int mode = modeRadioBtnContent; // radio
-            // PROBLÉM: recordStep může být 0.25 !!
             float recordStep = float.Parse(recordStepComboBox.SelectedItem.ToString().Split()[1]); // chceme odseknout jednotky metrů a ponechat pouze číslo
             string speedRecordType = speedRecordTypeRadioBtnContent;
             string tachographType = tachographTypeRadioBtnContent;
-            return new(mode, recordStep, speedRecordType, tachographType);
+            return new (mode, recordStep, speedRecordType, tachographType);
         }
 
         /// <summary>
@@ -80,7 +79,7 @@ namespace Tachograph
         {
             int wheelDiameter = int.Parse(wheelDiameterTxtBox.Text);
             int carNumber = int.Parse(carNumberTxtBox.Text);
-            return new(wheelDiameter, carNumber);
+            return new (wheelDiameter, carNumber);
         }
 
         /// <summary>

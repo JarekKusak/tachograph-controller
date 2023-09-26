@@ -73,12 +73,12 @@ namespace Tachograph
 
                 TachographRecord record = new TachographRecord(tachographParameters, carParameters, counterParameters, otherParameters, signalParameters);
 
-                int result = await writingInterface.WriteData(record);
+                int result = await writingInterface.WriteData(record); // návratový kód asynchronní metody
 
                 if (result == 0)
                 {
                     MessageBox.Show("Parametry tachografu byly úspěšně zapsány.");
-                    settingsPage = new SettingsPage(); // potřeba aktualizovat okno
+                    settingsPage = new (); // potřeba aktualizovat okno
                     pagesFrame.Content = settingsPage;
                 }
                 else return;
