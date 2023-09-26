@@ -75,6 +75,12 @@ namespace Tachograph
 
         // + byty navíc..
 
+        public TachographRecord(TachographParameters tachographParameters)
+        {
+            wheelDiameter = tachographParameters.WheelDiameter;
+            carNumber = tachographParameters.CarNumber;
+        }
+
         public TachographRecord(TachographParameters tachographParameters, CarParameters carParameters, CounterParameters counterParameters, OtherParameters otherParameters, SignalParameters signalParameters) 
         {
             wheelDiameter = tachographParameters.WheelDiameter;
@@ -103,6 +109,8 @@ namespace Tachograph
             breakSignals = signalParameters.BreakSignals;
             inverseSignals = signalParameters.InverseSignals;
         }
+
+        // TODO: tři bool proměnné, které budou rozhodovat, které objekty půjdou na zápis (vyplyne ze stisknutého tlačítka)
 
         /// <summary>
         /// Metoda zapisuje byty do streamu (v opačném pořadí) a následně vrací pole bytů na zápis
