@@ -12,6 +12,7 @@ namespace Tachograph
         WritingInterface writingInterface;
         SettingsPage settingsPage;
         SignalsPage signalsPage;
+        CommentPage commentPage;
 
         const string tachoIP = "192.168.30.15";
         const int sourcePort = 5049;
@@ -24,6 +25,7 @@ namespace Tachograph
 
             settingsPage = new SettingsPage();
             signalsPage = new SignalsPage();
+            commentPage = new CommentPage();
         }
 
         /// <summary>
@@ -54,6 +56,14 @@ namespace Tachograph
         private void signalsBtn_Click(object sender, RoutedEventArgs e)
         {
             pagesFrame.Content = signalsPage;
+        }
+
+        /// <summary>
+        /// Stránka na poznámku (ještě úplně nevím k čemu)
+        /// </summary>
+        private void commentBtn_Click(object sender, RoutedEventArgs e)
+        {
+            pagesFrame.Content = commentPage;
         }
 
         /// <summary>
@@ -97,5 +107,6 @@ namespace Tachograph
         {
 
         }
+
     }
 }
