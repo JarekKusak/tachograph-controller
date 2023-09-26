@@ -40,7 +40,7 @@ namespace Tachograph
             Můžeme reprezentovat signály jako pole boolů, kde každý bool je jeden byte. Pokud máme 3x bool[48], pak potřebujeme 144 bytů.
             Další byty:
 
-            Zde byste měli zahrnout další byty, které potřebujete pro vaši aplikaci.
+            (Zde můžete zahrnout další byty, které potřebujete pro vaši aplikaci)
          */
 
         // Prefix (4 byty)
