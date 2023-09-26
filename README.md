@@ -7,3 +7,7 @@ Tahle dokumentace popisuje program na vyčítání a zápis do Tachografu po lin
 ## Nastavení a ovládání
 
 Lorem ipsum
+
+### Autor
+
+Jaroslav Kusák
