@@ -81,8 +81,8 @@ namespace Tachograph
                 OtherParameters otherParameters = settingsPage.ReturnOtherParameters();
                 SignalParameters signalParameters = settingsPage.ReturnSignalParameters();
 
-                //TachographRecord record = new TachographRecord(tachographParameters);
-                TachographRecord record = new TachographRecord(tachographParameters, carParameters, counterParameters, otherParameters, signalParameters);
+                TachographRecord record = new TachographRecord(tachographParameters);
+                //TachographRecord record = new TachographRecord(tachographParameters, carParameters, counterParameters, otherParameters, signalParameters);
 
                 int result = await writingInterface.WriteData(record); // návratový kód asynchronní metody
 

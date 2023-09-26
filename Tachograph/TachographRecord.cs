@@ -75,11 +75,33 @@ namespace Tachograph
 
         // + byty navíc..
 
+        bool writeDownTachoParameters = false;
+        bool writeDownCarParameters = false;
+        bool writeDownCounterParameters = false;
+        bool writeDownSignalParameters = false;
+
         public TachographRecord(TachographParameters tachographParameters)
         {
             wheelDiameter = tachographParameters.WheelDiameter;
             carNumber = tachographParameters.CarNumber;
+
+            writeDownTachoParameters = true;
         }
+
+        public TachographRecord(CarParameters carParameters)
+        {
+            carType = carParameters.CarType;
+            gearRatio = carParameters.GearRatio;
+            maxWheelDiameter = carParameters.MaxSpeed;
+            maxSpeed = carParameters.MaxSpeed;
+            kFactor = carParameters.KFactor;
+
+            writeDownCarParameters = true;
+            writeDownSignalParameters = true;
+        }
+
+        // TODO: COUNTERPARAMETERS
+
 
         public TachographRecord(TachographParameters tachographParameters, CarParameters carParameters, CounterParameters counterParameters, OtherParameters otherParameters, SignalParameters signalParameters) 
         {
@@ -108,6 +130,8 @@ namespace Tachograph
             activeSignals = signalParameters.ActiveSignals;
             breakSignals = signalParameters.BreakSignals;
             inverseSignals = signalParameters.InverseSignals;
+
+            writeDownTachoParameters = writeDownSignalParameters = writeDownCarParameters = writeDownCounterParameters = true;
         }
 
         // TODO: tři bool proměnné, které budou rozhodovat, které objekty půjdou na zápis (vyplyne ze stisknutého tlačítka)
@@ -125,14 +149,8 @@ namespace Tachograph
             // třída, která zjednodušuje zápis primitivních datových typů (jako int, byte, float, atd.) do streamu
             using (BinaryWriter writer = new BinaryWriter(stream))
             {
-                // Signály
-                foreach (bool b in inverseSignals)
-                    writer.Write(b);
-                foreach (bool b in breakSignals)
-                    writer.Write(b);
-                foreach (bool b in activeSignals)
-                    writer.Write(b);
-
+                
+                /*
                 byte[] taphographTypeBytes = Encoding.UTF8.GetBytes(taphographType);
 
                 writer.Write(taphographTypeBytes);
@@ -140,31 +158,51 @@ namespace Tachograph
                 writer.Write(recordStep);
 
                 // Další parametry:
-                byte[] speedRecordTypeBytes = Encoding.UTF8.GetBytes(speedRecordType);
-                writer.Write(speedRecordTypeBytes);
-                writer.Write(speedRecordTypeBytes.Length);
+                
                 writer.Write((byte)mode);
+                */
 
-                // Blok počítadla:
-                writer.Write((byte)counter5);
-                writer.Write((byte)counter4);
-                writer.Write((byte)counter3);
-                writer.Write((byte)counter2);
-                writer.Write((byte)counter1);
-                writer.Write(totalKilometersDriven);
+                if (writeDownCounterParameters)
+                {
+                    // Blok počítadla:
+                    writer.Write((byte)counter5);
+                    writer.Write((byte)counter4);
+                    writer.Write((byte)counter3);
+                    writer.Write((byte)counter2);
+                    writer.Write((byte)counter1);
+                    writer.Write(totalKilometersDriven);
+                }
+                if (writeDownSignalParameters)
+                {
+                    // Blok parametry vozu:
+                    // Signály
+                    foreach (bool b in inverseSignals)
+                        writer.Write(b);
+                    foreach (bool b in breakSignals)
+                        writer.Write(b);
+                    foreach (bool b in activeSignals)
+                        writer.Write(b);
+                }
+                if (writeDownCarParameters)
+                {
+                    byte[] speedRecordTypeBytes = Encoding.UTF8.GetBytes(speedRecordType);
+                    writer.Write(speedRecordTypeBytes);
+                    writer.Write(speedRecordTypeBytes.Length);
 
-                // Blok parametry vozu:
-                writer.Write(kFactor);
-                writer.Write(maxSpeed);
-                writer.Write(maxWheelDiameter);
-                writer.Write(gearRatio);
-                byte[] carTypeBytes = Encoding.UTF8.GetBytes(carType);
-                writer.Write(carTypeBytes);
-                writer.Write(carTypeBytes.Length); 
-
-                // Blok parametry tacho:
-                writer.Write((byte)carNumber);
-                writer.Write(wheelDiameter);
+                    writer.Write(kFactor);
+                    writer.Write(maxSpeed);
+                    writer.Write(maxWheelDiameter);
+                    writer.Write(gearRatio);
+                    byte[] carTypeBytes = Encoding.UTF8.GetBytes(carType);
+                    writer.Write(carTypeBytes);
+                    writer.Write(carTypeBytes.Length);
+                }            
+                if (writeDownTachoParameters)
+                {
+                    // Blok parametry tacho:
+                    writer.Write((byte)carNumber);
+                    writer.Write(wheelDiameter);
+                }
 
                 writer.Write(writingPrefix);
 
