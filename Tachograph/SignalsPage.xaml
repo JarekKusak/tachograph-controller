@@ -9,6 +9,6 @@
       Title="SignalsPage">
 
     <Grid>
-        <TextBlock Text="Signály jééj" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="40"/>
+        <TextBlock Text="Signály" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="40"/>
     </Grid>
 </Page>
