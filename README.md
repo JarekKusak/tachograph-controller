@@ -16,6 +16,10 @@ Po spuštění aplikace se zobrazí okno se čtyřmi řádky, v prvním najdeme 
 
 Nastavení
 
+## Komunikační protokol
+
+Pro čtení z tachografu se používá již existující protokol, pro dotazy na uložená data je třeba poslat packet s prefixem 0x15000000 a následně pro každý další packet zvyšovat o jedničku. Pro dotaz na zápis dat předchází datům prefix 0x15100000. Zbytek protokolu je textově popsáno a okomentováno ve třídě TachographRecord.cs.
+
 ## Design (XAML)
 
 ### MainWindow.xaml
