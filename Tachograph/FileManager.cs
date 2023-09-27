@@ -20,7 +20,7 @@ namespace Tachograph
             SetupFiles();
         }
 
-        public string OpenFileAndReadContents()
+        public string ReturnSavedSocketsFromFile()
         {
             try
             {

@@ -20,7 +20,7 @@ namespace Tachograph
 
         void LoadContent()
         {
-            string fileContents = fileManager.OpenFileAndReadContents();
+            string fileContents = fileManager.ReturnSavedSocketsFromFile();
             socketEditorTxtBox.Text = fileContents;
         }
 
