@@ -86,6 +86,8 @@ namespace Tachograph
         bool writeDownSignalParameters = false;
         bool writeDownDateAndTime = false;
 
+        // Každý konstruktor představuje různý typ záznamu na zápis
+
         public TachographRecord(string dateAndTime)
         {
             this.dateAndTime = dateAndTime;
@@ -130,8 +132,12 @@ namespace Tachograph
             writeDownCounterParameters = true;
         }
 
-        public TachographRecord(TachographParameters tachographParameters, CarParameters carParameters, CounterParameters counterParameters, OtherParameters otherParameters, SignalParameters signalParameters) 
+        // Univerzální kontruktor na zápis všeho (nepoužívá se)
+        /*
+        public TachographRecord(TachographParameters tachographParameters, CarParameters carParameters, CounterParameters counterParameters, OtherParameters otherParameters, 
+            SignalParameters signalParameters, string dateAndTime) 
         {
+            this.dateAndTime = dateAndTime;
             wheelDiameter = tachographParameters.WheelDiameter;
             carNumber = tachographParameters.CarNumber;
 
@@ -158,8 +164,9 @@ namespace Tachograph
             breakSignals = signalParameters.BreakSignals;
             inverseSignals = signalParameters.InverseSignals;
 
-            writeDownTachoParameters = writeDownSignalParameters = writeDownCarParameters = writeDownCounterParameters = true;
+            writeDownDateAndTime = writeDownTachoParameters = writeDownSignalParameters = writeDownCarParameters = writeDownCounterParameters = true;
         }
+        */
 
         /// <summary>
         /// Metoda zapisuje byty do streamu (v opačném pořadí) a následně vrací pole bytů na zápis
