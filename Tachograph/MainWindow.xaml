@@ -50,10 +50,10 @@
                     <Setter Property="Height" Value="30"/>
                 </Style>
             </StackPanel.Resources>
-            <Button Content="Nastavit datum a čas" Name="setTimeAndDateBtn"/>
-            <Button Content="Nastavit parametry vozu" Margin="10,0,0,0" Name="setCarParametersBtn" Click="setCarParametersBtn_Click"/>
-            <Button Content="Nastavit parametry tachografu" Margin="10,0,0,0" Name="setTaphoParametersBtn" Click="setTachoParametersBtn_Click"/>
-            <Button Content="Nastavit počítadla" Margin="10,0,0,0" Name="setCountersBtn"/>
+            <Button Content="Nastavit datum a čas" Name="setTimeAndDateBtn" Click="setParametersBtn_Click"/>
+            <Button Content="Nastavit parametry vozu" Margin="10,0,0,0" Name="setCarParametersBtn" Click="setParametersBtn_Click"/>
+            <Button Content="Nastavit parametry tachografu" Margin="10,0,0,0" Name="setTaphoParametersBtn" Click="setParametersBtn_Click"/>
+            <Button Content="Nastavit počítadla" Margin="10,0,0,0" Name="setCountersBtn" Click="setParametersBtn_Click"/>
         </StackPanel>
 
         <Line Stretch="Fill" Stroke="Gray" X2="1" Grid.Row="1" Grid.ColumnSpan="2" VerticalAlignment="Top"/>

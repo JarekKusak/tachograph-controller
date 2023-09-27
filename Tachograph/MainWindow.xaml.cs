@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows;
+using System.Windows.Controls;
 
 namespace Tachograph
 {
@@ -67,24 +68,42 @@ namespace Tachograph
         }
 
         /// <summary>
-        /// Metoda na zápis dat do tachografu (při správném vyplnění parametrů)
+        /// Metoda na založení záznamu a jeho následný zápis do tachografu
         /// </summary>
-        private async void setTachoParametersBtn_Click(object sender, RoutedEventArgs e)
+        /// <param name="sender"> Tlačítko na zápis parametrů požadovaného typu </param>
+        async void CreateRecordAndWriteData(object sender)
         {
             try
             {
+                Button clickedBtn = (Button)sender;
                 writingInterface = new WritingInterface(tachoIP, sourcePort, destinationPort);
+                TachographRecord record = null;
 
-                TachographParameters tachographParameters = settingsPage.ReturnTachoParameters();
-                CarParameters carParameters = settingsPage.ReturnCarParameters();
-                CounterParameters counterParameters = settingsPage.ReturnCounterParameters();
-                OtherParameters otherParameters = settingsPage.ReturnOtherParameters();
-                SignalParameters signalParameters = settingsPage.ReturnSignalParameters();
+                if (clickedBtn == setTaphoParametersBtn)
+                {
+                    TachographParameters tachographParameters = settingsPage.ReturnTachoParameters();
+                    record = new TachographRecord(tachographParameters);
+                }
+                else if (clickedBtn == setCarParametersBtn)
+                {
+                    CarParameters carParameters = settingsPage.ReturnCarParameters();
+                    SignalParameters signalParameters = settingsPage.ReturnSignalParameters();
+                    OtherParameters otherParameters = settingsPage.ReturnOtherParameters(); 
+                    record = new TachographRecord(carParameters, signalParameters, otherParameters);
+                }
+                else if (clickedBtn == setCountersBtn)
+                {
+                    CounterParameters counterParameters = settingsPage.ReturnCounterParameters();
+                    record = new TachographRecord(counterParameters);
 
-                TachographRecord record = new TachographRecord(tachographParameters);
-                //TachographRecord record = new TachographRecord(tachographParameters, carParameters, counterParameters, otherParameters, signalParameters);
+                }
+                else // nastavit datum a čas
+                {
+                    string dateAndTime = (DateTime.Now).ToString("yyyy-dd-MM HH:mm:ss");
 
-                int result = await writingInterface.WriteData(record); // návratový kód asynchronní metody
+                }
+
+                int result = await writingInterface.WriteData(record!); // návratový kód asynchronní metody
 
                 if (result == 0)
                 {
@@ -102,12 +121,12 @@ namespace Tachograph
         }
 
         /// <summary>
-        /// Úplně nevím, jak tuhle metodu využít?
+        /// Jednotná událost na řízení zápisu dat (parametrů) požadovaného typu
         /// </summary>
-        private void setCarParametersBtn_Click(object sender, RoutedEventArgs e)
+        /// <param name="sender"> Tlačítko na zápis parametrů požadovaného typu </param>
+        private void setParametersBtn_Click(object sender, RoutedEventArgs e)
         {
-
+            CreateRecordAndWriteData(sender);
         }
-
     }
 }
