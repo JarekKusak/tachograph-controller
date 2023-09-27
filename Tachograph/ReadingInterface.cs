@@ -26,10 +26,8 @@ namespace Tachograph
         int sourcePort;
         int destinationPort;
         string destinationIP;
-        string filePath;
-        string projectDirectory;
-        string outputFileName;
-        StreamWriter writer;
+
+        FileManager fileManager;
         
         // Importování funkce SendARP z knihovny iphlpapi.dll
         // Toto je atribut označující externí funkci, který říká, že tuto funkci hledáme v knihovně iphlpapi.dll.
@@ -37,22 +35,17 @@ namespace Tachograph
         [DllImport("iphlpapi.dll", ExactSpelling = true)]
         public static extern int SendARP(int destIp, int srcIp, byte[] macAddress, ref int macAddressLength);
 
-        public ReadingInterface(string destinationIP, int sourcePort, int destinationPort)
+        public ReadingInterface(string destinationIP, int sourcePort, int destinationPort, FileManager fileManager)
         {
+            this.fileManager = fileManager;
+            
             readingPrefix = 0x15000000;
             packetIndex = 1;
             retries = 0;
 
-            outputFileName = "output.txt";
-
             this.destinationIP = destinationIP;
             this.sourcePort = sourcePort;
             this.destinationPort = destinationPort;
-
-            // Získejte cestu k adresáři projektu, kde chcete vytvořit soubor "output.txt"
-            projectDirectory = AppDomain.CurrentDomain.BaseDirectory;
-            // Sestavte úplnou cestu k souboru "output.txt"
-            filePath = Path.Combine(projectDirectory, outputFileName);
         }      
 
         /// <summary>
@@ -84,7 +77,7 @@ namespace Tachograph
         {
             try
             {
-                writer = new StreamWriter(filePath);
+                fileManager.OpenWriter();
                 using (UdpClient client = new UdpClient(sourcePort)) // inicializace UDP klienta na řízení komunikace
                 {
                     IPAddress tachographAddress = IPAddress.Parse(destinationIP);
@@ -132,7 +125,7 @@ namespace Tachograph
                                 if (receiveData != null && receiveData.Length == dataLength) // při úspěšném obdržení packetu se data zapíšou do souboru
                                 {
                                     Console.WriteLine($"Obdrženo č.{packetIndex}");
-                                    PacketOutput(receiveData, packetIndex, writer);
+                                    fileManager.PacketOutput(receiveData, packetIndex);
                                     packetIndex++;
                                     readingPrefix++; // navýšení hodnoty pro další požadavek
 
@@ -150,7 +143,7 @@ namespace Tachograph
                                 return;
                             }
                         }
-                        MessageBox.Show($"Packety byly přečteny a zapsány do {filePath}.", "Upozornění", MessageBoxButton.OK, MessageBoxImage.Information);
+                        MessageBox.Show($"Packety byly přečteny a zapsány do {fileManager.ReadingOutputFileName}.", "Upozornění", MessageBoxButton.OK, MessageBoxImage.Information);
                     } else return;
                 }
             }
@@ -160,28 +153,7 @@ namespace Tachograph
             }
             finally
             {
-                writer.Close();
-            }
-        }
-
-        /// <summary>
-        /// Metoda na tisknutí bytů přijatých dat (podoba hexdumpu)
-        /// </summary>
-        /// <param name="data"> Obdržená data v packetu </param>
-        void PacketOutput(byte[] data, int packetIndex, StreamWriter writer)
-        {
-            int i = 0;
-            int rowWidth = 16;
-
-            foreach (byte b in data)
-            {
-                if (i % rowWidth == 0) // vypisuje vždy po konkrétním počtu bytů (standardně po 16, jako hexdump)
-                {
-                    writer.Write("\n");
-                    i = 0;
-                }
-                writer.Write(b.ToString("X2") + " "); // output je v šestnáctkové soustavě
-                i++;
+                fileManager.CloseWriter();
             }
         }
 
