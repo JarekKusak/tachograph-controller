@@ -23,6 +23,9 @@ namespace Tachograph
             SetupFiles();
         }
 
+        /// <summary>
+        /// Vytvoří (pokud již neexistují) soubory pro zápis z vyčítání a také soubor na spravování IP adres
+        /// </summary>
         void SetupFiles()
         {
             // Získejte cestu k adresáři projektu, kde chcete vytvořit soubor "socket_editor.txt"
@@ -37,7 +40,7 @@ namespace Tachograph
                 File.Create(readingOutputfilePath).Close();
         }
 
-        public void OpenWriter()
+        public void OpenWriterForReadingOutput()
         {
             writer = new StreamWriter(readingOutputfilePath);
         }
