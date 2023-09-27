@@ -8,7 +8,15 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="EditorPage">
 
-    <Grid>
-        <TextBox HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+    <Grid Margin="5">
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="40"/>
+        </Grid.RowDefinitions>
+        <TextBox Grid.Row="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Name="socketEditorTxtBox"/>
+        <StackPanel Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal">
+            <Button Width="50" Height="30" Content="Uložit" Name="saveEditorBtn" Click="saveEditorBtn_Click"/>
+            <Button Width="50" Height="30" Content="Otevřít" Name="openEditorBtn" Margin="10,0,0,0" Click="openEditorBtn_Click"/>
+        </StackPanel>
     </Grid>
 </Page>

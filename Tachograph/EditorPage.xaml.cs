@@ -24,5 +24,15 @@ namespace Tachograph
         {
             InitializeComponent();
         }
+
+        private void saveEditorBtn_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void openEditorBtn_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
