@@ -4,7 +4,6 @@ using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using System.Net.Sockets;
 using System.Threading;
-using System.IO;
 using System.Net;
 using System.Windows.Controls;
 using System.Windows;
@@ -77,7 +76,7 @@ namespace Tachograph
         {
             try
             {
-                fileManager.OpenWriterForReadingOutput();
+                fileManager.OpenWriterForReadingOutput(); // otevře StreamWriter
                 using (UdpClient client = new UdpClient(sourcePort)) // inicializace UDP klienta na řízení komunikace
                 {
                     IPAddress tachographAddress = IPAddress.Parse(destinationIP);
