@@ -52,6 +52,10 @@ Třída inicializuje objekty pro zápis, čtení a jednotlivé stránky. Poskytu
 
 Obsahuje metody na vyzvedávání parametrů z okna. Mimo jiné obsahuje metodu na generování tlačítkových bloků s typy signálů, které se dají přepínat do dvou stavů. Bloky signálů se dají hromadně označit třemi tlačítky markingSignalButtons.
 
+### FileManager.cs
+
+Třída obsluhuje soubory pro zápis výstupu ze čtení tachografu, a také soubor pro zápis IP adres a socketů tachografů.
+
 ### ReadingInterface.cs
 
 Třída slouží jako rozhraní pro čtení dat z tachografu. Je určena pro komunikaci s tachografem prostřednictvím UDP (User Datagram Protocol) a zpracování přijatých dat. Následně zaznamenává tato data do textového souboru.
