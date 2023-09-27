@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 
 namespace Tachograph
 {
@@ -21,15 +22,42 @@ namespace Tachograph
         const int sourcePort = 5049;
         const int destinationPort = sourcePort;
 
+        ToggleButton previouslyClickedBtn;
+
         public MainWindow()
         {
             InitializeComponent();
-            Loaded += settingsBtn_Click;
+            Loaded += settingsBtn_Checked;
+            settingsBtn.IsChecked = true;
+            previouslyClickedBtn = settingsBtn;
 
             settingsPage = new SettingsPage();
             signalsPage = new SignalsPage();
             commentPage = new CommentPage();
             editorPage = new EditorPage();
+        }
+
+        private void ToggleButton_Click(object sender, RoutedEventArgs e)
+        {
+            ToggleButton clickedButton = (ToggleButton)sender;
+
+            // Pokud je tlačítko již zakliklé, neměňte jeho stav
+            if (previouslyClickedBtn == clickedButton)
+            {
+                clickedButton.IsChecked = true;
+                return;
+            }
+            
+            // Zrušit označení u všech tlačítek
+            foreach (UIElement child in pagesSwitcher.Children)
+            {
+                if (child is ToggleButton toggleButton && toggleButton != clickedButton)
+                {
+                    toggleButton.IsChecked = false;
+                }
+            }
+
+            previouslyClickedBtn = clickedButton;
         }
 
         /// <summary>
@@ -51,7 +79,7 @@ namespace Tachograph
         /// <summary>
         /// Generuje stránku s nastavením parametrů tachografu
         /// </summary>
-        private void settingsBtn_Click(object sender, RoutedEventArgs e)
+        private void settingsBtn_Checked(object sender, RoutedEventArgs e)
         {
             pagesFrame.Content = settingsPage;
         }
@@ -59,7 +87,7 @@ namespace Tachograph
         /// <summary>
         /// Stránka na signály (ještě úplně nevím k čemu)
         /// </summary>
-        private void signalsBtn_Click(object sender, RoutedEventArgs e)
+        private void signalsBtn_Checked(object sender, RoutedEventArgs e)
         {
             pagesFrame.Content = signalsPage;
         }
@@ -67,7 +95,7 @@ namespace Tachograph
         /// <summary>
         /// Stránka na poznámku (ještě úplně nevím k čemu)
         /// </summary>
-        private void commentBtn_Click(object sender, RoutedEventArgs e)
+        private void commentBtn_Checked(object sender, RoutedEventArgs e)
         {
             pagesFrame.Content = commentPage;
         }
@@ -75,7 +103,7 @@ namespace Tachograph
         /// <summary>
         /// Stránka na textový editor socketů Tachografů
         /// </summary>
-        private void editorBtn_Click(object sender, RoutedEventArgs e)
+        private void editorBtn_Checked(object sender, RoutedEventArgs e)
         {
             pagesFrame.Content = editorPage;
         }
@@ -141,5 +169,6 @@ namespace Tachograph
         {
             CreateRecordAndWriteData(sender);
         }
+
     }
 }

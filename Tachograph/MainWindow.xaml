@@ -65,17 +65,18 @@
         </StackPanel>
         <Line Stretch="Fill" Stroke="Gray" X2="1" Grid.Row="2" Grid.ColumnSpan="2" VerticalAlignment="Bottom"/>
 
-        <StackPanel Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left" Orientation="Horizontal" Margin="5">
+        <StackPanel Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" Name="pagesSwitcher" HorizontalAlignment="Left" Orientation="Horizontal" Margin="5">
             <StackPanel.Resources>
-                <Style TargetType="{x:Type Button}">
+                <Style TargetType="{x:Type ToggleButton}">
                     <Setter Property="Width" Value="100"/>
                     <Setter Property="Height" Value="30"/>
+                    <EventSetter Event="Click" Handler="ToggleButton_Click"/>
                 </Style>
             </StackPanel.Resources>
-            <Button Content="Nastavení" Name="settingsBtn" Click="settingsBtn_Click"/>
-            <Button Content="Signály" Name="signalsBtn" Click="signalsBtn_Click"/>
-            <Button Content="Poznámka" Name="commentBtn" Click="commentBtn_Click"/>
-            <Button Content="Editor" Name="editorBtn" Click="editorBtn_Click"/>
+            <ToggleButton Content="Nastavení" Name="settingsBtn" Checked="settingsBtn_Checked"/>
+            <ToggleButton Content="Signály" Name="signalsBtn" Checked="signalsBtn_Checked"/>
+            <ToggleButton Content="Poznámka" Name="commentBtn" Checked="commentBtn_Checked"/>
+            <ToggleButton Content="Editor" Name="editorBtn" Checked="editorBtn_Checked"/>
         </StackPanel>
         <Frame Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" Name="pagesFrame" NavigationUIVisibility="Hidden"/>
         <Grid Grid.Row="4" Grid.ColumnSpan="2">
