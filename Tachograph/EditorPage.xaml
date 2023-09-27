@@ -13,7 +13,7 @@
             <RowDefinition/>
             <RowDefinition Height="40"/>
         </Grid.RowDefinitions>
-        <TextBox Grid.Row="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Name="socketEditorTxtBox"/>
+        <TextBox Grid.Row="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Name="socketEditorTxtBox" FontSize="20"/>
         <StackPanel Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal">
             <Button Width="50" Height="30" Content="Uložit" Name="saveEditorBtn" Click="saveEditorBtn_Click"/>
             <Button Width="50" Height="30" Content="Otevřít" Name="openEditorBtn" Margin="10,0,0,0" Click="openEditorBtn_Click"/>
