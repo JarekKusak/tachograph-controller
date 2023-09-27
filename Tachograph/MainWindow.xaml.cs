@@ -20,9 +20,9 @@ namespace Tachograph
         CommentPage commentPage;
         EditorPage editorPage;
 
-        const string tachoIP = "192.168.30.15";
-        const int sourcePort = 5049;
-        const int destinationPort = sourcePort;
+        const string tachoIP = "192.168.30.15"; // bude se vyčítat ze souboru socket_editor.txt
+        const int sourcePort = 5049; // bude se vyčítat ze souboru socket_editor.txt
+        const int destinationPort = sourcePort; // bude se vyčítat ze souboru socket_editor.txt
 
         ToggleButton previouslyClickedBtn;
 
@@ -37,7 +37,8 @@ namespace Tachograph
             settingsPage = new SettingsPage();
             signalsPage = new SignalsPage();
             commentPage = new CommentPage();
-            editorPage = new EditorPage();
+
+            editorPage = new EditorPage(fileManager);
         }
 
         private void ToggleButton_Click(object sender, RoutedEventArgs e)
