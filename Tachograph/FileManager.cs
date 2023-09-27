@@ -1,13 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Windows;
 
 namespace Tachograph
 {
-    internal class FileManager
+    public class FileManager
     {
         string socketEditorfilePath;
         string readingOutputfilePath;
@@ -21,6 +18,20 @@ namespace Tachograph
         public FileManager()
         {
             SetupFiles();
+        }
+
+        public string OpenFileAndReadContents()
+        {
+            try
+            {
+                return File.ReadAllText(socketEditorfilePath);
+            }
+            catch (Exception ex)
+            {
+                // Zpracování výjimky, pokud soubor není dostupný nebo došlo k chybě při čtení.
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return string.Empty;
+            }
         }
 
         /// <summary>
@@ -40,6 +51,9 @@ namespace Tachograph
                 File.Create(readingOutputfilePath).Close();
         }
 
+        /// <summary>
+        /// Otevře StreamWriter určený pro zápis výstupu po čtení z tachografu
+        /// </summary>
         public void OpenWriterForReadingOutput()
         {
             writer = new StreamWriter(readingOutputfilePath);
