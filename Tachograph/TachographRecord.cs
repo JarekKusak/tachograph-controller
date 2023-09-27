@@ -61,13 +61,15 @@ namespace Tachograph
         int counter4; // 1 byte
         int counter5; // 1 byte
 
-        int mode; // 1 byte
+        // Nezapisuje se
+        // int mode; // 1 byte
 
         string speedRecordType; // dvě proměnné: délka stringu (4 byty) + samotný string (? bytů)
 
-        float recordStep; // 4 byty
+        // Nezapisují se
+        // float recordStep; // 4 byty
 
-        string taphographType; // dvě proměnné: délka stringu (4 byty) + samotný string (? bytů)
+        // string taphographType; // dvě proměnné: délka stringu (4 byty) + samotný string (? bytů)
 
         bool[] activeSignals;
         bool[] breakSignals;
@@ -88,7 +90,7 @@ namespace Tachograph
             writeDownTachoParameters = true;
         }
 
-        public TachographRecord(CarParameters carParameters)
+        public TachographRecord(CarParameters carParameters, SignalParameters signalParameters, OtherParameters otherParameters)
         {
             carType = carParameters.CarType;
             gearRatio = carParameters.GearRatio;
@@ -96,12 +98,27 @@ namespace Tachograph
             maxSpeed = carParameters.MaxSpeed;
             kFactor = carParameters.KFactor;
 
+            activeSignals = signalParameters.ActiveSignals;
+            breakSignals = signalParameters.BreakSignals;
+            inverseSignals = signalParameters.InverseSignals;
+
+            speedRecordType = otherParameters.SpeedRecordType;
+
             writeDownCarParameters = true;
-            writeDownSignalParameters = true;
+            writeDownSignalParameters = true; // signály se připojují k parametrům vozu
         }
 
-        // TODO: COUNTERPARAMETERS
+        public TachographRecord(CounterParameters counterParameters)
+        {
+            totalKilometersDriven = counterParameters.TotalKilometersDriven;
+            counter1 = counterParameters.Counter1;
+            counter2 = counterParameters.Counter2;
+            counter3 = counterParameters.Counter3;
+            counter4 = counterParameters.Counter4;
+            counter5 = counterParameters.Counter5;
 
+            writeDownCounterParameters = true;
+        }
 
         public TachographRecord(TachographParameters tachographParameters, CarParameters carParameters, CounterParameters counterParameters, OtherParameters otherParameters, SignalParameters signalParameters) 
         {
@@ -121,11 +138,11 @@ namespace Tachograph
             counter4 = counterParameters.Counter4;
             counter5 = counterParameters.Counter5;
             
-            mode = otherParameters.Mode;
-            recordStep = otherParameters.RecordStep;
+            // mode = otherParameters.Mode;
+            // recordStep = otherParameters.RecordStep;
 
             speedRecordType = otherParameters.SpeedRecordType;
-            taphographType = otherParameters.TachographType;
+            // taphographType = otherParameters.TachographType;
 
             activeSignals = signalParameters.ActiveSignals;
             breakSignals = signalParameters.BreakSignals;
@@ -149,7 +166,7 @@ namespace Tachograph
             // třída, která zjednodušuje zápis primitivních datových typů (jako int, byte, float, atd.) do streamu
             using (BinaryWriter writer = new BinaryWriter(stream))
             {
-                
+                // Parametry typ tachografu a mód se nezapisují
                 /*
                 byte[] taphographTypeBytes = Encoding.UTF8.GetBytes(taphographType);
 
