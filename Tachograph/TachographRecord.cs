@@ -43,6 +43,9 @@ namespace Tachograph
             (Zde můžete zahrnout další byty, které potřebujete pro vaši aplikaci)
          */
 
+        // Datum a čas
+        string dateAndTime;
+
         // Prefix (4 byty)
         // Blok parametry tacho:
         int wheelDiameter; // 4 byty
@@ -81,6 +84,13 @@ namespace Tachograph
         bool writeDownCarParameters = false;
         bool writeDownCounterParameters = false;
         bool writeDownSignalParameters = false;
+        bool writeDownDateAndTime = false;
+
+        public TachographRecord(string dateAndTime)
+        {
+            this.dateAndTime = dateAndTime;
+            writeDownDateAndTime = true;
+        }
 
         public TachographRecord(TachographParameters tachographParameters)
         {
@@ -151,8 +161,6 @@ namespace Tachograph
             writeDownTachoParameters = writeDownSignalParameters = writeDownCarParameters = writeDownCounterParameters = true;
         }
 
-        // TODO: tři bool proměnné, které budou rozhodovat, které objekty půjdou na zápis (vyplyne ze stisknutého tlačítka)
-
         /// <summary>
         /// Metoda zapisuje byty do streamu (v opačném pořadí) a následně vrací pole bytů na zápis
         /// </summary>
@@ -178,7 +186,21 @@ namespace Tachograph
                 
                 writer.Write((byte)mode);
                 */
-
+                if (writeDownDateAndTime)
+                {
+                    byte[] dateAndTimeBytes = Encoding.UTF8.GetBytes(dateAndTime);
+                    /*
+                    // Převedení bytů z malého endianu na velký endian
+                    byte[] reversedDateAndTimeBytes = new byte[dateAndTimeBytes.Length];
+                    for (int i = 0; i < dateAndTimeBytes.Length; i++)
+                    {
+                        reversedDateAndTimeBytes[i] = dateAndTimeBytes[dateAndTimeBytes.Length - 1 - i];
+                    }
+                    writer.Write(reversedDateAndTimeBytes);
+                    */
+                    writer.Write(dateAndTimeBytes);
+                    writer.Write(dateAndTimeBytes.Length);
+                }  
                 if (writeDownCounterParameters)
                 {
                     // Blok počítadla:
