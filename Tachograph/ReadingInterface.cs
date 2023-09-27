@@ -77,7 +77,7 @@ namespace Tachograph
         {
             try
             {
-                fileManager.OpenWriter();
+                fileManager.OpenWriterForReadingOutput();
                 using (UdpClient client = new UdpClient(sourcePort)) // inicializace UDP klienta na řízení komunikace
                 {
                     IPAddress tachographAddress = IPAddress.Parse(destinationIP);
