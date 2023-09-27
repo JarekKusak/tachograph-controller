@@ -24,3 +24,5 @@ C:\Users\david.manasek\Documents\projekty\csharp\Tachograph\Tachograph\obj\Debug
 C:\Users\david.manasek\Documents\projekty\csharp\Tachograph\Tachograph\obj\Debug\net6.0-windows\SignalsPage.baml
 C:\Users\david.manasek\Documents\projekty\csharp\Tachograph\Tachograph\obj\Debug\net6.0-windows\CommentPage.g.cs
 C:\Users\david.manasek\Documents\projekty\csharp\Tachograph\Tachograph\obj\Debug\net6.0-windows\CommentPage.baml
+C:\Users\david.manasek\Documents\projekty\csharp\Tachograph\Tachograph\obj\Debug\net6.0-windows\EditorPage.g.cs
+C:\Users\david.manasek\Documents\projekty\csharp\Tachograph\Tachograph\obj\Debug\net6.0-windows\EditorPage.baml

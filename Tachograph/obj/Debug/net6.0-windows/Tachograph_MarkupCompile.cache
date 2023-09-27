@@ -10,11 +10,11 @@ none
 false
 TRACE;DEBUG;NET;NET6_0;NETCOREAPP
 C:\Users\david.manasek\Documents\projekty\csharp\Tachograph\Tachograph\App.xaml
-497018172
+5-381719790
 
-141214436422
+151890519113
 194726069201
-CommentPage.xaml;MainWindow.xaml;SettingsPage.xaml;SignalsPage.xaml;
+CommentPage.xaml;EditorPage.xaml;MainWindow.xaml;SettingsPage.xaml;SignalsPage.xaml;
 
 False
 
