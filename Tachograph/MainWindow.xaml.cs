@@ -10,6 +10,8 @@ namespace Tachograph
     /// </summary>
     public partial class MainWindow : Window
     {
+        FileManager fileManager;
+        
         ReadingInterface readingInterface;
         WritingInterface writingInterface;
 
@@ -31,6 +33,7 @@ namespace Tachograph
             settingsBtn.IsChecked = true;
             previouslyClickedBtn = settingsBtn;
 
+            fileManager = new FileManager();
             settingsPage = new SettingsPage();
             signalsPage = new SignalsPage();
             commentPage = new CommentPage();
@@ -50,12 +53,8 @@ namespace Tachograph
             
             // Zrušit označení u všech tlačítek
             foreach (UIElement child in pagesSwitcher.Children)
-            {
                 if (child is ToggleButton toggleButton && toggleButton != clickedButton)
-                {
-                    toggleButton.IsChecked = false;
-                }
-            }
+                    toggleButton.IsChecked = false; 
 
             previouslyClickedBtn = clickedButton;
         }
@@ -65,7 +64,7 @@ namespace Tachograph
         /// </summary>
         private async void readAndSaveButton_Click(object sender, RoutedEventArgs e)
         {
-            readingInterface = new ReadingInterface(tachoIP, sourcePort, destinationPort);
+            readingInterface = new ReadingInterface(tachoIP, sourcePort, destinationPort, fileManager);
 
             readAndSaveButton.IsEnabled = false; // znemožní opakované klikání na tlačítko
             progressBar.Visibility = Visibility.Visible; // Zobrazí ProgressBar
@@ -123,25 +122,25 @@ namespace Tachograph
                 if (clickedBtn == setTaphoParametersBtn)
                 {
                     TachographParameters tachographParameters = settingsPage.ReturnTachoParameters();
-                    record = new TachographRecord(tachographParameters);
+                    record = new (tachographParameters);
                 }
                 else if (clickedBtn == setCarParametersBtn)
                 {
                     CarParameters carParameters = settingsPage.ReturnCarParameters();
                     SignalParameters signalParameters = settingsPage.ReturnSignalParameters();
                     OtherParameters otherParameters = settingsPage.ReturnOtherParameters(); 
-                    record = new TachographRecord(carParameters, signalParameters, otherParameters);
+                    record = new (carParameters, signalParameters, otherParameters);
                 }
                 else if (clickedBtn == setCountersBtn)
                 {
                     CounterParameters counterParameters = settingsPage.ReturnCounterParameters();
-                    record = new TachographRecord(counterParameters);
+                    record = new (counterParameters);
 
                 }
                 else // nastavit datum a čas
                 {
                     string dateAndTime = (DateTime.Now).ToString("yyyy-dd-MM HH:mm:ss");
-                    record = new TachographRecord(dateAndTime);
+                    record = new (dateAndTime);
                 }
 
                 int result = await writingInterface.WriteData(record!); // návratový kód asynchronní metody
@@ -162,13 +161,15 @@ namespace Tachograph
         }
 
         /// <summary>
-        /// Jednotná událost na řízení zápisu dat (parametrů) požadovaného typu
+        /// Jednotná událost na řízení zápisu dat (parametrů) požadovaného typu + aktualizace označení toggle buttonů
         /// </summary>
         /// <param name="sender"> Tlačítko na zápis parametrů požadovaného typu </param>
         private void setParametersBtn_Click(object sender, RoutedEventArgs e)
         {
             CreateRecordAndWriteData(sender);
-        }
 
+            previouslyClickedBtn.IsChecked = false;
+            settingsBtn.IsChecked = true;
+        }
     }
 }
