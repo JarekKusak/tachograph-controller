@@ -73,8 +73,9 @@
                 </Style>
             </StackPanel.Resources>
             <Button Content="Nastavení" Name="settingsBtn" Click="settingsBtn_Click"/>
-            <Button Content="Signály" Margin="10,0,0,0" Name="signalsBtn" Click="signalsBtn_Click"/>
-            <Button Content="Poznámka" Margin="10,0,0,0" Name="commentBtn" Click="commentBtn_Click"/>
+            <Button Content="Signály" Name="signalsBtn" Click="signalsBtn_Click"/>
+            <Button Content="Poznámka" Name="commentBtn" Click="commentBtn_Click"/>
+            <Button Content="Editor" Name="editorBtn" Click="editorBtn_Click"/>
         </StackPanel>
         <Frame Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" Name="pagesFrame" NavigationUIVisibility="Hidden"/>
         <Grid Grid.Row="4" Grid.ColumnSpan="2">

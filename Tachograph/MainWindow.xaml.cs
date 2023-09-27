@@ -11,9 +11,11 @@ namespace Tachograph
     {
         ReadingInterface readingInterface;
         WritingInterface writingInterface;
+
         SettingsPage settingsPage;
         SignalsPage signalsPage;
         CommentPage commentPage;
+        EditorPage editorPage;
 
         const string tachoIP = "192.168.30.15";
         const int sourcePort = 5049;
@@ -27,6 +29,7 @@ namespace Tachograph
             settingsPage = new SettingsPage();
             signalsPage = new SignalsPage();
             commentPage = new CommentPage();
+            editorPage = new EditorPage();
         }
 
         /// <summary>
@@ -38,7 +41,9 @@ namespace Tachograph
 
             readAndSaveButton.IsEnabled = false; // znemožní opakované klikání na tlačítko
             progressBar.Visibility = Visibility.Visible; // Zobrazí ProgressBar
+
             await readingInterface.ReadAndSaveData(progressBar); // Spustíme čtení dat s ProgressBar
+
             progressBar.Visibility = Visibility.Hidden; // Skryje ProgressBar po dokončení
             readAndSaveButton.IsEnabled = true;
         }
@@ -65,6 +70,14 @@ namespace Tachograph
         private void commentBtn_Click(object sender, RoutedEventArgs e)
         {
             pagesFrame.Content = commentPage;
+        }
+
+        /// <summary>
+        /// Stránka na textový editor socketů Tachografů
+        /// </summary>
+        private void editorBtn_Click(object sender, RoutedEventArgs e)
+        {
+            pagesFrame.Content = editorPage;
         }
 
         /// <summary>
