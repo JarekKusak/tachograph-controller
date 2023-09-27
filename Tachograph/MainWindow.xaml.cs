@@ -100,7 +100,7 @@ namespace Tachograph
                 else // nastavit datum a čas
                 {
                     string dateAndTime = (DateTime.Now).ToString("yyyy-dd-MM HH:mm:ss");
-
+                    record = new TachographRecord(dateAndTime);
                 }
 
                 int result = await writingInterface.WriteData(record!); // návratový kód asynchronní metody
